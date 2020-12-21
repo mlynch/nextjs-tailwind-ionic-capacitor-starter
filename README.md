@@ -2,7 +2,7 @@
 
 This repo contains some component snippets for building native mobile apps with Tailwind CSS and Capacitor.
 
-![screenshot.png](Screen Shot 2020-12-20 at 11.46.21 PM.png)
+![Screenshot](./ss.png)
 
 ## What is Capacitor?
 
