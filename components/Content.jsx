@@ -1,9 +1,10 @@
-const Content = ({ className, children }) => (
-  <div
-  className={`${className} flex-1 overflow-auto"`}
-  style={{
-    paddingTop: `calc(env(safe-area-inset-top, 0px) + 16px)`, // Care for the notch
-  }}>
+import classNames from 'classnames';
+
+const Content = ({ className, visible, children }) => (
+  <div className={classNames(`h-full overflow-auto py-2 absolute top-0 ${className || ''}`, {
+    visible,
+    invisible: !visible
+  })}>
     {children}
   </div>
 );

@@ -1,9 +1,9 @@
 import { homeItems } from "../../data";
 import Content from "../Content";
 
-const Profile = () => {
+const Profile = ({ selected }) => {
   return (
-    <Content>
+    <Content visible={selected}>
       <h2>Profile</h2>
     </Content>
   )

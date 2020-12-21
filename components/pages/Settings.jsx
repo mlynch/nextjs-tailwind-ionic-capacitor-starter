@@ -1,8 +1,8 @@
 import Content from "../Content";
 
-const Settings = () => {
+const Settings = ({ selected }) => {
   return (
-    <Content className="p-4">
+    <Content visible={selected}>
       <h2>Settings</h2>
     </Content>
   )

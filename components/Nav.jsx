@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Plugins } from '@capacitor/core';
 
 const Nav = ({ page }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  useEffect(() => {
+    Plugins.StatusBar.setStyle({
+      style: 'DARK'
+    });
+  }, []);
+
   return (
-    <nav className="bg-gray-800 w-full flex-0 h-auto">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+    <nav
+      className="bg-gray-800 w-full flex-0 flex items-end flex-row"
+      style={{
+        height: `calc(env(safe-area-inset-bottom, 0px) + 64px)`
+      }}
+    >
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex-1">
         <div className="relative flex items-center justify-between h-16">
           <div
             className="absolute inset-y-0 left-0 flex items-center sm:hidden"

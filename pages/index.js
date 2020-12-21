@@ -15,8 +15,14 @@ const pages = [
 ]
 
 const CurrentPage = ({ page }) => {
-  const Page = page.component;
-  return <Page />;
+  return (
+    <div className="flex-1 overflow-hidden relative">
+      {pages.map(p => {
+        const Page = p.component;
+        return <Page selected={page.id === p.id} />
+      })}
+    </div>
+  )
 }
 
 export default function Index() {

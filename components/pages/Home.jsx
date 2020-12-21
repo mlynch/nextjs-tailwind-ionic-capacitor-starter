@@ -2,9 +2,9 @@ import { homeItems } from "../../data";
 import PostCard from "../Card";
 import Content from "../Content";
 
-const Home = () => {
+const Home = ({ selected }) => {
   return (
-    <Content>
+    <Content visible={selected}>
       {homeItems.map(i => (
         <PostCard {...i} />
       ))}
