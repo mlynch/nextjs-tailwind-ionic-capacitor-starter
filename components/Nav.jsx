@@ -1,30 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 import { Plugins } from '@capacitor/core';
 
-const Nav = ({ page }) => {
+const Nav = ({ page, onShowMenu }) => {
   const [showMenu, setShowMenu] = useState(false);
-
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     Plugins.StatusBar.setStyle({
-      style: 'DARK'
+      style: 'DARK',
     });
   }, []);
 
   return (
     <nav
-      className="bg-gray-800 w-full flex-0 flex items-end flex-row"
+      className="bg-gray-800 w-full flex-0 flex items-end flex-row z-10"
       style={{
-        height: `calc(env(safe-area-inset-bottom, 0px) + 64px)`
+        height: `calc(env(safe-area-inset-bottom, 0px) + 64px)`,
       }}
     >
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 flex-1">
         <div className="relative flex items-center justify-between h-16">
           <div
             className="absolute inset-y-0 left-0 flex items-center sm:hidden"
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
+            onClick={onShowMenu}
           >
             {/* Mobile menu button*/}
             <button
@@ -204,43 +202,8 @@ const Nav = ({ page }) => {
           </div>
         </div>
       </div>
-
-      {/*
-  Mobile menu, toggle classes based on menu state.
-
-  Menu open: "block", Menu closed: "hidden"
-  */}
-      <div className={`${showMobileMenu ? '' : 'hidden sm:hidden'}`}>
-        <div className="px-2 pt-2 pb-3 space-y-1">
-          {/* Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" */}
-          <a
-            href="#"
-            className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Dashboard
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Team
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Projects
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >
-            Calendar
-          </a>
-        </div>
-      </div>
     </nav>
   );
-}
+};
 
 export default Nav;

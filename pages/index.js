@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import App from '../components/App';
+import Backdrop from '../components/Backdrop';
+import Menu from '../components/Menu';
 import Nav from '../components/Nav';
 import Home from '../components/pages/Home';
 import Profile from '../components/pages/Profile';
@@ -9,34 +11,54 @@ import Tab from '../components/Tab';
 import TabBar from '../components/TabBar';
 
 const pages = [
-  { id: 'home', title: 'Home', icon: "home-outline", selectedIcon: "home", component: Home },
-  { id: 'profile', title: 'Profile', icon: "person-outline", selectedIcon: "person", component: Profile },
-  { id: 'settings', title: 'Settings', icon: "cog-outline", selectedIcon: "cog", component: Settings },
-]
+  { id: 'home', title: 'Home', icon: 'home-outline', selectedIcon: 'home', component: Home },
+  {
+    id: 'profile',
+    title: 'Profile',
+    icon: 'person-outline',
+    selectedIcon: 'person',
+    component: Profile,
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    icon: 'cog-outline',
+    selectedIcon: 'cog',
+    component: Settings,
+  },
+];
 
 const CurrentPage = ({ page }) => {
   return (
     <div className="flex-1 overflow-hidden relative">
       {pages.map(p => {
         const Page = p.component;
-        return <Page selected={page.id === p.id} />
+        return <Page selected={page.id === p.id} />;
       })}
     </div>
-  )
-}
+  );
+};
 
 export default function Index() {
   const [page, setPage] = useState(pages[0]);
 
+  const [showMenu, setShowMenu] = useState(false);
+
+  const openMenu = useCallback(() => {
+    setShowMenu(true);
+  }, []);
+
   return (
     <App>
-      <Nav page={page} />
+      <Menu open={showMenu} onClose={() => setShowMenu(false)} />
+      <Nav page={page} onShowMenu={openMenu} />
       <CurrentPage page={page} />
       <TabBar>
         {pages.map(p => (
           <Tab key={p.id} {...p} onClick={() => setPage(p)} selected={p.id === page.id} />
         ))}
       </TabBar>
+      <Backdrop open={showMenu} onClose={() => setShowMenu(false)} />
     </App>
   );
 }
