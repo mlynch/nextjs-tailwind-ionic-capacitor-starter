@@ -21,6 +21,7 @@ There are currently snippets for the following common mobile components:
 - [x] App Shell
 - [x] Content
 - [x] Tabs
+- [ ] Nav (in progress)
 - [ ] Menu
 - [ ] Modal
 - [ ] Dialog
