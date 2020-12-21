@@ -39,6 +39,24 @@ const CurrentPage = ({ page }) => {
   );
 };
 
+const MenuContent = () => (
+  <>
+    <div className="p-4">
+      <h2 className="text-xl select-none">Menu</h2>
+    </div>
+    <ul>
+      <li>
+        <a
+          href="#"
+          className="text-gray-800 hover:text-gray-400 block px-4 py-2 rounded-md text-base font-medium"
+        >
+          Calendar
+        </a>
+      </li>
+    </ul>
+  </>
+);
+
 export default function Index() {
   const [page, setPage] = useState(pages[0]);
 
@@ -50,7 +68,9 @@ export default function Index() {
 
   return (
     <App>
-      <Menu open={showMenu} onClose={() => setShowMenu(false)} />
+      <Menu open={showMenu} onClose={() => setShowMenu(false)}>
+        <MenuContent />
+      </Menu>
       <Nav page={page} onShowMenu={openMenu} />
       <CurrentPage page={page} />
       <TabBar>

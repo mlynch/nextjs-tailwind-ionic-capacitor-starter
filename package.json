@@ -21,6 +21,7 @@
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-use-gesture": "^9.0.0-beta.11"
   }
 }
