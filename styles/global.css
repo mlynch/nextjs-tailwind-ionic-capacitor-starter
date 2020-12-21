@@ -1,0 +1,10 @@
+:root {
+  /* Safe area contains how much space I should leave from the top and returns 0 if it's not supported */
+  --safe-area-inset-top: env(safe-area-inset-top);
+  /* A replacement for 100vh */
+  --screen-height: calc(100vh - var(--safe-area-inset-top));
+}
+
+#nav {
+  padding-top: var(--safe-area-inset-top);
+}
