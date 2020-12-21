@@ -1,10 +1,11 @@
 import { homeItems } from "../../data";
+import Content from "../Content";
 
 const Profile = () => {
   return (
-    <div class="py-32">
+    <Content>
       <h2>Profile</h2>
-    </div>
+    </Content>
   )
 }
 

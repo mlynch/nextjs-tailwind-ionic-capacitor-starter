@@ -1,13 +1,14 @@
 import { homeItems } from "../../data";
 import PostCard from "../Card";
+import Content from "../Content";
 
 const Home = () => {
   return (
-    <div class="py-32">
+    <Content>
       {homeItems.map(i => (
         <PostCard {...i} />
       ))}
-    </div>
+    </Content>
   )
 }
 

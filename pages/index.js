@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import Card from '../components/Card';
+import App from '../components/App';
 import Nav from '../components/Nav';
 import Home from '../components/pages/Home';
 import Profile from '../components/pages/Profile';
@@ -23,7 +23,7 @@ export default function Index() {
   const [page, setPage] = useState(pages[0]);
 
   return (
-    <>
+    <App>
       <Nav page={page} />
       <CurrentPage page={page} />
       <TabBar>
@@ -31,6 +31,6 @@ export default function Index() {
           <Tab key={p.id} {...p} onClick={() => setPage(p)} selected={p.id === page.id} />
         ))}
       </TabBar>
-    </>
+    </App>
   );
 }
