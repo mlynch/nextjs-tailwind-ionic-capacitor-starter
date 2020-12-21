@@ -2,6 +2,8 @@
 
 This repo contains some component snippets for building native mobile apps with Tailwind CSS and Capacitor.
 
+Use these components and build on top of them as you build your mobile app.
+
 ![Screenshot](./ss.png)
 
 ## What is Capacitor?
@@ -13,6 +15,8 @@ Capacitor apps can also run in the browser as a Progressive Web App with the sam
 
 
 ## Progress
+
+There are currently snippets for the following common mobile components:
 
 - [x] App Shell
 - [x] Content
