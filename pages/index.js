@@ -39,20 +39,25 @@ const CurrentPage = ({ page }) => {
   );
 };
 
+const MenuItem = ({ children }) => (
+  <li>
+    <a
+      href="#"
+      className="text-gray-800 hover:text-gray-400 block px-4 py-2 rounded-md text-base font-medium"
+    >
+      {children}
+    </a>
+  </li>
+);
 const MenuContent = () => (
   <>
     <div className="p-4">
       <h2 className="text-xl select-none">Menu</h2>
     </div>
     <ul>
-      <li>
-        <a
-          href="#"
-          className="text-gray-800 hover:text-gray-400 block px-4 py-2 rounded-md text-base font-medium"
-        >
-          Calendar
-        </a>
-      </li>
+      <MenuItem>Home</MenuItem>
+      <MenuItem>Profile</MenuItem>
+      <MenuItem>Settings</MenuItem>
     </ul>
   </>
 );
