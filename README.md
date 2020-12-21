@@ -27,4 +27,5 @@ There are currently snippets for the following common mobile components:
 - [ ] Menu
 - [ ] Modal
 - [ ] Dialog
+- [ ] Card
 
