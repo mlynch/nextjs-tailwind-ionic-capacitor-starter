@@ -2,7 +2,7 @@ import Content from "../Content";
 
 const Settings = ({ selected }) => {
   return (
-    <Content visible={selected}>
+    <Content visible={selected} className="p-4">
       <h2>Settings</h2>
     </Content>
   )
