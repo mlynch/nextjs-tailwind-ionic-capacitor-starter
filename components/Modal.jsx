@@ -55,7 +55,7 @@ const Modal = ({ open, onClose, children }) => {
       ref={ref}
       {...bind()}
       className={classNames(
-        'fixed z-40 top-5 transform transform-gpu translate w-full h-full bg-white rounded-t-lg',
+        'fixed z-40 top-5 transform transform-gpu ease-in-out duration-300 translate w-full h-full bg-white rounded-t-lg',
         {
           'transition-transform': !dragging,
         }
