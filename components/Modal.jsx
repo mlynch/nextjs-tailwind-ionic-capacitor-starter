@@ -1,15 +1,18 @@
 import classNames from 'classnames';
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
+import Store from '../store';
 
 const Modal = ({ open, onClose, children }) => {
   const ref = useRef();
   const [dragging, setDragging] = useState(false);
   const [rect, setRect] = useState(null);
   const [y, setY] = useState(100000);
-  const [safeAreaTop, setSafeAreaTop] = useState(0);
+
+  const safeAreaTop = Store.useState(s => s.safeAreaTop);
 
   const _open = useCallback(() => {
+    console.log('Opening modal!', safeAreaTop);
     setY(safeAreaTop);
   }, [safeAreaTop]);
 
@@ -20,20 +23,12 @@ const Modal = ({ open, onClose, children }) => {
     setY(rect.height + safeAreaTop);
   }, [safeAreaTop, rect]);
 
-  // Get pixel value of safe area insets
-  useEffect(() => {
-    const safeAreaTop = parseInt(
-      getComputedStyle(document.documentElement).getPropertyValue('--safe-area-top')
-    );
-    setSafeAreaTop(safeAreaTop);
-  }, []);
-
   // Get the layout rectangle for the modal
   useLayoutEffect(() => {
     const rect = ref.current?.getBoundingClientRect();
     setRect(rect);
     _close();
-  }, []);
+  }, [safeAreaTop]);
 
   // If open changes, open/close the modal
   useLayoutEffect(() => {
@@ -83,6 +78,7 @@ const Modal = ({ open, onClose, children }) => {
         }
       )}
       style={{
+        '--safe-area-top': `env(safe-area-inset-top, 0px)`,
         height: `calc(100% - env(safe-area-inset-top, 0px) - 1.25rem)`,
         touchAction: 'pan-y',
         transform: `translateY(${y}px)`,

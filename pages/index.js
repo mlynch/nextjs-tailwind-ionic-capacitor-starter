@@ -1,7 +1,5 @@
 import { Virtuoso } from 'react-virtuoso';
 
-import { faces } from '../data';
-
 import Store from '../store';
 
 import App from '../components/App';
