@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
-import Store from '../store';
+import Store from '../../store';
 import { SafeAreaContext } from './SafeArea';
 
 const Modal = ({ open, onClose, children }) => {

@@ -1,22 +1,23 @@
+import { useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
 
 import Store from '../store';
 
-import App from '../components/App';
-import Backdrop from '../components/Backdrop';
-import Menu from '../components/Menu';
-import Modal from '../components/Modal';
-import Nav from '../components/Nav';
+import App from '../components/ui/App';
+import Backdrop from '../components/ui/Backdrop';
+import Menu from '../components/ui/Menu';
+import Modal from '../components/ui/Modal';
+import Nav from '../components/ui/Nav';
+import Tab from '../components/ui/Tab';
+import TabBar from '../components/ui/TabBar';
+import List from '../components/ui/List';
+import ListItem from '../components/ui/ListItem';
+import Button from '../components/ui/Button';
+import { SafeAreaProvider } from '../components/ui/SafeArea';
+
 import Home from '../components/pages/Home';
 import Feed from '../components/pages/Feed';
 import Settings from '../components/pages/Settings';
-import Tab from '../components/Tab';
-import TabBar from '../components/TabBar';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
-import { useState } from 'react';
-import Button from '../components/Button';
-import { SafeAreaProvider } from '../components/SafeArea';
 
 const pages = [
   { id: 'home', title: 'Home', icon: 'home-outline', selectedIcon: 'home', component: Home },

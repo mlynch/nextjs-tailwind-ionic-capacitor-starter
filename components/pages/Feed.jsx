@@ -1,8 +1,8 @@
-import Content from '../Content';
-
 import { Virtuoso } from 'react-virtuoso';
-import List from '../List';
-import ListItem from '../ListItem';
+
+import Content from '../ui/Content';
+import List from '../ui/List';
+import ListItem from '../ui/ListItem';
 
 const Feed = ({ selected }) => {
   return (

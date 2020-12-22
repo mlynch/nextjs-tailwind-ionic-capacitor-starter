@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Plugins } from '@capacitor/core';
-import Store from '../store';
+import Store from '../../store';
 
 const Nav = ({ page }) => {
   const [showMenu, setShowMenu] = useState(false);
