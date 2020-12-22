@@ -32,7 +32,7 @@ const pages = [
 
 const CurrentPage = ({ page }) => {
   return (
-    <div className="flex-1 overflow-hidden relative">
+    <div className="flex-1 z-0 overflow-hidden relative">
       {pages.map(p => {
         const Page = p.component;
         return <Page selected={page.id === p.id} />;
