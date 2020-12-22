@@ -1,4 +1,8 @@
-import { useCallback, useState } from 'react';
+import { Virtuoso } from 'react-virtuoso';
+
+import { faces } from '../data';
+
+import Store from '../store';
 
 import App from '../components/App';
 import Backdrop from '../components/Backdrop';
@@ -6,20 +10,23 @@ import Menu from '../components/Menu';
 import Modal from '../components/Modal';
 import Nav from '../components/Nav';
 import Home from '../components/pages/Home';
-import Profile from '../components/pages/Profile';
+import Feed from '../components/pages/Feed';
 import Settings from '../components/pages/Settings';
 import Tab from '../components/Tab';
 import TabBar from '../components/TabBar';
-import Store from '../store';
+import List from '../components/List';
+import ListItem from '../components/ListItem';
+import { useState } from 'react';
+import Button from '../components/Button';
 
 const pages = [
   { id: 'home', title: 'Home', icon: 'home-outline', selectedIcon: 'home', component: Home },
   {
-    id: 'profile',
-    title: 'Profile',
-    icon: 'person-outline',
+    id: 'feed',
+    title: 'Feed',
+    icon: 'flash-outline',
     selectedIcon: 'person',
-    component: Profile,
+    component: Feed,
   },
   {
     id: 'settings',
@@ -64,9 +71,40 @@ const MenuContent = () => (
   </>
 );
 
+const FakeNotification = ({ i }) => (
+  <ListItem className="flex align-center">
+    <img
+      src={`/img/faces/image-${(i % 66) + 1}.png`}
+      alt="Notification"
+      className="block rounded-full w-8 h-8 mr-4"
+    />
+    <div className="flex-1">
+      <span className="p-0 m-0 align-middle">You have a new friend request</span>
+    </div>
+    <div>
+      <Button className="background-transparent px-1 py-1 text-green-400 text-lg">
+        <ion-icon name="checkmark-outline" />
+      </Button>
+      <Button className="background-transparent px-1 py-1 text-red-400 text-lg">
+        <ion-icon name="close-outline" />
+      </Button>
+    </div>
+  </ListItem>
+);
+
 const NotificationsContent = () => (
-  <div className="p-4">
-    <h2 className="text-xl">Notifications</h2>
+  <div className="w-full h-full flex flex-col">
+    <div className="p-4">
+      <h2 className="text-xl">Notifications</h2>
+    </div>
+    <List className="flex-1">
+      <Virtuoso
+        totalCount={1000}
+        overscan={200}
+        style={{ height: '100%', width: '100%' }}
+        itemContent={index => <FakeNotification i={index} />}
+      />
+    </List>
   </div>
 );
 

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
 
 const Modal = ({ open, onClose, children }) => {
@@ -7,24 +7,46 @@ const Modal = ({ open, onClose, children }) => {
   const [dragging, setDragging] = useState(false);
   const [rect, setRect] = useState(null);
   const [y, setY] = useState(100000);
+  const [safeAreaTop, setSafeAreaTop] = useState(0);
 
+  const _open = useCallback(() => {
+    setY(safeAreaTop);
+  }, [safeAreaTop]);
+
+  const _close = useCallback(() => {
+    if (!rect) {
+      return;
+    }
+    setY(rect.height + safeAreaTop);
+  }, [safeAreaTop, rect]);
+
+  // Get pixel value of safe area insets
+  useEffect(() => {
+    const safeAreaTop = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--safe-area-top')
+    );
+    setSafeAreaTop(safeAreaTop);
+  }, []);
+
+  // Get the layout rectangle for the modal
   useLayoutEffect(() => {
     const rect = ref.current?.getBoundingClientRect();
     setRect(rect);
-    setY(-rect.width);
+    _close();
   }, []);
 
+  // If open changes, open/close the modal
   useLayoutEffect(() => {
     if (open) {
-      setY(0);
-    } else if (rect) {
-      setY(rect.height);
+      _open();
+    } else {
+      _close();
     }
-  }, [rect, open]);
+  }, [rect, open, _open, _close]);
 
   const bind = useDrag(
     ({ down, movement: [mx, my] }) => {
-      setY(my < 0 ? 0 : my);
+      setY(my < 0 ? safeAreaTop : my + safeAreaTop);
 
       if (down) {
         setDragging(true);
@@ -32,16 +54,16 @@ const Modal = ({ open, onClose, children }) => {
         setDragging(false);
       }
 
-      // If the drag ended, snap the menu back
+      // If the drag ended, snap the menu back open or close it
       if (!down) {
         const mid = rect.height;
         if (y > mid / 2) {
           // Close
-          setY(rect.height);
+          _close();
           onClose();
         } else {
           // Re-open
-          setY(0);
+          _open();
         }
       }
     },
@@ -55,13 +77,13 @@ const Modal = ({ open, onClose, children }) => {
       ref={ref}
       {...bind()}
       className={classNames(
-        'fixed z-40 top-5 transform transform-gpu ranslate w-full h-full bg-white rounded-t-lg',
+        'fixed z-40 top-5 transform transform-gpu ranslate w-full h-full bg-white rounded-t-xl',
         {
           'ease-in-out duration-300 transition-transformation': !dragging,
         }
       )}
       style={{
-        height: `calc(100% - 1.25rem)`,
+        height: `calc(100% - env(safe-area-inset-top, 0px) - 1.25rem)`,
         touchAction: 'pan-y',
         transform: `translateY(${y}px)`,
       }}
