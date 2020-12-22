@@ -4,18 +4,17 @@ import { useDrag } from 'react-use-gesture';
 import Store from '../../store';
 import { SafeAreaContext } from './SafeArea';
 
+// A Modal window that slides in from offscreen and can be closed
+// by dragging.
 const Modal = ({ open, onClose, children }) => {
   const ref = useRef();
   const [dragging, setDragging] = useState(false);
   const [rect, setRect] = useState(null);
   const [y, setY] = useState(100000);
 
-  const { top } = useContext(SafeAreaContext);
-
-  const safeAreaTop = top;
+  const { top: safeAreaTop } = useContext(SafeAreaContext);
 
   const _open = useCallback(() => {
-    console.log('Opening modal!', safeAreaTop);
     setY(safeAreaTop);
   }, [safeAreaTop]);
 
@@ -75,7 +74,7 @@ const Modal = ({ open, onClose, children }) => {
       ref={ref}
       {...bind()}
       className={classNames(
-        'fixed z-40 top-5 transform transform-gpu ranslate w-full h-full bg-white rounded-t-xl',
+        'fixed z-40 top-5 transform transform-gpu w-full h-full bg-white rounded-t-xl',
         {
           'ease-in-out duration-300 transition-transformation': !dragging,
         }

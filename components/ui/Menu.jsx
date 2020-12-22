@@ -11,17 +11,15 @@ const Menu = ({ open, onClose, children, className, ...props }) => {
   const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
-    try {
-      if (open) {
-        Plugins.StatusBar.setStyle({
-          style: 'LIGHT',
-        });
-      } else {
-        Plugins.StatusBar.setStyle({
-          style: 'DARK',
-        });
-      }
-    } catch (e) {}
+    if (open) {
+      Plugins.StatusBar.setStyle({
+        style: 'LIGHT',
+      }).catch(() => {});
+    } else {
+      Plugins.StatusBar.setStyle({
+        style: 'DARK',
+      }).catch(() => {});
+    }
   }, [open]);
 
   useLayoutEffect(() => {

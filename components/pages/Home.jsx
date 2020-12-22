@@ -21,8 +21,8 @@ const PostCard = ({ title, type, text, author, image }) => (
 const Home = ({ selected }) => {
   return (
     <Content visible={selected}>
-      {homeItems.map(i => (
-        <PostCard {...i} />
+      {homeItems.map((i, index) => (
+        <PostCard {...i} key={index} />
       ))}
     </Content>
   );

@@ -12,3 +12,43 @@ body {
   height: 100vh;
   width: 100vw;
 }
+
+/**
+ * Styles for the Icon UI component.
+ *
+ * TODO: Move these into a styled component or similar system if desired
+ */
+.ui-icon {
+  display: inline-block;
+
+  width: 1em;
+  height: 1em;
+
+  contain: strict;
+
+  fill: currentColor;
+
+  box-sizing: content-box !important;
+}
+
+.ui-icon .ionicon {
+  stroke: currentColor;
+}
+
+.ui-icon .ionicon-fill-none {
+  fill: none;
+}
+
+.ui-icon .ionicon-stroke-width {
+  stroke-width: 32px;
+  stroke-width: var(--ionicon-stroke-width, 32px);
+}
+
+.ui-icon .icon-inner,
+.ui-icon .ionicon,
+.ui-icon svg {
+  display: block;
+
+  height: 100%;
+  width: 100%;
+}

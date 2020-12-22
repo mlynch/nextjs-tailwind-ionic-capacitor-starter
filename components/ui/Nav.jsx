@@ -9,7 +9,7 @@ const Nav = ({ page }) => {
   useEffect(() => {
     Plugins.StatusBar.setStyle({
       style: 'DARK',
-    });
+    }).catch(() => {});
   }, []);
 
   return (

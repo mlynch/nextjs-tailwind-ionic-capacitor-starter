@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Virtuoso } from 'react-virtuoso';
+import { flash, flashOutline, cog, cogOutline, home, homeOutline } from 'ionicons/icons';
 
 import Store from '../store';
 
@@ -18,21 +19,22 @@ import { SafeAreaProvider } from '../components/ui/SafeArea';
 import Home from '../components/pages/Home';
 import Feed from '../components/pages/Feed';
 import Settings from '../components/pages/Settings';
+import { useDrag } from 'react-use-gesture';
 
 const pages = [
-  { id: 'home', title: 'Home', icon: 'home-outline', selectedIcon: 'home', component: Home },
+  { id: 'home', title: 'Home', icon: homeOutline, selectedIcon: home, component: Home },
   {
     id: 'feed',
     title: 'Feed',
-    icon: 'flash-outline',
-    selectedIcon: 'person',
+    icon: flashOutline,
+    selectedIcon: flash,
     component: Feed,
   },
   {
     id: 'settings',
     title: 'Settings',
-    icon: 'cog-outline',
-    selectedIcon: 'cog',
+    icon: cogOutline,
+    selectedIcon: cog,
     component: Settings,
   },
 ];
@@ -42,7 +44,7 @@ const CurrentPage = ({ page }) => {
     <div className="flex-1 z-0 overflow-hidden relative">
       {pages.map(p => {
         const Page = p.component;
-        return <Page selected={page.id === p.id} />;
+        return <Page selected={page.id === p.id} key={p.id} />;
       })}
     </div>
   );
@@ -133,10 +135,24 @@ export default function Index() {
     });
   };
 
+  const bind = useDrag(
+    ({ down, movement: [mx] }) => {
+      console.log('DRAGGING SIDE', mx);
+    },
+    {
+      axis: 'x',
+    }
+  );
+
   // This is an example app layout. We've got a hidden menu that will be toggled
   //
   return (
-    <App>
+    <App
+      {...bind()}
+      style={{
+        touchAction: 'pan-x',
+      }}
+    >
       <SafeAreaProvider>
         <Menu open={showMenu} onClose={closeMenu}>
           <MenuContent />
