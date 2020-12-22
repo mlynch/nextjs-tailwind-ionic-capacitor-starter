@@ -16,6 +16,7 @@ import List from '../components/List';
 import ListItem from '../components/ListItem';
 import { useState } from 'react';
 import Button from '../components/Button';
+import { SafeAreaProvider } from '../components/SafeArea';
 
 const pages = [
   { id: 'home', title: 'Home', icon: 'home-outline', selectedIcon: 'home', component: Home },
@@ -135,20 +136,22 @@ export default function Index() {
   //
   return (
     <App>
-      <Menu open={showMenu} onClose={closeMenu}>
-        <MenuContent />
-      </Menu>
-      <Nav page={page} />
-      <CurrentPage page={page} />
-      <TabBar>
-        {pages.map(p => (
-          <Tab key={p.id} {...p} onClick={() => setPage(p)} selected={p.id === page.id} />
-        ))}
-      </TabBar>
-      <Backdrop open={showMenu || showNotifications} onClose={backdropClose} />
-      <Modal open={showNotifications} onClose={closeNotifications}>
-        <NotificationsContent />
-      </Modal>
+      <SafeAreaProvider>
+        <Menu open={showMenu} onClose={closeMenu}>
+          <MenuContent />
+        </Menu>
+        <Nav page={page} />
+        <CurrentPage page={page} />
+        <TabBar>
+          {pages.map(p => (
+            <Tab key={p.id} {...p} onClick={() => setPage(p)} selected={p.id === page.id} />
+          ))}
+        </TabBar>
+        <Backdrop open={showMenu || showNotifications} onClose={backdropClose} />
+        <Modal open={showNotifications} onClose={closeNotifications}>
+          <NotificationsContent />
+        </Modal>
+      </SafeAreaProvider>
     </App>
   );
 }

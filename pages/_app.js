@@ -7,24 +7,6 @@ import Store from '../store';
 import '../styles/global.css';
 
 function MyApp({ Component, pageProps }) {
-  useEffect(() => {
-    // I don't know why, but we can't get the value of this CSS variable
-    // until a bit of a delay, maybe something with Next?
-    setTimeout(() => {
-      const safeAreaTop = parseInt(
-        window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-top')
-      );
-      const safeAreaBottom = window
-        .getComputedStyle(document.documentElement)
-        .getPropertyValue('--safe-area-bottom');
-
-      Store.update(s => {
-        s.safeAreaTop = safeAreaTop;
-        s.safeAreaBottom = safeAreaBottom;
-      });
-    }, 500);
-  }, []);
-
   return (
     <>
       <Head>

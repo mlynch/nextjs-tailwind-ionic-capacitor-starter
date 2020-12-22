@@ -1,7 +1,8 @@
 import classNames from 'classnames';
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
 import Store from '../store';
+import { SafeAreaContext } from './SafeArea';
 
 const Modal = ({ open, onClose, children }) => {
   const ref = useRef();
@@ -9,7 +10,9 @@ const Modal = ({ open, onClose, children }) => {
   const [rect, setRect] = useState(null);
   const [y, setY] = useState(100000);
 
-  const safeAreaTop = Store.useState(s => s.safeAreaTop);
+  const { top } = useContext(SafeAreaContext);
+
+  const safeAreaTop = top;
 
   const _open = useCallback(() => {
     console.log('Opening modal!', safeAreaTop);
