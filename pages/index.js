@@ -76,12 +76,6 @@ export default function Index() {
   const showMenu = Store.useState(s => s.showMenu);
   const showNotifications = Store.useState(s => s.showNotifications);
 
-  const openMenu = () => {
-    Store.update(s => {
-      s.showMenu = true;
-    });
-  };
-
   const closeMenu = () => {
     Store.update(s => {
       s.showMenu = false;
@@ -101,12 +95,14 @@ export default function Index() {
     });
   };
 
+  // This is an example app layout. We've got a hidden menu that will be toggled
+  //
   return (
     <App>
       <Menu open={showMenu} onClose={closeMenu}>
         <MenuContent />
       </Menu>
-      <Nav page={page} onShowMenu={openMenu} />
+      <Nav page={page} />
       <CurrentPage page={page} />
       <TabBar>
         {pages.map(p => (

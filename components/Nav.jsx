@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Plugins } from '@capacitor/core';
 import Store from '../store';
 
-const Nav = ({ page, onShowMenu }) => {
+const Nav = ({ page }) => {
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
@@ -23,7 +23,11 @@ const Nav = ({ page, onShowMenu }) => {
         <div className="relative flex items-center justify-between h-16">
           <div
             className="absolute inset-y-0 left-0 flex items-center sm:hidden"
-            onClick={onShowMenu}
+            onClick={() =>
+              Store.update(s => {
+                s.showMenu = true;
+              })
+            }
           >
             {/* Mobile menu button*/}
             <button
