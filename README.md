@@ -24,7 +24,10 @@ There are currently snippets for the following common mobile components:
 - [x] Content
 - [x] Tabs
 - [ ] Nav (in progress)
+- [x] Icon
 - [x] Menu
 - [x] Modal
 - [ ] Dialog
-- [ ] Card
+- [x] Button
+- [x] Card
+- [x] Safe Area

@@ -135,9 +135,15 @@ export default function Index() {
     });
   };
 
+  // To enable edge drag detection to open the side menu
   const bind = useDrag(
-    ({ down, movement: [mx] }) => {
-      console.log('DRAGGING SIDE', mx);
+    ({ down, movement: [mx], xy: [x, y], cancel }) => {
+      if (mx > 5 && x < 50 && down) {
+        Store.update(s => {
+          s.showMenu = true;
+        });
+        cancel();
+      }
     },
     {
       axis: 'x',
