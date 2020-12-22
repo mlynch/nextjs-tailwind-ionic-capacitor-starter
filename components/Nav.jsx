@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Plugins } from '@capacitor/core';
+import Store from '../store';
 
 const Nav = ({ page, onShowMenu }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -77,18 +78,6 @@ const Nav = ({ page, onShowMenu }) => {
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0 flex items-center">
               <h1 className="text-gray-50">{page.title}</h1>
-              {/*}
-              <img
-                className="block lg:hidden h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                alt="Workflow"
-              />
-              <img
-                className="hidden lg:block h-8 w-auto"
-                src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                alt="Workflow"
-              />
-              */}
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
@@ -121,7 +110,14 @@ const Nav = ({ page, onShowMenu }) => {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <button
+              className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+              onClick={() =>
+                Store.update(s => {
+                  s.showNotifications = true;
+                })
+              }
+            >
               <span className="sr-only">View notifications</span>
               {/* Heroicon name: bell */}
               <svg
