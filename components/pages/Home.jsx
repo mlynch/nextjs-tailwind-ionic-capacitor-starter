@@ -1,7 +1,8 @@
-import { homeItems } from '../../data';
 import Store from '../../store';
 import Card from '../ui/Card';
 import Content from '../ui/Content';
+
+import * as selectors from '../../store/selectors';
 
 const HomeCard = ({ title, type, text, author, image }) => (
   <Card className="my-4">
@@ -17,7 +18,7 @@ const HomeCard = ({ title, type, text, author, image }) => (
 );
 
 const Home = ({ selected }) => {
-  const homeItems = Store.useState(s => s.homeItems);
+  const homeItems = Store.useState(selectors.getHomeItems);
 
   return (
     <Content visible={selected} className="p-4">

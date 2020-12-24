@@ -1,4 +1,8 @@
+import { useDrag } from 'react-use-gesture';
+
 import Store from '../store';
+import * as actions from '../store/actions';
+import * as selectors from '../store/selectors';
 
 import App from '../components/ui/App';
 import Backdrop from '../components/ui/Backdrop';
@@ -9,14 +13,11 @@ import PageStack from '../components/ui/PageStack';
 import Tab from '../components/ui/Tab';
 import TabBar from '../components/ui/TabBar';
 import { SafeAreaProvider } from '../components/ui/SafeArea';
-
-import { useDrag } from 'react-use-gesture';
-
 import Notifications from '../components/Notifications';
 import MenuContent from '../components/MenuContent';
 
 const CurrentPage = ({ page }) => {
-  const pages = Store.useState(s => s.pages);
+  const pages = Store.useState(selectors.getPages);
 
   return (
     <PageStack>
@@ -29,37 +30,25 @@ const CurrentPage = ({ page }) => {
 };
 
 export default function Index() {
-  const showMenu = Store.useState(s => s.showMenu);
-  const showNotifications = Store.useState(s => s.showNotifications);
-  const currentPage = Store.useState(s => s.currentPage);
-  const pages = Store.useState(s => s.pages);
+  const showMenu = Store.useState(selectors.getMenuOpen);
+  const showNotifications = Store.useState(selectors.getNotificationsOpen);
+  const currentPage = Store.useState(selectors.getCurrentPage);
+  const tabs = Store.useState(selectors.getTabs);
 
-  const closeMenu = () => {
-    Store.update(s => {
-      s.showMenu = false;
-    });
-  };
+  const closeMenu = () => actions.setMenuOpen(false);
 
   const backdropClose = () => {
-    Store.update(s => {
-      s.showMenu = false;
-      s.showNotifications = false;
-    });
+    actions.setMenuOpen(false);
+    actions.setNotificationsOpen(false);
   };
 
-  const closeNotifications = () => {
-    Store.update(s => {
-      s.showNotifications = false;
-    });
-  };
+  const closeNotifications = () => actions.setNotificationsOpen(false);
 
   // To enable edge drag detection to open the side menu
   const bind = useDrag(
     ({ down, movement: [mx], xy: [x, y], cancel }) => {
       if (mx > 5 && x < 50 && down) {
-        Store.update(s => {
-          s.showMenu = true;
-        });
+        actions.setMenuOpen(true);
         cancel();
       }
     },
@@ -84,15 +73,11 @@ export default function Index() {
         <Nav page={currentPage} />
         <CurrentPage page={currentPage} />
         <TabBar>
-          {pages.map(p => (
+          {tabs.map(p => (
             <Tab
               key={p.id}
               {...p}
-              onClick={() =>
-                Store.update(s => {
-                  s.currentPage = p;
-                })
-              }
+              onClick={() => actions.setPage(p)}
               selected={p.id === currentPage.id}
             />
           ))}

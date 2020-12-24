@@ -1,4 +1,6 @@
 import Store from '../store';
+import * as actions from '../store/actions';
+import * as selectors from '../store/selectors';
 
 const MenuItem = ({ children, ...props }) => (
   <li {...props}>
@@ -12,14 +14,11 @@ const MenuItem = ({ children, ...props }) => (
 );
 
 const MenuContent = () => {
-  const pages = Store.useState(s => s.pages);
+  const menuLinks = Store.useState(selectors.getMenuLinks);
 
   const go = page => {
-    Store.update(s => {
-      console.log('Going to', page);
-      s.currentPage = page;
-      s.showMenu = false;
-    });
+    actions.setPage(page);
+    actions.setMenuOpen(false);
   };
 
   return (
@@ -28,11 +27,15 @@ const MenuContent = () => {
         <h2 className="text-xl select-none">Menu</h2>
       </div>
       <ul>
-        {pages.map(p => (
-          <MenuItem key={p.id} onClick={() => go(p)}>
-            {p.title}
-          </MenuItem>
-        ))}
+        {menuLinks.map(p => {
+          const title = typeof p.title === 'function' ? p.title() : p.title;
+
+          return (
+            <MenuItem key={p.id} onClick={() => go(p)}>
+              {title}
+            </MenuItem>
+          );
+        })}
       </ul>
     </>
   );

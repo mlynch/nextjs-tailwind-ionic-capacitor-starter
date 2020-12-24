@@ -5,6 +5,7 @@ import { list, listOutline, cog, cogOutline, home, homeOutline } from 'ionicons/
 import Home from '../components/pages/Home';
 import Lists from '../components/pages/Lists';
 import Settings from '../components/pages/Settings';
+import ListDetail from '../components/pages/ListDetail';
 
 // The available pages here
 const pages = [
@@ -15,6 +16,13 @@ const pages = [
     icon: listOutline,
     selectedIcon: list,
     component: Lists,
+  },
+  {
+    id: 'list-detail',
+    title: () => Store.getRawState().selectedList?.name,
+    icon: listOutline,
+    selectedIcon: list,
+    component: ListDetail,
   },
   {
     id: 'settings',
@@ -81,10 +89,16 @@ const lists = [
 const Store = new PullStateStore({
   safeAreaTop: 0,
   safeAreaBottom: 0,
-  showMenu: false,
-  showNotifications: false,
+  menuOpen: false,
+  notificationsOpen: false,
   currentPage: pages[0],
   pages,
+
+  // The pages that are linked to tabs
+  tabs: pages.filter(p => ['home', 'lists', 'settings'].indexOf(p.id) >= 0),
+  // The pages that are linked to the menu
+  menuLinks: pages.filter(p => ['home', 'lists', 'settings'].indexOf(p.id) >= 0),
+
   homeItems,
   lists,
   selectedList: null,
