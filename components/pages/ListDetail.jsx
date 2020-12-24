@@ -25,14 +25,15 @@ const ListItems = ({ list, onClose }) => {
 };
 
 const ListItemEntry = ({ list, item }) => (
-  <div className="p-4 border-solid border-b cursor-pointer">
-    <span className="text-md">{item.name}</span>
+  <div
+    className="p-4 border-solid border-b cursor-pointer flex select-none"
+    onClick={() => actions.setDone(list, item, !item.done)}
+  >
+    <span className="text-md flex-1">{item.name}</span>
     <input
+      className="pointer-events-none select-none"
       type="checkbox"
-      checked={item.done}
-      onChange={() => {
-        actions.setDone(list, item, !item.done);
-      }}
+      checked={item.done || false}
     />
   </div>
 );
