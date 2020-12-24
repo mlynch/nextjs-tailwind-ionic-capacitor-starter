@@ -24,6 +24,12 @@ export const setNotificationsOpen = open => {
   });
 };
 
+export const setSettings = settings => {
+  Store.update(s => {
+    s.settings = settings;
+  });
+};
+
 // App-specific actions
 
 export const setDone = (list, item, done) => {

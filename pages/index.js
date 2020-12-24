@@ -15,16 +15,21 @@ import TabBar from '../components/ui/TabBar';
 import { SafeAreaProvider } from '../components/ui/SafeArea';
 import Notifications from '../components/Notifications';
 import MenuContent from '../components/MenuContent';
+import { useEffect, useState } from 'react';
 
 const CurrentPage = ({ page }) => {
   const pages = Store.useState(selectors.getPages);
+  const currentPage = Store.useState(selectors.getCurrentPage);
+
+  const Page = currentPage.component;
 
   return (
     <PageStack>
-      {pages.map(p => {
+      {/*pages.map(p => {
         const Page = p.component;
         return <Page selected={page.id === p.id} key={p.id} />;
-      })}
+      })*/}
+      <Page selected={true} />
     </PageStack>
   );
 };
