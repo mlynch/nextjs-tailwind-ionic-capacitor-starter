@@ -1,14 +1,12 @@
 import { homeItems } from '../../data';
+import Store from '../../store';
 import Card from '../ui/Card';
 import Content from '../ui/Content';
 
-const PostCard = ({ title, type, text, author, image }) => (
-  <Card>
+const HomeCard = ({ title, type, text, author, image }) => (
+  <Card className="my-4">
     <div>
-      <img
-        className="rounded-t-xl h-32 w-full object-cover"
-        src={image || 'https://ionic-docs-demo.herokuapp.com/assets/card-top-img.png'}
-      />
+      <img className="rounded-t-xl h-32 w-full object-cover" src={image} />
     </div>
     <div className="px-4 py-4 mt-2 bg-white rounded-b-xl">
       <h4 className="font-bold py-0 text-s text-gray-400 uppercase">{type}</h4>
@@ -19,10 +17,12 @@ const PostCard = ({ title, type, text, author, image }) => (
 );
 
 const Home = ({ selected }) => {
+  const homeItems = Store.useState(s => s.homeItems);
+
   return (
-    <Content visible={selected}>
+    <Content visible={selected} className="p-4">
       {homeItems.map((i, index) => (
-        <PostCard {...i} key={index} />
+        <HomeCard {...i} key={index} />
       ))}
     </Content>
   );
