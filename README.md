@@ -24,6 +24,7 @@ There are currently snippets for the following common mobile components:
 - [x] Content
 - [x] Tabs
 - [ ] Nav (in progress)
+- [ ] Next.js router integration
 - [x] Icon
 - [x] Menu
 - [x] Modal

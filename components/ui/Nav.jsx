@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { Plugins } from '@capacitor/core';
-import Store from '../../store';
+import * as actions from '../../store/actions';
 
 const Nav = ({ page }) => {
-  const [showMenu, setShowMenu] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const title = typeof page.title === 'function' ? page.title() : page.title;
 
   useEffect(() => {
     Plugins.StatusBar.setStyle({
@@ -23,11 +25,7 @@ const Nav = ({ page }) => {
         <div className="relative flex items-center justify-between h-16">
           <div
             className="absolute inset-y-0 left-0 flex items-center sm:hidden"
-            onClick={() =>
-              Store.update(s => {
-                s.showMenu = true;
-              })
-            }
+            onClick={() => actions.setMenuOpen(true)}
           >
             {/* Mobile menu button*/}
             <button
@@ -81,7 +79,7 @@ const Nav = ({ page }) => {
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0 flex items-center">
-              <h1 className="text-gray-50">{page.title}</h1>
+              <h1 className="text-gray-50">{title}</h1>
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
@@ -116,11 +114,7 @@ const Nav = ({ page }) => {
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <button
               className="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              onClick={() =>
-                Store.update(s => {
-                  s.showNotifications = true;
-                })
-              }
+              onClick={() => actions.setNotificationsOpen(true)}
             >
               <span className="sr-only">View notifications</span>
               {/* Heroicon name: bell */}
@@ -148,7 +142,7 @@ const Nav = ({ page }) => {
                   className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   id="user-menu"
                   aria-haspopup="true"
-                  onClick={() => setShowMenu(!showMenu)}
+                  onClick={() => setShowProfileMenu(!showProfileMenu)}
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
@@ -170,7 +164,7 @@ const Nav = ({ page }) => {
         */}
               <div
                 className={`${
-                  showMenu ? '' : 'hidden'
+                  showProfileMenu ? '' : 'hidden'
                 } origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5`}
                 role="menu"
                 aria-orientation="vertical"
