@@ -6,14 +6,14 @@ import ListItem from './ui/ListItem';
 import VirtualScroll from './ui/VirtualScroll';
 
 const NotificationItem = ({ i }) => (
-  <ListItem className="flex align-center">
+  <ListItem className="flex align-center dark:bg-black">
     <img
       src={`/img/faces/image-${(i % 66) + 1}.png`}
       alt="Notification"
       className="block rounded-full w-8 h-8 mr-4"
     />
     <div className="flex-1">
-      <span className="p-0 m-0 align-middle">You have a new friend request</span>
+      <span className="p-0 m-0 align-middle dark:text-gray-500">You have a new friend request</span>
     </div>
     <div>
       <Button className="background-transparent px-1 py-1 text-green-400 text-lg">
@@ -27,9 +27,9 @@ const NotificationItem = ({ i }) => (
 );
 
 const Notifications = () => (
-  <div className="w-full h-full flex flex-col">
-    <div className="p-4">
-      <h2 className="text-xl">Notifications</h2>
+  <div className="w-full h-full flex flex-col dark:bg-black">
+    <div className="p-4 rounded-tl-md rounded-tr-md dark:bg-black">
+      <h2 className="text-xl dark:text-gray-600">Notifications</h2>
     </div>
     <List className="flex-1">
       <VirtualScroll

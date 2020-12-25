@@ -6,8 +6,8 @@ const Tab = ({ title, icon, selected, selectedIcon, onClick }) => (
     onClick={onClick}
     href="#"
     className={classNames('px-6 rounded-md text-sm text-center font-medium cursor-pointer', {
-      'text-gray-500': !selected,
-      'text-gray-800': selected,
+      'text-gray-500 dark:text-white': !selected,
+      'text-gray-800 dark:text-gray-600': selected,
     })}
   >
     {icon && (

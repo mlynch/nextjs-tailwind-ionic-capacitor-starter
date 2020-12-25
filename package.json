@@ -13,6 +13,7 @@
     "@capacitor/core": "^2.4.5",
     "@capacitor/ios": "^2.4.5",
     "autoprefixer": "^10.1.0",
+    "capacitor-dark-mode": "^1.0.5",
     "classnames": "^2.2.6",
     "next": "10.0.3",
     "postcss": "^8.2.1",
