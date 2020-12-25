@@ -6,7 +6,7 @@ const MenuItem = ({ children, ...props }) => (
   <li {...props}>
     <a
       href="#"
-      className="text-gray-800 hover:text-gray-400 block px-4 py-2 rounded-md text-base font-medium"
+      className="text-gray-800 hover:text-gray-400 dark:text-gray-400 block px-4 py-2 rounded-md text-base font-medium"
     >
       {children}
     </a>
@@ -24,7 +24,7 @@ const MenuContent = () => {
   return (
     <>
       <div className="p-4">
-        <h2 className="text-xl select-none">Menu</h2>
+        <h2 className="text-xl select-none dark:text-gray-500">Menu</h2>
       </div>
       <ul>
         {menuLinks.map(p => {

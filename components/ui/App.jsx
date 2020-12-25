@@ -1,9 +1,29 @@
 import classNames from 'classnames';
+import { Plugins } from '@capacitor/core';
+import { useEffect, useState } from 'react';
 
-const App = ({ children, className, ...props }) => (
-  <div {...props} className={classNames('flex h-screen flex-col', className)}>
+const { DarkMode } = Plugins;
+
+const App = ({ children, className, ...props }) => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(async() => {
+    let darkmodeConfig = await DarkMode.isDarkModeOn();
+    setDarkMode(darkmodeConfig.isDarkModeOn);
+    DarkMode.addListener("darkModeStateChanged", (state) => {
+      setDarkMode(state.isDarkModeOn);
+    });
+  }, []);
+
+  return (<div {...props} className={classNames(
+    'flex h-screen flex-col', 
+    className,
+    {
+      'dark': darkMode
+    }
+    )}>
     {children}
-  </div>
-);
+  </div>);
+}
 
 export default App;

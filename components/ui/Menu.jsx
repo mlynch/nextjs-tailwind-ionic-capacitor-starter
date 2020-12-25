@@ -4,22 +4,20 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import { useDrag } from 'react-use-gesture';
 
+const { DarkMode } = Plugins;
+
 const Menu = ({ open, onClose, children, className, ...props }) => {
   const ref = useRef();
   const [x, setX] = useState(-100000);
   const [rect, setRect] = useState(null);
   const [dragging, setDragging] = useState(false);
 
-  useEffect(() => {
-    if (open) {
-      Plugins.StatusBar.setStyle({
-        style: 'LIGHT',
-      }).catch(() => {});
-    } else {
-      Plugins.StatusBar.setStyle({
-        style: 'DARK',
-      }).catch(() => {});
-    }
+  useEffect(async () => {
+    let darkmodeConfig = await DarkMode.isDarkModeOn();
+    console.log({open, darkMode: darkmodeConfig.isDarkModeOn})
+    Plugins.StatusBar.setStyle({
+      style: open && !darkmodeConfig.isDarkModeOn ? 'LIGHT' : 'DARK',
+    }).catch(() => {});
   }, [open]);
 
   useLayoutEffect(() => {
@@ -76,7 +74,7 @@ const Menu = ({ open, onClose, children, className, ...props }) => {
         transform: `translateX(${x}px)`,
       }}
       className={classNames(
-        'fixed z-40 transform transform-gpu translate w-48 h-full bg-gray-100',
+        'fixed z-40 transform-gpu translate w-48 h-full bg-gray-100 dark:bg-gray-800',
         className,
         {
           'transition-transform': !dragging,

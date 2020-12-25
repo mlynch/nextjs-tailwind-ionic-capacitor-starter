@@ -165,28 +165,28 @@ const Nav = ({ page }) => {
               <div
                 className={`${
                   showProfileMenu ? '' : 'hidden'
-                } origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5`}
+                } origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5`}
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
               >
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400"
                   role="menuitem"
                 >
                   Your Profile
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400"
                   role="menuitem"
                 >
                   Settings
                 </a>
                 <a
                   href="#"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400"
                   role="menuitem"
                 >
                   Sign out
