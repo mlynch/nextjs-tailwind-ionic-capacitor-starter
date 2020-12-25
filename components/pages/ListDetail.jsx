@@ -34,6 +34,7 @@ const ListItemEntry = ({ list, item }) => (
       className="pointer-events-none select-none"
       type="checkbox"
       checked={item.done || false}
+      readOnly={true}
     />
   </div>
 );

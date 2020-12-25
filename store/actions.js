@@ -34,10 +34,8 @@ export const setSettings = settings => {
 
 export const setDone = (list, item, done) => {
   Store.update((s, o) => {
-    console.log('Setting done', list, item, done);
     const listIndex = o.lists.findIndex(l => l === list);
     const itemIndex = o.lists[listIndex].items.findIndex(i => i === item);
-    console.log(listIndex, itemIndex);
     s.lists[listIndex].items[itemIndex].done = done;
     if (list === o.selectedList) {
       s.selectedList = s.lists[listIndex];
