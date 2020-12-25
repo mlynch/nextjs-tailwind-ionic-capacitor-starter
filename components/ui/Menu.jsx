@@ -1,6 +1,6 @@
 import { Plugins } from '@capacitor/core';
 import classNames from 'classnames';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useDrag } from 'react-use-gesture';
 
@@ -13,20 +13,22 @@ const Menu = ({ open, onClose, children, className, ...props }) => {
   const [dragging, setDragging] = useState(false);
 
   useEffect(async () => {
-    let darkmodeConfig = await DarkMode.isDarkModeOn();
-    console.log({open, darkMode: darkmodeConfig.isDarkModeOn})
-    Plugins.StatusBar.setStyle({
-      style: open && !darkmodeConfig.isDarkModeOn ? 'LIGHT' : 'DARK',
-    }).catch(() => {});
+    try {
+      let darkmodeConfig = await DarkMode.isDarkModeOn();
+      console.log({ open, darkMode: darkmodeConfig.isDarkModeOn });
+      Plugins.StatusBar.setStyle({
+        style: open && !darkmodeConfig.isDarkModeOn ? 'LIGHT' : 'DARK',
+      }).catch(() => {});
+    } catch (e) {}
   }, [open]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const rect = ref.current?.getBoundingClientRect();
     setRect(rect);
     setX(-rect.width);
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (open) {
       setX(0);
     } else if (rect) {
