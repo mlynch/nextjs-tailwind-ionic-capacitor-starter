@@ -7,23 +7,26 @@ const { DarkMode } = Plugins;
 const App = ({ children, className, ...props }) => {
   const [darkMode, setDarkMode] = useState(false);
 
-  useEffect(async() => {
-    let darkmodeConfig = await DarkMode.isDarkModeOn();
-    setDarkMode(darkmodeConfig.isDarkModeOn);
-    DarkMode.addListener("darkModeStateChanged", (state) => {
-      setDarkMode(state.isDarkModeOn);
-    });
+  useEffect(async () => {
+    try {
+      let darkmodeConfig = await DarkMode.isDarkModeOn();
+      setDarkMode(darkmodeConfig.isDarkModeOn);
+      DarkMode.addListener('darkModeStateChanged', state => {
+        setDarkMode(state.isDarkModeOn);
+      });
+    } catch (e) {}
   }, []);
 
-  return (<div {...props} className={classNames(
-    'flex h-screen flex-col', 
-    className,
-    {
-      'dark': darkMode
-    }
-    )}>
-    {children}
-  </div>);
-}
+  return (
+    <div
+      {...props}
+      className={classNames('flex h-screen flex-col', className, {
+        dark: darkMode,
+      })}
+    >
+      {children}
+    </div>
+  );
+};
 
 export default App;

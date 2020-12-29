@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useCallback, useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
 import Store from '../../store';
 import { SafeAreaContext } from './SafeArea';
@@ -26,14 +26,14 @@ const Modal = ({ open, onClose, children }) => {
   }, [safeAreaTop, rect]);
 
   // Get the layout rectangle for the modal
-  useLayoutEffect(() => {
+  useEffect(() => {
     const rect = ref.current?.getBoundingClientRect();
     setRect(rect);
     _close();
   }, [safeAreaTop]);
 
   // If open changes, open/close the modal
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (open) {
       _open();
     } else {

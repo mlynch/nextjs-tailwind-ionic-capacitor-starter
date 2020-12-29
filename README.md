@@ -1,5 +1,7 @@
 # Next.js + Tailwind CSS + Capacitor for mobile app development
 
+*Note: this repo is in active development and not quite ready for production use!*
+
 This repo is a starting point for building an iOS, Android, and Progressive Web App with Tailwind CSS, Next.js, and Capacitor. It comes with some pre-built components that can be customized using Tailwind classes, and provides the most important UI controls needed to build native mobile experiences (tabs, nav bars, modals, menus, etc).
 
 These components are baked into the starter and will be adopted into your project. This way you gain full control over the experience and can easily modify the look and feel of the components to match your design.
