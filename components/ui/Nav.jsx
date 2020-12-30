@@ -6,7 +6,7 @@ import * as actions from '../../store/actions';
 const Nav = ({ page }) => {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const title = typeof page.title === 'function' ? page.title() : page.title;
+  const title = typeof page?.title === 'function' ? page?.title() : page?.title || '';
 
   useEffect(() => {
     Plugins.StatusBar.setStyle({

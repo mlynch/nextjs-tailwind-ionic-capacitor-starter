@@ -3,6 +3,8 @@ import Card from '../ui/Card';
 import Content from '../ui/Content';
 
 import * as selectors from '../../store/selectors';
+import usePage from '../../hooks/usePage';
+import { home, homeOutline } from 'ionicons/icons';
 
 const HomeCard = ({ title, type, text, author, image }) => (
   <Card className="my-4">
@@ -18,10 +20,17 @@ const HomeCard = ({ title, type, text, author, image }) => (
 );
 
 const Home = ({ selected }) => {
+  usePage({
+    id: 'home',
+    title: 'Home',
+    icon: homeOutline,
+    selectedIcon: home,
+  });
+
   const homeItems = Store.useState(selectors.getHomeItems);
 
   return (
-    <Content visible={selected} className="p-4 dark:bg-black">
+    <Content visible={true} className="p-4 dark:bg-black">
       {homeItems.map((i, index) => (
         <HomeCard {...i} key={index} />
       ))}

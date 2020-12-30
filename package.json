@@ -30,6 +30,7 @@
     "react-toggle": "^4.1.1",
     "react-transition-group": "^4.4.1",
     "react-use-gesture": "^9.0.0-beta.11",
-    "reselect": "^4.0.0"
+    "reselect": "^4.0.0",
+    "wouter": "^2.7.0"
   }
 }

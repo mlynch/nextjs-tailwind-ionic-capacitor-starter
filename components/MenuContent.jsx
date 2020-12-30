@@ -14,8 +14,6 @@ const MenuItem = ({ children, ...props }) => (
 );
 
 const MenuContent = () => {
-  const menuLinks = Store.useState(selectors.getMenuLinks);
-
   const go = page => {
     actions.setPage(page);
     actions.setMenuOpen(false);
@@ -27,15 +25,9 @@ const MenuContent = () => {
         <h2 className="text-xl select-none dark:text-gray-500">Menu</h2>
       </div>
       <ul>
-        {menuLinks.map(p => {
-          const title = typeof p.title === 'function' ? p.title() : p.title;
-
-          return (
-            <MenuItem key={p.id} onClick={() => go(p)}>
-              {title}
-            </MenuItem>
-          );
-        })}
+        <MenuItem onClick={() => {}}>Home</MenuItem>
+        <MenuItem onClick={() => {}}>Lists</MenuItem>
+        <MenuItem onClick={() => {}}>Settings</MenuItem>
       </ul>
     </>
   );
