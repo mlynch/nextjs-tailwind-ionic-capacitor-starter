@@ -1,3 +1,7 @@
+import { Link } from 'wouter';
+
+import usePage from '../../hooks/usePage';
+import { lists } from '../../mock';
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
@@ -6,13 +10,11 @@ import Content from '../ui/Content';
 import List from '../ui/List';
 import VirtualScroll from '../ui/VirtualScroll';
 
-const ListItems = ({ list, onClose }) => {
+const ListItems = ({ list }) => {
   return (
     <>
       <div className="py-2">
-        <a href="#" onClick={onClose}>
-          All Lists
-        </a>
+        <Link href="/lists">All Lists</Link>
       </div>
       <VirtualScroll
         data={list?.items || []}
@@ -39,27 +41,19 @@ const ListItemEntry = ({ list, item }) => (
   </div>
 );
 
-const ListDetail = ({ selected }) => {
+const ListDetail = ({ selected, list, listId, params }) => {
   const selectedList = Store.useState(selectors.getSelectedList);
 
+  const loadedList = list ? list : lists.find(l => l.id === params.listId);
+
   usePage({
-    title: selectedList.title,
+    title: loadedList.title,
   });
 
   return (
-    <Content visible={selected} className="p-4">
+    <Content className="p-4">
       <List className="h-full w-full">
-        {selected && (
-          <ListItems
-            list={selectedList}
-            onClose={() => {
-              /*
-              actions.setSelectedList(null);
-              actions.setPageById('lists');
-              */
-            }}
-          />
-        )}
+        <ListItems list={loadedList} />
       </List>
     </Content>
   );

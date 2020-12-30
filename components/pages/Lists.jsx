@@ -1,3 +1,5 @@
+import { Link } from 'wouter';
+
 import usePage from '../../hooks/usePage';
 import Store from '../../store';
 import * as actions from '../../store/actions';
@@ -8,12 +10,14 @@ import List from '../ui/List';
 import VirtualScroll from '../ui/VirtualScroll';
 
 const ListEntry = ({ list, ...props }) => (
-  <div
-    {...props}
-    className="p-4 border-solid dark:border-gray-800 border-b cursor-pointer dark:text-gray-200"
-  >
-    <span className="text-md">{list.name}</span>
-  </div>
+  <Link href={`/lists/${list.id}`}>
+    <a
+      {...props}
+      className="p-4 border-solid dark:border-gray-800 border-b cursor-pointer dark:text-gray-200 block"
+    >
+      <span className="text-md">{list.name}</span>
+    </a>
+  </Link>
 );
 
 const AllLists = ({ onSelect }) => {
@@ -24,9 +28,7 @@ const AllLists = ({ onSelect }) => {
       data={lists}
       totalCount={lists.length}
       style={{ height: '100%', width: '100%' }}
-      itemContent={(i, list) => (
-        <ListEntry list={list} onClick={() => onSelect(list)} onClose={() => onSelect(null)} />
-      )}
+      itemContent={(i, list) => <ListEntry list={list} />}
     />
   );
 };
@@ -37,18 +39,9 @@ const Lists = ({ selected }) => {
   });
 
   return (
-    <Content visible={true} className="p-4 dark:bg-black">
+    <Content className="p-4 dark:bg-black">
       <List className="h-full w-full">
-        {/*selected && (*/}
-        <AllLists
-          onSelect={list => {
-            /*
-            actions.setSelectedList(list);
-            actions.setPageById('list-detail');
-            */
-          }}
-        />
-        {/*)}*/}
+        <AllLists />
       </List>
     </Content>
   );

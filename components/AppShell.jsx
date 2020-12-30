@@ -22,13 +22,11 @@ import Home from './pages/Home';
 import Lists from './pages/Lists';
 import Settings from './pages/Settings';
 import useLocation from '../hooks/useLocation';
+import ListDetail from './pages/ListDetail';
 
-const CurrentPage = ({ page }) => {
+const CurrentPage = ({ page, pageProps = {} }) => {
   const currentPage = Store.useState(selectors.getCurrentPage);
 
-  const [match, params] = useRoute('/lists');
-  console.log('Matches?', match);
-  // const Page = currentPage.component;
   const Page = page;
 
   const [local, setLocal] = useState(false);
@@ -37,18 +35,17 @@ const CurrentPage = ({ page }) => {
     setLocal(true);
   }, []);
 
-  console.log('Rendering current page', local);
-
   return (
     <PageStack>
       {local ? (
         <Switch>
           <Route path="/" component={Home} />
           <Route path="/lists" component={Lists} />
+          <Route path="/lists/:listId" component={ListDetail} />
           <Route path="/settings" component={Settings} />
         </Switch>
       ) : (
-        <Page selected={true} />
+        <Page selected={true} {...pageProps} />
       )}
       {/*pages.map(p => {
           const Page = p.component;
@@ -59,7 +56,7 @@ const CurrentPage = ({ page }) => {
   );
 };
 
-const AppShell = ({ page }) => {
+const AppShell = ({ page, pageProps }) => {
   const [location, setLocation] = useLocation();
 
   const showMenu = Store.useState(selectors.getMenuOpen);
@@ -106,7 +103,7 @@ const AppShell = ({ page }) => {
           </Menu>
           <Nav page={currentPage} />
           {/*<CurrentPage page={currentPage} />*/}
-          <CurrentPage page={page} />
+          <CurrentPage page={page} pageProps={pageProps} />
           <TabBar>
             <Tab
               icon={homeOutline}
@@ -120,7 +117,7 @@ const AppShell = ({ page }) => {
               selectedIcon={list}
               title="Lists"
               href="/lists"
-              selected={'/lists' === location}
+              selected={location.indexOf('/lists') === 0}
             />
             <Tab
               icon={cogOutline}

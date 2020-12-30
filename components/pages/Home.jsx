@@ -30,7 +30,7 @@ const Home = ({ selected }) => {
   const homeItems = Store.useState(selectors.getHomeItems);
 
   return (
-    <Content visible={true} className="p-4 dark:bg-black">
+    <Content className="p-4 dark:bg-black">
       {homeItems.map((i, index) => (
         <HomeCard {...i} key={index} />
       ))}
