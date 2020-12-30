@@ -12,7 +12,7 @@ const Settings = ({ selected }) => {
   const settings = Store.useState(selectors.getSettings);
 
   return (
-    <Content visible={selected} className="p-4 dark:bg-black">
+    <Content visible={true} className="p-4 dark:bg-black">
       <List>
         <ListItem className="flex">
           <span className="text-md flex-1 dark:text-gray-200">Enable Notifications</span>

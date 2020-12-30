@@ -1,5 +1,7 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useDrag } from 'react-use-gesture';
-import { Route, Switch } from 'wouter';
+import { Router, Route, Switch, useRoute } from 'wouter';
+import { cog, cogOutline, home, homeOutline, list, listOutline } from 'ionicons/icons';
 
 import Store from '../store';
 import * as actions from '../store/actions';
@@ -16,13 +18,16 @@ import TabBar from '../components/ui/TabBar';
 import { SafeAreaProvider } from '../components/ui/SafeArea';
 import Notifications from '../components/Notifications';
 import MenuContent from '../components/MenuContent';
-import { useEffect, useState } from 'react';
 import Home from './pages/Home';
-import { cog, cogOutline, home, homeOutline, list, listOutline } from 'ionicons/icons';
+import Lists from './pages/Lists';
+import Settings from './pages/Settings';
+import useLocation from '../hooks/useLocation';
 
 const CurrentPage = ({ page }) => {
   const currentPage = Store.useState(selectors.getCurrentPage);
 
+  const [match, params] = useRoute('/lists');
+  console.log('Matches?', match);
   // const Page = currentPage.component;
   const Page = page;
 
@@ -32,19 +37,23 @@ const CurrentPage = ({ page }) => {
     setLocal(true);
   }, []);
 
+  console.log('Rendering current page', local);
+
   return (
     <PageStack>
       {local ? (
         <Switch>
           <Route path="/" component={Home} />
+          <Route path="/lists" component={Lists} />
+          <Route path="/settings" component={Settings} />
         </Switch>
       ) : (
         <Page selected={true} />
       )}
       {/*pages.map(p => {
-        const Page = p.component;
-        return <Page selected={page.id === p.id} key={p.id} />;
-      })*/}
+          const Page = p.component;
+          return <Page selected={page.id === p.id} key={p.id} />;
+        })*/}
       {/*<Page selected={true} />*/}
     </PageStack>
   );
@@ -87,39 +96,41 @@ const AppShell = ({ page }) => {
       }}
     >
       <SafeAreaProvider>
-        <Menu open={showMenu} onClose={closeMenu}>
-          <MenuContent />
-        </Menu>
-        <Nav page={currentPage} />
-        {/*<CurrentPage page={currentPage} />*/}
-        <CurrentPage page={page} />
-        <TabBar>
-          <Tab
-            icon={homeOutline}
-            selectedIcon={home}
-            title="Home"
-            onClick={() => actions.setPage(p)}
-            selected={'home' === currentPage?.id}
-          />
-          <Tab
-            icon={listOutline}
-            selectedIcon={list}
-            title="Lists"
-            onClick={() => actions.setPage(p)}
-            selected={'lists' === currentPage?.id}
-          />
-          <Tab
-            icon={cogOutline}
-            selectedIcon={cog}
-            title="settings"
-            onClick={() => actions.setPage(p)}
-            selected={'settings' === currentPage?.id}
-          />
-        </TabBar>
-        <Backdrop open={showMenu || showNotifications} onClose={backdropClose} />
-        <Modal open={showNotifications} onClose={closeNotifications}>
-          <Notifications />
-        </Modal>
+        <Router hook={useLocation}>
+          <Menu open={showMenu} onClose={closeMenu}>
+            <MenuContent />
+          </Menu>
+          <Nav page={currentPage} />
+          {/*<CurrentPage page={currentPage} />*/}
+          <CurrentPage page={page} />
+          <TabBar>
+            <Tab
+              icon={homeOutline}
+              selectedIcon={home}
+              title="Home"
+              href="/"
+              selected={'home' === currentPage?.id}
+            />
+            <Tab
+              icon={listOutline}
+              selectedIcon={list}
+              title="Lists"
+              href="/lists"
+              selected={'lists' === currentPage?.id}
+            />
+            <Tab
+              icon={cogOutline}
+              selectedIcon={cog}
+              title="settings"
+              href="/settings"
+              selected={'settings' === currentPage?.id}
+            />
+          </TabBar>
+          <Backdrop open={showMenu || showNotifications} onClose={backdropClose} />
+          <Modal open={showNotifications} onClose={closeNotifications}>
+            <Notifications />
+          </Modal>
+        </Router>
       </SafeAreaProvider>
     </App>
   );

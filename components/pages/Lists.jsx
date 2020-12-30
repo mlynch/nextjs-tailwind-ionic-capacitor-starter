@@ -7,7 +7,10 @@ import List from '../ui/List';
 import VirtualScroll from '../ui/VirtualScroll';
 
 const ListEntry = ({ list, ...props }) => (
-  <div {...props} className="p-4 border-solid dark:border-gray-800 border-b cursor-pointer dark:text-gray-200">
+  <div
+    {...props}
+    className="p-4 border-solid dark:border-gray-800 border-b cursor-pointer dark:text-gray-200"
+  >
     <span className="text-md">{list.name}</span>
   </div>
 );
@@ -29,7 +32,7 @@ const AllLists = ({ onSelect }) => {
 
 const Lists = ({ selected }) => {
   return (
-    <Content visible={selected} className="p-4 dark:bg-black">
+    <Content visible={true} className="p-4 dark:bg-black">
       <List className="h-full w-full">
         {selected && (
           <AllLists
