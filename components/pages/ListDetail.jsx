@@ -42,6 +42,10 @@ const ListItemEntry = ({ list, item }) => (
 const ListDetail = ({ selected }) => {
   const selectedList = Store.useState(selectors.getSelectedList);
 
+  usePage({
+    title: selectedList.title,
+  });
+
   return (
     <Content visible={selected} className="p-4">
       <List className="h-full w-full">
@@ -49,8 +53,10 @@ const ListDetail = ({ selected }) => {
           <ListItems
             list={selectedList}
             onClose={() => {
+              /*
               actions.setSelectedList(null);
               actions.setPageById('lists');
+              */
             }}
           />
         )}

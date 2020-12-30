@@ -1,3 +1,4 @@
+import usePage from '../../hooks/usePage';
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
@@ -31,17 +32,23 @@ const AllLists = ({ onSelect }) => {
 };
 
 const Lists = ({ selected }) => {
+  usePage({
+    title: 'Lists',
+  });
+
   return (
     <Content visible={true} className="p-4 dark:bg-black">
       <List className="h-full w-full">
-        {selected && (
-          <AllLists
-            onSelect={list => {
-              actions.setSelectedList(list);
-              actions.setPageById('list-detail');
-            }}
-          />
-        )}
+        {/*selected && (*/}
+        <AllLists
+          onSelect={list => {
+            /*
+            actions.setSelectedList(list);
+            actions.setPageById('list-detail');
+            */
+          }}
+        />
+        {/*)}*/}
       </List>
     </Content>
   );

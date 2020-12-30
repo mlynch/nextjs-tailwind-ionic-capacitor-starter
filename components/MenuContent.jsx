@@ -1,3 +1,4 @@
+import useLocation from '../hooks/useLocation';
 import Store from '../store';
 import * as actions from '../store/actions';
 import * as selectors from '../store/selectors';
@@ -14,9 +15,11 @@ const MenuItem = ({ children, ...props }) => (
 );
 
 const MenuContent = () => {
+  const [location, setLocation] = useLocation();
+
   const go = page => {
-    actions.setPage(page);
     actions.setMenuOpen(false);
+    setLocation(page);
   };
 
   return (
@@ -25,9 +28,9 @@ const MenuContent = () => {
         <h2 className="text-xl select-none dark:text-gray-500">Menu</h2>
       </div>
       <ul>
-        <MenuItem onClick={() => {}}>Home</MenuItem>
-        <MenuItem onClick={() => {}}>Lists</MenuItem>
-        <MenuItem onClick={() => {}}>Settings</MenuItem>
+        <MenuItem onClick={() => go('/')}>Home</MenuItem>
+        <MenuItem onClick={() => go('/lists')}>Lists</MenuItem>
+        <MenuItem onClick={() => go('/settings')}>Settings</MenuItem>
       </ul>
     </>
   );

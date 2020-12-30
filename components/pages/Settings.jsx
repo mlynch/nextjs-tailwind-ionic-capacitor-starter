@@ -6,8 +6,13 @@ import Content from '../ui/Content';
 import List from '../ui/List';
 import ListItem from '../ui/ListItem';
 import Toggle from '../ui/Toggle';
+import usePage from '../../hooks/usePage';
 
 const Settings = ({ selected }) => {
+  usePage({
+    title: 'Settings',
+  });
+
   const enableNotifications = Store.useState();
   const settings = Store.useState(selectors.getSettings);
 

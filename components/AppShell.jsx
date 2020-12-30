@@ -60,6 +60,8 @@ const CurrentPage = ({ page }) => {
 };
 
 const AppShell = ({ page }) => {
+  const [location, setLocation] = useLocation();
+
   const showMenu = Store.useState(selectors.getMenuOpen);
   const showNotifications = Store.useState(selectors.getNotificationsOpen);
   const currentPage = Store.useState(selectors.getCurrentPage);
@@ -86,6 +88,8 @@ const AppShell = ({ page }) => {
     }
   );
 
+  console.log('Got location', location, '/settings' === location);
+
   // This is an example app layout. We've got a hidden menu that will be toggled
   //
   return (
@@ -109,21 +113,21 @@ const AppShell = ({ page }) => {
               selectedIcon={home}
               title="Home"
               href="/"
-              selected={'home' === currentPage?.id}
+              selected={'/home' === location}
             />
             <Tab
               icon={listOutline}
               selectedIcon={list}
               title="Lists"
               href="/lists"
-              selected={'lists' === currentPage?.id}
+              selected={'/lists' === location}
             />
             <Tab
               icon={cogOutline}
               selectedIcon={cog}
-              title="settings"
+              title="Settings"
               href="/settings"
-              selected={'settings' === currentPage?.id}
+              selected={'/settings' === location}
             />
           </TabBar>
           <Backdrop open={showMenu || showNotifications} onClose={backdropClose} />

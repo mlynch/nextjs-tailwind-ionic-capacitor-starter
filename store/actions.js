@@ -1,17 +1,5 @@
 import Store from '.';
 
-export const setPageById = id => {
-  Store.update((s, o) => {
-    s.currentPage = o.pages.find(p => p.id === id);
-  });
-};
-
-export const setPage = page => {
-  Store.update((s, o) => {
-    s.currentPage = page;
-  });
-};
-
 export const setMenuOpen = open => {
   Store.update(s => {
     s.menuOpen = open;
