@@ -11,8 +11,7 @@ export const SafeAreaContext = createContext({ top: 0, bottom: 0 });
 // These values are useful for JS-driven interactions, such as a modal that
 // will drag in and out but needs to offset for the safe region.
 export const SafeAreaProvider = ({ children }) => {
-  const [safeAreaTop, setSafeAreaTop] = useState(0);
-  const [safeAreaBottom, setSafeAreaBottom] = useState(0);
+  const [safeArea, setSafeArea] = useState({ top: 0, right: 0, bottom: 0, left: 0 });
 
   useEffect(() => {
     // I don't know why, but we can't get the value of this CSS variable
@@ -21,18 +20,24 @@ export const SafeAreaProvider = ({ children }) => {
       const safeAreaTop = parseInt(
         window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-top')
       );
-      const safeAreaBottom = window
-        .getComputedStyle(document.documentElement)
-        .getPropertyValue('--safe-area-bottom');
+      const safeAreaBottom = parseInt(
+        window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-bottom')
+      );
+      const safeAreaLeft = parseInt(
+        window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-left')
+      );
+      const safeAreaRight = parseInt(
+        window.getComputedStyle(document.documentElement).getPropertyValue('--safe-area-right')
+      );
 
-      setSafeAreaTop(safeAreaTop);
-      setSafeAreaBottom(safeAreaBottom);
+      setSafeArea({
+        top: safeAreaTop,
+        right: safeAreaRight,
+        bottom: safeAreaBottom,
+        left: safeAreaLeft,
+      });
     }, 500);
   }, []);
 
-  return (
-    <SafeAreaContext.Provider value={{ top: safeAreaTop, bottom: safeAreaBottom }}>
-      {children}
-    </SafeAreaContext.Provider>
-  );
+  return <SafeAreaContext.Provider value={safeArea}>{children}</SafeAreaContext.Provider>;
 };
