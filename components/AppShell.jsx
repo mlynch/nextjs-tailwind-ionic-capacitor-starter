@@ -47,11 +47,6 @@ const CurrentPage = ({ page, pageProps = {} }) => {
       ) : (
         <Page selected={true} {...pageProps} />
       )}
-      {/*pages.map(p => {
-          const Page = p.component;
-          return <Page selected={page.id === p.id} key={p.id} />;
-        })*/}
-      {/*<Page selected={true} />*/}
     </PageStack>
   );
 };
