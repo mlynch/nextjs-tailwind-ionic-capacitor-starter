@@ -45,12 +45,9 @@ const ListDetail = ({ selected, listId, params }) => {
   const actualListId = listId ? listId : params?.listId || null;
   const loadedList = lists.find(l => l.id === actualListId);
 
-  usePage(
-    {
-      title: loadedList.name,
-    },
-    [loadedList]
-  );
+  usePage({
+    title: loadedList.name,
+  });
 
   return (
     <Content className="p-4">

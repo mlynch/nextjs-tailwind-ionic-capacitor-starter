@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import Store from '../store';
 
-const usePage = (fields, deps) => {
+const usePage = fields => {
   useEffect(() => {
-    console.log('Deps updating', fields, deps);
     Store.update(s => {
       s.currentPage = fields;
     });
-  }, [fields, deps]);
+  }, [fields]);
 };
 
 export default usePage;
