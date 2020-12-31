@@ -1,9 +1,8 @@
 import AppShell from '../../components/AppShell';
 import ListDetailPage from '../../components/pages/ListDetail';
-import { lists } from '../../mock';
 
-export default function ListDetail({ list }) {
-  return <AppShell page={ListDetailPage} pageProps={{ list }} />;
+export default function ListDetail({ listId }) {
+  return <AppShell page={ListDetailPage} pageProps={{ listId }} />;
 }
 
 export const getServerSideProps = context => {
@@ -11,12 +10,9 @@ export const getServerSideProps = context => {
     params: { listId },
   } = context;
 
-  const list = lists.find(l => l.id === listId);
-  console.log('Loaded list', list);
-
   return {
     props: {
-      list,
+      listId,
     },
   };
 };

@@ -1,5 +1,29 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 
+// useEffect(() => {
+// While History API does have `popstate` event, the only
+// proper way to listen to changes via `push/replaceState`
+// is to monkey-patch these methods.
+//
+// See https://stackoverflow.com/a/4585031
+if (typeof history !== 'undefined') {
+  for (const type of [eventPushState, eventReplaceState]) {
+    const original = history[type];
+
+    history[type] = function () {
+      const result = original.apply(this, arguments);
+      const event = new Event(type);
+      event.arguments = arguments;
+
+      dispatchEvent(event);
+      return result;
+    };
+  }
+} else {
+  console.log('No history API');
+}
+// });
+
 /**
  * History API docs @see https://developer.mozilla.org/en-US/docs/Web/API/History
  */
@@ -19,30 +43,6 @@ const useLocation = ({ base = '' } = {}) => {
 
   const [path, update] = useState(() => getCurrentPathname(base)); // @see https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
   const prevPath = useRef(path);
-
-  useEffect(() => {
-    // While History API does have `popstate` event, the only
-    // proper way to listen to changes via `push/replaceState`
-    // is to monkey-patch these methods.
-    //
-    // See https://stackoverflow.com/a/4585031
-    if (typeof history !== 'undefined') {
-      for (const type of [eventPushState, eventReplaceState]) {
-        const original = history[type];
-
-        history[type] = function () {
-          const result = original.apply(this, arguments);
-          const event = new Event(type);
-          event.arguments = arguments;
-
-          dispatchEvent(event);
-          return result;
-        };
-      }
-    } else {
-      console.log('No history API');
-    }
-  });
 
   useEffect(() => {
     // this function checks if the location has been changed since the

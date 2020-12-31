@@ -1,7 +1,6 @@
 import { Link } from 'wouter';
 
 import usePage from '../../hooks/usePage';
-import { lists } from '../../mock';
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
@@ -41,14 +40,17 @@ const ListItemEntry = ({ list, item }) => (
   </div>
 );
 
-const ListDetail = ({ selected, list, listId, params }) => {
-  const selectedList = Store.useState(selectors.getSelectedList);
+const ListDetail = ({ selected, listId, params }) => {
+  const lists = Store.useState(selectors.getLists);
+  const actualListId = listId ? listId : params?.listId || null;
+  const loadedList = lists.find(l => l.id === actualListId);
 
-  const loadedList = list ? list : lists.find(l => l.id === params.listId);
-
-  usePage({
-    title: loadedList.title,
-  });
+  usePage(
+    {
+      title: loadedList.name,
+    },
+    [loadedList]
+  );
 
   return (
     <Content className="p-4">

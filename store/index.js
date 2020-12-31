@@ -49,7 +49,6 @@ const Store = new PullStateStore({
   currentPage: null,
   homeItems,
   lists,
-  selectedList: null,
   settings: {
     enableNotifications: true,
   },

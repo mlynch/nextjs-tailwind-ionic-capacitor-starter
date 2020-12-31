@@ -52,7 +52,7 @@ const CurrentPage = ({ page, pageProps = {} }) => {
 };
 
 const AppShell = ({ page, pageProps }) => {
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
 
   const showMenu = Store.useState(selectors.getMenuOpen);
   const showNotifications = Store.useState(selectors.getNotificationsOpen);
@@ -80,7 +80,7 @@ const AppShell = ({ page, pageProps }) => {
     }
   );
 
-  console.log('Got location', location, '/settings' === location);
+  console.log('Got location', location);
 
   // This is an example app layout. We've got a hidden menu that will be toggled
   //
@@ -97,7 +97,6 @@ const AppShell = ({ page, pageProps }) => {
             <MenuContent />
           </Menu>
           <Nav page={currentPage} />
-          {/*<CurrentPage page={currentPage} />*/}
           <CurrentPage page={page} pageProps={pageProps} />
           <TabBar>
             <Tab
@@ -105,7 +104,7 @@ const AppShell = ({ page, pageProps }) => {
               selectedIcon={home}
               title="Home"
               href="/"
-              selected={'/home' === location}
+              selected={'/' === location}
             />
             <Tab
               icon={listOutline}

@@ -9,5 +9,4 @@ export const getCurrentPage = createSelector(getState, state => state.currentPag
 // App specific selectors
 export const getHomeItems = createSelector(getState, state => state.homeItems);
 export const getLists = createSelector(getState, state => state.lists);
-export const getSelectedList = createSelector(getState, state => state.selectedList);
 export const getSettings = createSelector(getState, state => state.settings);
