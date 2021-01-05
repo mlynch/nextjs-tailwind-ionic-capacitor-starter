@@ -4,12 +4,6 @@ import { Link } from 'wouter';
 import { useEffect, useState } from 'react';
 
 const Tab = ({ title, href, icon, selected, selectedIcon, onClick }) => {
-  console.log('TAB', href, selected);
-  const [update, setUpdate] = useState(false);
-  useEffect(() => {
-    setUpdate(true);
-  }, [selected]);
-
   return (
     <Link href={href}>
       <a

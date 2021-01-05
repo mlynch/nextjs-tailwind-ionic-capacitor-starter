@@ -51,7 +51,6 @@ const useLocation = ({ base = '' } = {}) => {
     // that's why we store the last pathname in a ref.
     const checkForUpdates = () => {
       const pathname = getCurrentPathname(base);
-      console.log('CHECK FOR UPDATES', pathname);
       prevPath.current !== pathname && update((prevPath.current = pathname));
     };
 
