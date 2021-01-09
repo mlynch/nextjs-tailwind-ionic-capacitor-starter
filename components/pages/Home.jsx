@@ -23,7 +23,7 @@ const Home = () => (
         <IonTitle>Inbox</IonTitle>
       </IonToolbar>
     </IonHeader>
-    <IonContent>
+    <IonContent className="ion-padding">
       {homeItems.map((i, index) => (
         <HomeCard {...i} key={index} />
       ))}
