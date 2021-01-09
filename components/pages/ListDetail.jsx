@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import Link from '../../components/Link';
 
 import usePage from '../../hooks/usePage';
 import Store from '../../store';

@@ -2,13 +2,6 @@ import { Store as PullStateStore } from 'pullstate';
 
 import { lists } from '../mock';
 
-import { list, listOutline, cog, cogOutline, home, homeOutline } from 'ionicons/icons';
-
-import Home from '../components/pages/Home';
-import Lists from '../components/pages/Lists';
-import Settings from '../components/pages/Settings';
-import ListDetail from '../components/pages/ListDetail';
-
 export const images = [
   'https://images.unsplash.com/photo-1608091526083-86ae8489ae5c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80',
   'https://images.unsplash.com/photo-1608050072262-7b26ba63fb46?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80',

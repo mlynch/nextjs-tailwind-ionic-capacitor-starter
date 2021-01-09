@@ -1,10 +1,7 @@
-import Store from '../../store';
 import Card from '../ui/Card';
-import Content from '../ui/Content';
 
-import * as selectors from '../../store/selectors';
-import usePage from '../../hooks/usePage';
-import { home, homeOutline } from 'ionicons/icons';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/react';
+import { homeItems } from '../../store';
 
 const HomeCard = ({ title, type, text, author, image }) => (
   <Card className="my-4">
@@ -19,23 +16,19 @@ const HomeCard = ({ title, type, text, author, image }) => (
   </Card>
 );
 
-const Home = ({ selected }) => {
-  usePage({
-    id: 'home',
-    title: 'Home',
-    icon: homeOutline,
-    selectedIcon: home,
-  });
-
-  const homeItems = Store.useState(selectors.getHomeItems);
-
-  return (
-    <Content className="p-4 dark:bg-black">
+const Home = () => (
+  <IonPage>
+    <IonHeader>
+      <IonToolbar>
+        <IonTitle>Inbox</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+    <IonContent>
       {homeItems.map((i, index) => (
         <HomeCard {...i} key={index} />
       ))}
-    </Content>
-  );
-};
+    </IonContent>
+  </IonPage>
+);
 
 export default Home;

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import Icon from './Icon';
-import { Link } from 'wouter';
+import Link from '../../components/Link';
 import { useEffect, useState } from 'react';
 
 const Tab = ({ title, href, icon, selected, selectedIcon, onClick }) => {

@@ -1,13 +1,10 @@
-import { Link } from 'wouter';
+import Link from '../../components/Link';
 
-import usePage from '../../hooks/usePage';
 import Store from '../../store';
-import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
 
-import Content from '../ui/Content';
-import List from '../ui/List';
 import VirtualScroll from '../ui/VirtualScroll';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/react';
 
 const ListEntry = ({ list, ...props }) => (
   <Link href={`/lists/${list.id}`}>
@@ -33,17 +30,20 @@ const AllLists = ({ onSelect }) => {
   );
 };
 
-const Lists = ({ selected }) => {
-  usePage({
-    title: 'Lists',
-  });
-
+const Lists = ({ selected, ...props }) => {
   return (
-    <Content className="p-4 dark:bg-black">
-      <List className="h-full w-full">
-        <AllLists />
-      </List>
-    </Content>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Lists</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <List className="h-full w-full">
+          <AllLists />
+        </List>
+      </IonContent>
+    </IonPage>
   );
 };
 
