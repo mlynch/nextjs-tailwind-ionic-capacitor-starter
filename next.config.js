@@ -1,10 +1,1 @@
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: '/*',
-        destination: '/',
-      },
-    ];
-  },
-};
+module.exports = {};
