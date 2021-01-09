@@ -4,17 +4,22 @@ import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
 import VirtualScroll from '../ui/VirtualScroll';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/react';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+} from '@ionic/react';
+import { useEffect, useState } from 'react';
 
 const ListEntry = ({ list, ...props }) => (
-  <Link href={`/lists/${list.id}`}>
-    <a
-      {...props}
-      className="p-4 border-solid dark:border-gray-800 border-b cursor-pointer dark:text-gray-200 block"
-    >
-      <span className="text-md">{list.name}</span>
-    </a>
-  </Link>
+  <IonItem href={`/tabs/lists/${list.id}`}>
+    <IonLabel>{list.name}</IonLabel>
+  </IonItem>
 );
 
 const AllLists = ({ onSelect }) => {
@@ -30,7 +35,7 @@ const AllLists = ({ onSelect }) => {
   );
 };
 
-const Lists = ({ selected, ...props }) => {
+const Lists = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -38,10 +43,13 @@ const Lists = ({ selected, ...props }) => {
           <IonTitle>Lists</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        <List className="h-full w-full">
-          <AllLists />
-        </List>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">Lists</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <AllLists />
       </IonContent>
     </IonPage>
   );

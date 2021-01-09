@@ -1,6 +1,8 @@
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList } from '@ionic/react';
+
 const Settings = () => {
   const enableNotifications = Store.useState();
   const settings = Store.useState(selectors.getSettings);
@@ -13,9 +15,7 @@ const Settings = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <List className="h-full w-full">
-          <AllLists />
-        </List>
+        <IonList></IonList>
       </IonContent>
     </IonPage>
   );
