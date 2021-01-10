@@ -1,17 +1,9 @@
 import { Redirect, Route } from 'react-router-dom';
-import {
-  IonApp,
-  IonRouterOutlet,
-  IonTabs,
-  IonTabBar,
-  IonTabButton,
-  IonIcon,
-  IonLabel,
-} from '@ionic/react';
+import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { cog, flash, list } from 'ionicons/icons';
 
-import Home from './Home';
+import Home from './Feed';
 import Lists from './Lists';
 import Settings from './Settings';
 
@@ -20,23 +12,23 @@ const Tabs = () => {
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/tabs/home" component={Home} exact={true} />
+          <Route path="/tabs/feed" component={Home} exact={true} />
           <Route path="/tabs/lists" component={Lists} exact={true} />
           <Route path="/tabs/settings" component={Settings} exact={true} />
-          <Route path="/" render={() => <Redirect to="/tabs/home" />} exact={true} />
+          <Route path="/tabs" render={() => <Redirect to="/tabs/feed" />} exact={true} />
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tabs/home">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+          <IonTabButton tab="tab1" href="/tabs/feed">
+            <IonIcon icon={flash} />
+            <IonLabel>Feed</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab2" href="/tabs/lists">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonIcon icon={list} />
+            <IonLabel>Lists</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tabs/settings">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon icon={cog} />
+            <IonLabel>Settings</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>

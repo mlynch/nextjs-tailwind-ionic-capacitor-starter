@@ -9,5 +9,8 @@
       "launchShowDuration": 0
     }
   },
+  "server": {
+    "url": "http://192.168.86.26:3000"
+  },
   "cordova": {}
 }
