@@ -34,10 +34,10 @@ export const homeItems = [
 ];
 
 export const notifications = [
-  { title: 'New friend request' },
-  { title: 'Please change your password' },
-  { title: 'You have a new message' },
-  { title: 'Welcome to the app!' },
+  { title: 'New friend request', when: '6 hr' },
+  { title: 'Please change your password', when: '1 day' },
+  { title: 'You have a new message', when: '2 weeks' },
+  { title: 'Welcome to the app!', when: '1 month' },
 ];
 
 // Some fake lists

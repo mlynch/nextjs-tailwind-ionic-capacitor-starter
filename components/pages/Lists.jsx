@@ -3,21 +3,20 @@ import Link from '../../components/Link';
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
-import VirtualScroll from '../ui/VirtualScroll';
+// import VirtualScroll from '../ui/VirtualScroll';
 import {
   IonPage,
   IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
-  IonList,
   IonItem,
   IonLabel,
 } from '@ionic/react';
 import { useEffect, useState } from 'react';
 
 const ListEntry = ({ list, ...props }) => (
-  <IonItem href={`/tabs/lists/${list.id}`}>
+  <IonItem href={`/tabs/lists/${list.id}`} className="list-entry">
     <IonLabel>{list.name}</IonLabel>
   </IonItem>
 );
@@ -25,13 +24,23 @@ const ListEntry = ({ list, ...props }) => (
 const AllLists = ({ onSelect }) => {
   const lists = Store.useState(selectors.getLists);
 
+  /*
   return (
     <VirtualScroll
       data={lists}
       totalCount={lists.length}
-      style={{ height: '100%', width: '100%' }}
+      style={{ height: '100%', width: '100%', minHeight: '1px' }}
       itemContent={(i, list) => <ListEntry list={list} />}
     />
+  );
+  */
+
+  return (
+    <>
+      {lists.map(list => (
+        <ListEntry list={list} />
+      ))}
+    </>
   );
 };
 
