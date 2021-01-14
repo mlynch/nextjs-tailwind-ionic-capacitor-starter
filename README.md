@@ -1,6 +1,8 @@
 # Next.js + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter
 
-*Note: this repo is in active development and not quite ready for production use!*
+![ss.png](./ss.png)
+
+_Note: this repo is in active development and not quite ready for production use!_
 
 This repo is a starting point for building an iOS, Android, and Progressive Web App with Next.js, Tailwind CSS, Ionic Framework, and Capacitor.
 
