@@ -9,6 +9,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@capacitor/android": "^2.4.6",
     "@capacitor/cli": "^2.4.5",
     "@capacitor/core": "^2.4.5",
     "@capacitor/ios": "^2.4.5",
