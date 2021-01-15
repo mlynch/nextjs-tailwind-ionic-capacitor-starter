@@ -5,6 +5,5 @@ const App = dynamic(() => import('../components/AppShell'), {
 });
 
 export default function Index() {
-  // return <AppShell page={DynamicHome} />;
   return <App />;
 }
