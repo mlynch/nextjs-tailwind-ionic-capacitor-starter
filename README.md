@@ -1,6 +1,6 @@
 # Next.js + Tailwind CSS + Ionic Framework + Capacitor Mobile Starter
 
-![ss.png](./ss.png)
+![Screenshot](./screenshot.png)
 
 _Note: this repo is in active development and not quite ready for production use!_
 
