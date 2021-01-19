@@ -7,7 +7,6 @@ import * as selectors from '../../store/selectors';
 
 import Content from '../ui/Content';
 import List from '../ui/List';
-import VirtualScroll from '../ui/VirtualScroll';
 
 const ListItems = ({ list }) => {
   return (
@@ -15,12 +14,9 @@ const ListItems = ({ list }) => {
       <div className="py-2">
         <Link href="/lists">All Lists</Link>
       </div>
-      <VirtualScroll
-        data={list?.items || []}
-        totalCount={(list?.items || []).length}
-        style={{ height: '100%', width: '100%' }}
-        itemContent={(i, item) => <ListItemEntry list={list} item={item} />}
-      />
+      {(list?.items || []).map(item => (
+        <ListItemEntry list={list} item={item} />
+      ))}
     </>
   );
 };
