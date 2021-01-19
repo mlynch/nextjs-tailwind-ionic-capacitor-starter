@@ -10,24 +10,25 @@ Next.js handles the production React app experience, Tailwind can be used to sty
 
 ## Usage
 
-Build your client side Next.js files
+This project is a standard Next.js app, so the typical Next.js development process applies. However, there is one caveat: the app must be exported to deploy to iOS and Android, since it must run purely client-side. ([more on Next.js export](https://nextjs.org/docs/advanced-features/static-html-export))
+
+To build the app, run:
 
 ```bash
 npm run build
 npm run export
 ```
 
-All the client side files will be sent to `./out/` directory, you can now run capacitor on iOS or Android:
+All the client side files will be sent to the `./out/` directory. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
 
 ```bash
-# iOS
-npx cap copy ios
-npx cap open ios
+npx cap copy
 ```
 
-```bash
-# Android
-npx cap copy android
+Finally, to run the app, open the Native IDE for the platform and follow the IDE's run process (note: a CLI run [will be available in Capacitor 3](https://capacitorjs.com/blog/announcing-capacitor-3-0-beta):
+
+```
+npx cap open ios
 npx cap open android
 ```
 
