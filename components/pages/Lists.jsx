@@ -24,17 +24,6 @@ const ListEntry = ({ list, ...props }) => (
 const AllLists = ({ onSelect }) => {
   const lists = Store.useState(selectors.getLists);
 
-  /*
-  return (
-    <VirtualScroll
-      data={lists}
-      totalCount={lists.length}
-      style={{ height: '100%', width: '100%', minHeight: '1px' }}
-      itemContent={(i, list) => <ListEntry list={list} />}
-    />
-  );
-  */
-
   return (
     <>
       {lists.map(list => (
