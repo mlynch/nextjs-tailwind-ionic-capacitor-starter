@@ -5,6 +5,7 @@ import { cog, flash, list } from 'ionicons/icons';
 
 import Home from './Feed';
 import Lists from './Lists';
+import ListDetail from './ListDetail';
 import Settings from './Settings';
 
 const Tabs = () => {
@@ -14,6 +15,7 @@ const Tabs = () => {
         <IonRouterOutlet>
           <Route path="/tabs/feed" component={Home} exact={true} />
           <Route path="/tabs/lists" component={Lists} exact={true} />
+          <Route path="/tabs/lists/:listId" component={ListDetail} exact={true} />
           <Route path="/tabs/settings" component={Settings} exact={true} />
           <Route path="/tabs" render={() => <Redirect to="/tabs/feed" />} exact={true} />
         </IonRouterOutlet>
