@@ -3,7 +3,6 @@ import Link from '../../components/Link';
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
-// import VirtualScroll from '../ui/VirtualScroll';
 import {
   IonPage,
   IonHeader,
