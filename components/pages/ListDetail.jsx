@@ -11,7 +11,6 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import Link from '../../components/Link';
 
 import Store from '../../store';
 import * as actions from '../../store/actions';
