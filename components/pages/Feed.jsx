@@ -9,6 +9,7 @@ import {
   IonButton,
   IonIcon,
   IonContent,
+  IonMenuButton,
 } from '@ionic/react';
 import Notifications from './Notifications';
 import { useState } from 'react';
@@ -42,6 +43,9 @@ const Feed = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>Feed</IonTitle>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
           <IonButtons slot="end">
             <IonButton onClick={() => setShowNotifications(true)}>
               <IonIcon icon={notificationsOutline} />
