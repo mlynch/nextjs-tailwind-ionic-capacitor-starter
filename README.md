@@ -10,7 +10,7 @@ Next.js handles the production React app experience, Tailwind can be used to sty
 
 ## Usage
 
-This project is a standard Next.js app, so the typical Next.js development process applies. However, there is one caveat: the app must be exported to deploy to iOS and Android, since it must run purely client-side. ([more on Next.js export](https://nextjs.org/docs/advanced-features/static-html-export))
+This project is a standard Next.js app, so the typical Next.js development process applies (`npm run dev` for browser-based development). However, there is one caveat: the app must be exported to deploy to iOS and Android, since it must run purely client-side. ([more on Next.js export](https://nextjs.org/docs/advanced-features/static-html-export))
 
 To build the app, run:
 
@@ -31,6 +31,20 @@ Finally, to run the app, open the Native IDE for the platform and follow the IDE
 npx cap open ios
 npx cap open android
 ```
+
+## Livereload/Instant Refresh
+
+To enable Livereload and Instant Refresh during development (when running `npm run dev`), find the IP address of your local interface (ex: `192.168.1.2`) and port your Next.js server is running on, and then set the server url config value to point to it in `capacitor.config.json`:
+
+```json
+{
+  "server": {
+    "url": "192.168.1.2:3000"
+  }
+}
+```
+
+Note: this configuration wil be easier in Capacitor 3 which [recently went into beta](https://capacitorjs.com/blog/announcing-capacitor-3-0-beta).
 
 ## Caveats
 
