@@ -1,19 +1,30 @@
-import { Plugins } from '@capacitor/core';
+import { Plugins, StatusBarStyle } from '@capacitor/core';
 import { IonContent, IonHeader, IonMenu, IonTitle, IonToolbar } from '@ionic/react';
+import { useEffect, useState } from 'react';
 
 const Menu = () => {
   const { StatusBar } = Plugins;
 
-  const handleOpen = () => {
-    StatusBar.setStyle({
-      style: StatusBarStyle.Light,
-    });
+  const [isDark, setIsDark] = useState(false);
+
+  const handleOpen = async () => {
+    try {
+      await StatusBar.setStyle({
+        style: isDark ? StatusBarStyle.Light : StatusBarStyle.Dark,
+      });
+    } catch {}
   };
-  const handleClose = () => {
-    StatusBar.setStyle({
-      style: StatusBarStyle.Dark,
-    });
+  const handleClose = async () => {
+    try {
+      await StatusBar.setStyle({
+        style: isDark ? StatusBarStyle.Dark : StatusBarStyle.Light,
+      });
+    } catch {}
   };
+
+  useEffect(() => {
+    setIsDark(window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }, []);
 
   return (
     <IonMenu side="start" contentId="main" onIonDidOpen={handleOpen} onIonDidClose={handleClose}>

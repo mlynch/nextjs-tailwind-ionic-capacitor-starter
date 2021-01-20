@@ -43,8 +43,8 @@ const Notifications = ({ open, onDidDismiss }) => {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          {notifications.map(notification => (
-            <NotificationItem notification={notification} />
+          {notifications.map((notification, i) => (
+            <NotificationItem notification={notification} key={i} />
           ))}
         </IonList>
       </IonContent>
