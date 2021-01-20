@@ -1,5 +1,3 @@
-import Link from '../../components/Link';
-
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
@@ -12,7 +10,6 @@ import {
   IonItem,
   IonLabel,
 } from '@ionic/react';
-import { useEffect, useState } from 'react';
 
 const ListEntry = ({ list, ...props }) => (
   <IonItem href={`/tabs/lists/${list.id}`} className="list-entry">
