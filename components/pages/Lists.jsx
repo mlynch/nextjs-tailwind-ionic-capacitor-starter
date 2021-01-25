@@ -22,8 +22,8 @@ const AllLists = ({ onSelect }) => {
 
   return (
     <>
-      {lists.map(list => (
-        <ListEntry list={list} />
+      {lists.map((list, i) => (
+        <ListEntry list={list} key={i} />
       ))}
     </>
   );
