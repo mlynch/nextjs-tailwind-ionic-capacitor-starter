@@ -9,9 +9,12 @@
     "export": "next export"
   },
   "dependencies": {
+    "@capacitor/android": "^2.4.6",
     "@capacitor/cli": "^2.4.5",
     "@capacitor/core": "^2.4.5",
     "@capacitor/ios": "^2.4.5",
+    "@ionic/react": "^5.5.2",
+    "@ionic/react-router": "^5.5.2",
     "autoprefixer": "^10.1.0",
     "capacitor-dark-mode": "^1.0.5",
     "classnames": "^2.2.6",
@@ -19,6 +22,7 @@
     "postcss": "^8.2.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
+    "react-router-dom": "^5.2.0",
     "react-virtuoso": "^1.1.1",
     "tailwindcss": "^2.0.2"
   },
@@ -26,9 +30,6 @@
     "ionicons": "^5.2.3",
     "prettier": "^2.2.1",
     "pullstate": "^1.20.5",
-    "react-spring": "^8.0.27",
-    "react-toggle": "^4.1.1",
-    "react-transition-group": "^4.4.1",
     "react-use-gesture": "^9.0.0-beta.11",
     "reselect": "^4.0.0"
   }

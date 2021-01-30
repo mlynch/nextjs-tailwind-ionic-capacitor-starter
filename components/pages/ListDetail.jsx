@@ -1,61 +1,64 @@
+import {
+  IonBackButton,
+  IonButtons,
+  IonCheckbox,
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react';
+
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
 
-import Content from '../ui/Content';
-import List from '../ui/List';
-import VirtualScroll from '../ui/VirtualScroll';
-
-const ListItems = ({ list, onClose }) => {
+const ListItems = ({ list }) => {
   return (
-    <>
-      <div className="py-2">
-        <a href="#" onClick={onClose}>
-          All Lists
-        </a>
-      </div>
-      <VirtualScroll
-        data={list?.items || []}
-        totalCount={(list?.items || []).length}
-        style={{ height: '100%', width: '100%' }}
-        itemContent={(i, item) => <ListItemEntry list={list} item={item} />}
-      />
-    </>
+    <IonList>
+      {(list?.items || []).map(item => (
+        <ListItemEntry list={list} item={item} />
+      ))}
+    </IonList>
   );
 };
 
 const ListItemEntry = ({ list, item }) => (
-  <div
-    className="p-4 border-solid border-b cursor-pointer flex select-none"
-    onClick={() => actions.setDone(list, item, !item.done)}
-  >
-    <span className="text-md flex-1">{item.name}</span>
-    <input
-      className="pointer-events-none select-none"
-      type="checkbox"
-      checked={item.done || false}
-      readOnly={true}
-    />
-  </div>
+  <IonItem onClick={() => actions.setDone(list, item, !item.done)}>
+    <IonLabel>{item.name}</IonLabel>
+    <IonCheckbox checked={item.done || false} slot="end" />
+  </IonItem>
 );
 
-const ListDetail = ({ selected }) => {
-  const selectedList = Store.useState(selectors.getSelectedList);
+const ListDetail = ({ match }) => {
+  const lists = Store.useState(selectors.getLists);
+  const {
+    params: { listId },
+  } = match;
+  const loadedList = lists.find(l => l.id === listId);
 
   return (
-    <Content visible={selected} className="p-4">
-      <List className="h-full w-full">
-        {selected && (
-          <ListItems
-            list={selectedList}
-            onClose={() => {
-              actions.setSelectedList(null);
-              actions.setPageById('lists');
-            }}
-          />
-        )}
-      </List>
-    </Content>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/tabs/lists" />
+          </IonButtons>
+          <IonTitle>{loadedList.name}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent fullscreen>
+        <IonHeader collapse="condense">
+          <IonToolbar>
+            <IonTitle size="large">{loadedList.name}</IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <ListItems list={loadedList} />
+      </IonContent>
+    </IonPage>
   );
 };
 
