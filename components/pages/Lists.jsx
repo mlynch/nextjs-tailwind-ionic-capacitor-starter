@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 
 const ListEntry = ({ list, ...props }) => (
-  <IonItem href={`/tabs/lists/${list.id}`} className="list-entry">
+  <IonItem routerLink={`/tabs/lists/${list.id}`} className="list-entry">
     <IonLabel>{list.name}</IonLabel>
   </IonItem>
 );
