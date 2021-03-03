@@ -41,7 +41,7 @@ To enable Livereload and Instant Refresh during development (when running `npm r
 ```json
 {
   "server": {
-    "url": "192.168.1.2:3000"
+    "url": "http://192.168.1.2:3000"
   }
 }
 ```
