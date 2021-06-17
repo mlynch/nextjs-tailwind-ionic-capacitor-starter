@@ -27,7 +27,7 @@
     "react-dom": "17.0.1",
     "react-router-dom": "^5.2.0",
     "react-virtuoso": "^1.1.1",
-    "tailwindcss": "^2.1.4"
+    "tailwindcss": "^2.2.0"
   },
   "devDependencies": {
     "eslint": "^7.28.0",

@@ -20,7 +20,7 @@ const ListItems = ({ list }) => {
   return (
     <IonList>
       {(list?.items || []).map((item, key) => (
-        <ListItemEntry list={list} item={item} />
+        <ListItemEntry list={list} item={item} key={key} />
       ))}
     </IonList>
   );
