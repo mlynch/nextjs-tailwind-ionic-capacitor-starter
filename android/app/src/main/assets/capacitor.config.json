@@ -1,13 +1,16 @@
 {
-  "appId": "com.example.app",
-  "appName": "nextjs-tailwind-capacitor",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "out",
-  "plugins": {
-    "SplashScreen": {
-      "launchShowDuration": 0
-    }
-  },
-  "cordova": {}
+	"appId": "com.example.app",
+	"appName": "nextjs-tailwind-capacitor",
+	"bundledWebRuntime": false,
+	"npmClient": "npm",
+	"webDir": "out",
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		}
+	},
+	"cordova": {},
+	"server": {
+		"url": "http://192.168.1.123:3000"
+	}
 }
