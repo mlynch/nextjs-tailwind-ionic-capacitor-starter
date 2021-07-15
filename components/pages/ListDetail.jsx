@@ -19,8 +19,8 @@ import * as selectors from '../../store/selectors';
 const ListItems = ({ list }) => {
   return (
     <IonList>
-      {(list?.items || []).map(item => (
-        <ListItemEntry list={list} item={item} />
+      {(list?.items || []).map((item, key) => (
+        <ListItemEntry list={list} item={item} key={key} />
       ))}
     </IonList>
   );

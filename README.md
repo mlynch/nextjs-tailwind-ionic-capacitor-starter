@@ -24,14 +24,14 @@ npm run export
 All the client side files will be sent to the `./out/` directory. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
 
 ```bash
-npx cap copy
+npx cap sync
 ```
 
-Finally, to run the app, open the Native IDE for the platform and follow the IDE's run process (note: a CLI run [will be available in Capacitor 3](https://capacitorjs.com/blog/announcing-capacitor-3-0-beta):
+Finally, to run the app, use Capacitor 3 new awesome run command:
 
 ```
-npx cap open ios
-npx cap open android
+npx cap run ios
+npx cap run android
 ```
 
 ## Livereload/Instant Refresh

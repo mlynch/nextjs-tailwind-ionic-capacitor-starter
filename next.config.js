@@ -1,3 +1,6 @@
 module.exports = {
-  basePath: ''
+  basePath: '',
+  images: {
+    domains: ['images.unsplash.com'],
+  },
 };

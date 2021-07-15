@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Script from 'next/script';
 
 import 'tailwindcss/tailwind.css';
 import '@ionic/react/css/core.css';
@@ -20,9 +21,9 @@ function MyApp({ Component, pageProps }) {
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         ></meta>
-        <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
       </Head>
       <Component {...pageProps} />
+      <Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
     </>
   );
 }
