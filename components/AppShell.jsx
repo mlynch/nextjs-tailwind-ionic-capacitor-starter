@@ -7,9 +7,7 @@ import Menu from './Menu';
 
 import Tabs from './pages/Tabs';
 
-setupIonicReact({
-  mode: 'md'
-});
+setupIonicReact({});
 
 window.matchMedia("(prefers-color-scheme: dark)").addListener(async (status) => {
   try {
