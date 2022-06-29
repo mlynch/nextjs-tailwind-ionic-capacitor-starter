@@ -17,14 +17,14 @@
     "@capacitor/core": "^3.0.1",
     "@capacitor/ios": "^3.0.1",
     "@capacitor/status-bar": "^1.0.1",
-    "@ionic/react": "^5.5.2",
-    "@ionic/react-router": "^5.5.2",
+    "@ionic/react": "^6.1.12",
+    "@ionic/react-router": "^6.1.12",
     "autoprefixer": "^10.2.6",
     "classnames": "^2.2.6",
-    "next": "^11.0.0",
+    "next": "^12.2.0",
     "postcss": "^8.3.5",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-router-dom": "^5.2.0",
     "react-virtuoso": "^1.1.1",
     "tailwindcss": "^2.2.0"
@@ -34,7 +34,7 @@
     "eslint-config-next": "^11.0.0",
     "ionicons": "^5.2.3",
     "prettier": "^2.2.1",
-    "pullstate": "^1.20.5",
+    "pullstate": "1.24",
     "react-use-gesture": "^9.1.3",
     "reselect": "^4.0.0"
   }
