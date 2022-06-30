@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "build:mobile": "next build && next export && npx cap sync"
   },
   "dependencies": {
     "@babel/runtime": "^7.18.6",
