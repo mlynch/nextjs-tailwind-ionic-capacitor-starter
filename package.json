@@ -13,6 +13,7 @@
     "build:mobile": "next build && next export && npx cap sync"
   },
   "dependencies": {
+    "@babel/runtime": "^7.18.6",
     "@capacitor/android": "^3.0.1",
     "@capacitor/cli": "^3.0.1",
     "@capacitor/core": "^3.0.1",
@@ -26,9 +27,11 @@
     "postcss": "^8.3.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-instantsearch-dom": "^6.29.0",
     "react-router-dom": "^5.2.0",
     "react-virtuoso": "^1.1.1",
-    "tailwindcss": "^2.2.0"
+    "tailwindcss": "^2.2.0",
+    "typesense-instantsearch-adapter": "^2.4.1"
   },
   "devDependencies": {
     "eslint": "^7.28.0",
