@@ -16,11 +16,47 @@ import {
   IonModal,
   IonIcon,
   IonFooter,
+  IonList,
+  IonLabel,
+  IonNote,
 } from '@ionic/react';
 import Notifications from './Notifications';
 import { useState, useRef } from 'react';
 import { closeOutline, notificationsOutline } from 'ionicons/icons';
 import { ClearRefinements, Hits, InstantSearch, NumericMenu, RefinementList, SearchBox, Stats } from 'react-instantsearch-dom';
+
+const FILTER_FACETS = [
+  {
+    title: 'Division',
+    value: 'division',
+    selected: [],
+  },
+  {
+    title: 'Size',
+    value: 'sizes',
+    selected: [],
+  },
+  {
+    title: 'Brand',
+    value: 'brand',
+    selected: [],
+  },
+  {
+    title: 'Color',
+    value: 'colors',
+    selected: [],
+  },
+  {
+    title: 'Era',
+    value: 'eras',
+    selected: [],
+  },
+  {
+    title: 'Price',
+    value: 'priceBucket',
+    selected: [],
+  }
+];
 
 const Hit = ({ hit: { brand, title, description, sizes, images }}) => (
   <Card className="my-4 mx-auto">
@@ -54,7 +90,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   //  queryBy is required.
   additionalSearchParameters: {
     query_by: "title,description",
-	// include_fields: "images"
+  // include_fields: "images"
   },
 })
 
@@ -73,7 +109,7 @@ const Feed = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="ion-padding" fullscreen>
+      <IonContent fullscreen>
         <section>
           <IonButton><IonText>Sort</IonText></IonButton>
           <IonButton id='open-modal'>
@@ -84,36 +120,44 @@ const Feed = () => {
         </section>
 
         <Notifications open={showNotifications} onDidDismiss={() => setShowNotifications(false)} />
-        <InstantSearch searchClient={searchClient} indexName="products">
-			<SearchBox />
-			<Stats />
-			<ClearRefinements />
-			<h1>Brand</h1>
-			<RefinementList attribute="brand" />
-			<h1>Colors</h1>
-			<RefinementList attribute="colors" />
-			<h1>Eras</h1>
-			<RefinementList attribute="eras" />
-			<h1>Price</h1>
-			<RefinementList attribute="priceBucket" />
-			<Hits hitComponent={Hit} />
-      	</InstantSearch>
+        
+        <InstantSearch searchClient={searchClient} indexName='products'>
+          <SearchBox />
+
+          <Hits hitComponent={Hit} />
+        </InstantSearch>
       </IonContent>
 
       <IonModal ref={modal} trigger='open-modal'>
         <IonHeader>
           <IonToolbar>
-            <IonButtons slot="start">
+            <IonButtons slot='start'>
               <IonButton onClick={() => modal.current?.dismiss()}>
-                <IonIcon slot='start' icon={closeOutline}></IonIcon>
+                <IonIcon slot='icon-only' icon={closeOutline}></IonIcon>
               </IonButton>
             </IonButtons>
 
             <IonTitle>Filter</IonTitle>
+
+            <IonButtons slot='end'>
+            </IonButtons>
           </IonToolbar>
         </IonHeader>
 
         <IonContent className="ion-padding">
+          <IonList>
+            {FILTER_FACETS.map(filter => (
+              <IonItem
+                key={filter.value}
+                detail={false}
+                button
+                onClick={() => console.log('facet selected')}
+              >
+                <IonLabel>{filter.title}</IonLabel>
+                <IonNote>All</IonNote>
+              </IonItem>
+            ))}
+          </IonList>
         </IonContent>
 
         <IonFooter className='ion-no-border'>
