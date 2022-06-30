@@ -16,9 +16,7 @@ import {
 import Notifications from './Notifications';
 import { useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
-import { getHomeItems } from '../../store/selectors';
-import Store from '../../store';
-import { Hits, InstantSearch, SearchBox, Stats } from 'react-instantsearch-dom';
+import { ClearRefinements, Hits, InstantSearch, NumericMenu, RefinementList, SearchBox, Stats } from 'react-instantsearch-dom';
 
 const Hit = ({ hit: { brand, title, description, sizes, images }}) => (
   <Card className="my-4 mx-auto">
@@ -86,6 +84,15 @@ const Feed = () => {
         <InstantSearch searchClient={searchClient} indexName="products">
 			<SearchBox />
 			<Stats />
+			<ClearRefinements />
+			<h1>Brand</h1>
+			<RefinementList attribute="brand" />
+			<h1>Colors</h1>
+			<RefinementList attribute="colors" />
+			<h1>Eras</h1>
+			<RefinementList attribute="eras" />
+			<h1>Price</h1>
+			<RefinementList attribute="priceBucket" />
 			<Hits hitComponent={Hit} />
       	</InstantSearch>
       </IonContent>
