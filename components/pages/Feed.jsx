@@ -23,7 +23,7 @@ import { Hits, InstantSearch, SearchBox, Stats } from 'react-instantsearch-dom';
 const Hit = ({ hit: { brand, title, description, sizes, images }}) => (
   <Card className="my-4 mx-auto">
     <div className="h-32 w-full relative">
-      <Image className="rounded-t-xl" objectFit="cover" src={images[0].src} alt="" layout='fill' />
+      <Image className="rounded-t-xl" objectFit="cover" src={images ? images[0].src : 'https://s3.amazonaws.com/logos.ecountabl.com/49c44803-4f5d-4d4c-a943-d98ed18254a9-thrilling.png'} alt="" layout='fill' />
     </div>
     <div className="px-4 py-4 bg-white rounded-b-xl dark:bg-gray-900">
       <h4 className="font-bold py-0 text-s text-gray-400 dark:text-gray-500 uppercase">{brand}</h4>
