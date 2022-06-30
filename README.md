@@ -17,22 +17,54 @@ This project is a standard Next.js app, so the typical Next.js development proce
 To build the app, run:
 
 ```bash
-npm run build
-npm run export
+yarn build:mobile
 ```
 
 All the client side files will be sent to the `./out/` directory. These files need to be copied to the native iOS and Android projects, and this is where Capacitor comes in:
 
+### iOS
+
+To open the project in Xcode, run:
+
 ```bash
-npx cap sync
+npx cap open ios
 ```
 
-Finally, to run the app, use Capacitor 3 new awesome run command:
+Alternatively, you can open Xcode manually by running:
 
+```bash
+open ios/App/App.xcworkspace
 ```
+
+To run the project on a device or simulator, run:
+
+```bash
 npx cap run ios
+```
+
+The command will prompt you to select a target. [Learn more about run](https://capacitorjs.com/docs/cli/run).
+
+In Xcode, first select the device or simulator and then click the play button to run your app.
+
+### Android
+
+To open the project in Android Studio, run:
+
+```bash
+npx cap open android
+```
+
+Alternatively, you can open Android Studio and import the android/ directory as an Android Studio project.
+
+To run the project on a device or emulator, run:
+
+```bash
 npx cap run android
 ```
+
+The command will prompt you to select a target. [Learn more about run](https://capacitorjs.com/docs/cli/run).
+
+In Android Studio, first select the device or emulator and then click the run or debug button to run your app. Unless you’re debugging Java or Kotlin code, the run button is preferred.
 
 ## Livereload/Instant Refresh
 
