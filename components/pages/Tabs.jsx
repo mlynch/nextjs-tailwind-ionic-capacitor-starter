@@ -1,31 +1,32 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon} from '@ionic/react';
+import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonBadge} from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { bagOutline, heartOutline, shirtOutline } from 'ionicons/icons';
 
 import Home from './Feed';
-import Lists from './Lists';
-import ListDetail from './ListDetail';
 import Settings from './Settings';
+import Cart from './Cart';
 
 const Tabs = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Route path="/tabs/feed" component={Home} exact={true} />
-        <Route path="/tabs/lists" component={Lists} exact={true} />
-        <Route path="/tabs/lists/:listId" component={ListDetail} exact={true} />
-        <Route path="/tabs/settings" component={Settings} exact={true} />
-        <Route path="/tabs" render={() => <Redirect to="/tabs/feed" />} exact={true} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/feed" component={Home} />
+        <Route exact path="/settings" component={Settings} />
+        <Route path="/" render={() => <Redirect to="/feed" />} exact={true} />
       </IonRouterOutlet>
       <IonTabBar slot="bottom">
-        <IonTabButton tab="tab1" href="/tabs/feed">
+        <IonTabButton tab="feed" href="/feed">
           <IonIcon icon={shirtOutline} />
         </IonTabButton>
-        <IonTabButton tab="tab2" href="/tabs/lists">
+
+        <IonTabButton tab="cart" href="/cart">
           <IonIcon icon={bagOutline} />
+          <IonBadge color="primary"> 100 </IonBadge>
         </IonTabButton>
-        <IonTabButton tab="tab3" href="/tabs/settings">
+
+        <IonTabButton tab="settings" href="/settings">
           <IonIcon icon={heartOutline} />
         </IonTabButton>
       </IonTabBar>
