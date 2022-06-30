@@ -6,6 +6,8 @@ import { Redirect, Route } from 'react-router-dom';
 import Menu from './Menu';
 
 import Tabs from './pages/Tabs';
+import Feed from './pages/Feed';
+import Lists from './pages/Lists';
 
 setupIonicReact({});
 
@@ -25,6 +27,8 @@ const AppShell = () => {
           <Menu />
           <IonRouterOutlet id="main">
             <Route path="/tabs" render={() => <Tabs />} />
+            <Route path="/tabs/feed" render={() => <Feed />} />
+            <Route path="/tabs/lists" render={() => <Lists />} />
             <Route exact path="/" render={() => <Redirect to="/tabs" />} />
           </IonRouterOutlet>
         </IonSplitPane>
