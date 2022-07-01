@@ -19,7 +19,7 @@ import { debounce } from '@algolia/autocomplete-shared';
 
 import '@algolia/autocomplete-theme-classic';
 
-export function Autocomplete({
+export default function Autocomplete({
   searchClient,
   className,
   ...autocompleteProps
