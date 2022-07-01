@@ -1,6 +1,5 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonBadge} from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
 import { bagOutline, heartOutline, shirtOutline } from 'ionicons/icons';
 
 import Home from './Feed';
