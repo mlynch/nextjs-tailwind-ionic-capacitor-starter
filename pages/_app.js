@@ -70,7 +70,7 @@ function MyApp({ Component, pageProps }) {
 				></meta>
 			</Head>
 			<Component {...pageProps} />
-			<div id="autocomplete"></div>
+			{/* <div id="autocomplete"></div> */}
 
 			<Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
 		</>
