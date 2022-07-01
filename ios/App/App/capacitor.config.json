@@ -1,8 +1,8 @@
 {
-	"appId": "com.example.app",
-	"appName": "nextjs-tailwind-capacitor",
+	"appId": "com.shopthrilling.app",
+	"appName": "Thrilling Next",
 	"bundledWebRuntime": false,
-	"npmClient": "npm",
+	"npmClient": "yarn",
 	"webDir": "out",
 	"plugins": {
 		"SplashScreen": {

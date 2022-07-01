@@ -27,4 +27,5 @@ target 'App' do
   pod 'FirebaseAuth'
   pod 'FirebaseFirestore'
   pod 'FirebaseMessaging'
+  pod 'FirebaseInstanceID'
 end
