@@ -2,7 +2,7 @@ import { Dialog } from '@capacitor/dialog';
 
 export default async function notificationHandler(notification) {
 	// type of notification is ActionPerformed
-	switch(notification.data.campaign_id) {
+	switch(notification.notification.data.campaign_id) {
 		case "30OFF": {
 			await Dialog.alert({
 				title: '30% off!',
