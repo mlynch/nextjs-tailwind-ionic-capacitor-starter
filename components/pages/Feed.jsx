@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Card from '../ui/Card';
-import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter"
+import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 
 import {
   IonPage,
@@ -19,11 +19,13 @@ import {
   IonList,
   IonLabel,
   IonNote,
+  IonImg,
 } from '@ionic/react';
 import Notifications from './Notifications';
 import { useState, useRef } from 'react';
-import { closeOutline, notificationsOutline } from 'ionicons/icons';
-import { ClearRefinements, Hits, InstantSearch, NumericMenu, RefinementList, SearchBox, Stats } from 'react-instantsearch-dom';
+import { closeOutline, handRight, heartOutline, notificationsOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
+import { ClearRefinements, InstantSearch, SearchBox, Stats, connectHits } from 'react-instantsearch-dom';
+import imgixUtil from '../../util/imgixUtil';
 
 const FILTER_FACETS = [
   {
@@ -58,21 +60,36 @@ const FILTER_FACETS = [
   }
 ];
 
-const Hit = ({ hit: { brand, title, description, sizes, images }}) => (
-  <Card className="my-4 mx-auto">
-    <div className="h-32 w-full relative">
-      <Image className="rounded-t-xl" objectFit="cover" src={images ? images[0].src : 'https://s3.amazonaws.com/logos.ecountabl.com/49c44803-4f5d-4d4c-a943-d98ed18254a9-thrilling.png'} alt="" layout='fill' />
-    </div>
-    <div className="px-4 py-4 bg-white rounded-b-xl dark:bg-gray-900">
-      <h4 className="font-bold py-0 text-s text-gray-400 dark:text-gray-500 uppercase">{brand}</h4>
-      <h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">{title}</h2>
-      <p className="sm:text-sm text-s text-gray-500 mr-1 my-3 dark:text-gray-400">{description}</p>
-      <div className="flex items-center space-x-4">
-        <h3 className="text-gray-500 dark:text-gray-200 m-l-8 text-sm font-medium">{sizes.join(', ')}</h3>
-      </div>
-    </div>
-  </Card>
+const Hits = ({ hits }) => (
+  <ul className='grid grid-cols-2 gap-2'>
+    {hits.map(hit => (
+      <li key={hit.objectID} className='w-full rounded overflow-hidden p-2 bg-gray-100 relative'>
+        <IonImg src={hit.images
+          ? imgixUtil.getImgSrc({
+            url: hit.images[0].src,
+            ratio: 'square',
+            opts: {
+              bg: 'f3f4f6',
+              fit: 'fill',
+            },
+          })
+          : 'https://s3.amazonaws.com/logos.ecountabl.com/49c44803-4f5d-4d4c-a943-d98ed18254a9-thrilling.png'}
+          className='w-full'
+        />
+
+        <IonButton
+          fill='clear'
+          size='small'
+          className='absolute right-0 bottom-1 text-black'
+        >
+          <IonIcon icon={heartOutline} size='small' />
+        </IonButton>
+      </li>
+    ))}
+  </ul>
 );
+
+const CustomHits = connectHits(Hits);
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
@@ -103,28 +120,36 @@ const Feed = () => {
 
   return (
     <IonPage>
-      <IonHeader>
+      <IonHeader collapse='condense'>
         <IonToolbar>
           <IonTitle>New Arrivals</IonTitle>
         </IonToolbar>
+
+        <section className='flex bg-white py-2 divide-x divide-solid border-t border-b'>
+          {['Sort', 'Filter'].map(v => (
+            <IonButton
+              key={v}
+              id={v === 'Filter' && 'open-modal'}
+              fill='clear'
+              className='w-full font-semibold text-black m-0 h-7 rounded-none'
+            >
+              <IonIcon slot='start' icon={v === 'Sort' ? swapVerticalOutline : optionsOutline} size='small' />
+  
+              <IonText>
+                {v}
+              </IonText>
+            </IonButton>
+          ))}
+        </section>
       </IonHeader>
 
-      <IonContent fullscreen>
-        <section>
-          <IonButton><IonText>Sort</IonText></IonButton>
-          <IonButton id='open-modal'>
-            <IonText>
-              Filter
-            </IonText>
-          </IonButton>
-        </section>
-
+      <IonContent className='ion-padding' fullscreen>
         <Notifications open={showNotifications} onDidDismiss={() => setShowNotifications(false)} />
         
         <InstantSearch searchClient={searchClient} indexName='products'>
           <SearchBox />
 
-          <Hits hitComponent={Hit} />
+          <CustomHits />
         </InstantSearch>
       </IonContent>
 
@@ -133,7 +158,7 @@ const Feed = () => {
           <IonToolbar>
             <IonButtons slot='start'>
               <IonButton onClick={() => modal.current?.dismiss()}>
-                <IonIcon slot='icon-only' icon={closeOutline}></IonIcon>
+                <IonIcon slot='icon-only' icon={closeOutline} />
               </IonButton>
             </IonButtons>
 
