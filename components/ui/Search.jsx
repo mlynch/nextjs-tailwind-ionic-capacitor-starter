@@ -2,8 +2,6 @@ import Image from 'next/image';
 import { ClearRefinements, Hits, InstantSearch, RefinementList, SearchBox, Stats } from 'react-instantsearch-dom';
 import Card from './Card';
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter"
-import { autocomplete } from '@algolia/autocomplete-js';
-import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 
 
 const Hit = ({ hit: { brand, title, description, sizes, images } }) => (
@@ -45,19 +43,10 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 
 const searchClient = typesenseInstantsearchAdapter.searchClient
 
-const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
-	key: 'RECENT_SEARCH',
-	limit: 5,
-  });
-  
+
 
 const Search = () => {
-	autocomplete({
-		container: '#autocomplete',
-		plugins: [recentSearchesPlugin],
-		openOnFocus: true,
-	});
-
+	
 	return (
 		<InstantSearch searchClient={searchClient} indexName="products">
 			<SearchBox />
