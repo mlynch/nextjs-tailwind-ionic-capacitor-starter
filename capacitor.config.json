@@ -1,13 +1,16 @@
 {
-  "appId": "com.example.app",
-  "appName": "nextjs-tailwind-capacitor",
+  "appId": "com.shopthrilling.app",
+  "appName": "Thrilling Next",
   "bundledWebRuntime": false,
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "webDir": "out",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
-    }
+    },
+	"PushNotifications": {
+		"presentationOptions": ["badge", "sound", "alert"]
+	  }
   },
   "cordova": {}
 }

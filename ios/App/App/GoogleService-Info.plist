@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>393326953923-4hfgn6v8e42magikl67b6hoougg68u99.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.393326953923-4hfgn6v8e42magikl67b6hoougg68u99</string>
+	<key>API_KEY</key>
+	<string>AIzaSyARr5OOFjMTp0TuimMdE8AeYOiwO44l7Uk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>393326953923</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.shopthrilling.app</string>
+	<key>PROJECT_ID</key>
+	<string>thrilling-dev-portal</string>
+	<key>STORAGE_BUCKET</key>
+	<string>thrilling-dev-portal.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:393326953923:ios:2486e9a614c5f912892976</string>
+	<key>DATABASE_URL</key>
+	<string>https://thrilling-dev-portal.firebaseio.com</string>
+</dict>
+</plist>
