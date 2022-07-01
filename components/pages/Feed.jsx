@@ -7,7 +7,6 @@ import {
   IonButtons,
   IonContent,
   IonText,
-  IonSearchbar,
   IonItem,
   IonModal,
   IonIcon,
@@ -19,15 +18,14 @@ import {
 import { useState, useRef } from 'react';
 import { chevronBackOutline, closeOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
 import { InstantSearch } from 'react-instantsearch-hooks-web';
-import { autocomplete } from '@algolia/autocomplete-js';
 import '@algolia/autocomplete-theme-classic';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 
 import Notifications from './Notifications';
-import CustomSearchBox from '../CustomSearchBox';
 import CustomInfiniteHits from '../CustomInfiniteHits';
 import CustomRefinementList from '../CustomRefinementList';
+import SearchBoxWithHistory from '../SearchBoxWithHistory';
 
 const FILTER_FACETS = [
     {
@@ -94,12 +92,6 @@ const Feed = () => {
 
   const modal = useRef(null);
 
-  autocomplete({
-    container: '#autocomplete',
-    plugins: [recentSearchesPlugin],
-    openOnFocus: true,
-});
-
   const FilterRoot = () => (
     <>
       <IonHeader translucent={true}>
@@ -148,7 +140,7 @@ const Feed = () => {
       </IonHeader>
 
       <IonContent className='ion-padding'>
-        <CustomRefinementList attribute={selectedFacet.value} />
+        <CustomRefinementList attribute={selectedFacet.value} limit={30} />
       </IonContent>
     </>
   )
@@ -178,7 +170,10 @@ const Feed = () => {
             ))}
           </section>
 
-          <CustomSearchBox />
+          <SearchBoxWithHistory
+            openOnFocus={true}
+            plugins={[recentSearchesPlugin]}
+          />
         </IonHeader>
 
         <IonContent className='ion-padding' fullscreen>
