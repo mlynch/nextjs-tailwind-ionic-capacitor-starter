@@ -14,18 +14,20 @@ import '../styles/global.css';
 import '../styles/variables.css';
 
 function MyApp({ Component, pageProps }) {
-  return (
-    <>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-        ></meta>
-      </Head>
-      <Component {...pageProps} />
-      <Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
-    </>
-  );
+	return (
+		<>
+			<Head>
+				<meta
+					name="viewport"
+					content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+				></meta>
+			</Head>
+			<Component {...pageProps} />
+			<div id="a"></div>
+
+			<Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
+		</>
+	);
 }
 
 export default MyApp;
