@@ -16,49 +16,17 @@ import {
   IonNote
 } from '@ionic/react';
 import { useState, useRef } from 'react';
-import { chevronBackOutline, closeOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
+import { chevronBackOutline, closeOutline } from 'ionicons/icons';
 import { InstantSearch } from 'react-instantsearch-hooks-web';
 import '@algolia/autocomplete-theme-classic';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
 
-import Notifications from './Notifications';
 import CustomInfiniteHits from '../CustomInfiniteHits';
 import CustomRefinementList from '../CustomRefinementList';
 import SearchBoxWithHistory from '../SearchBoxWithHistory';
-
-const FILTER_FACETS = [
-    {
-        title: 'Division',
-        value: 'division',
-        selected: [],
-    },
-    {
-        title: 'Size',
-        value: 'sizes',
-        selected: [],
-    },
-    {
-        title: 'Brand',
-        value: 'brand',
-        selected: [],
-    },
-    {
-        title: 'Color',
-        value: 'colors',
-        selected: [],
-    },
-    {
-        title: 'Era',
-        value: 'eras',
-        selected: [],
-    },
-    {
-        title: 'Price',
-        value: 'priceBucket',
-        selected: [],
-    }
-];
+import SortFilterButtons from '../SortFilterButtons';
+import FILTER_FACETS from '../../mock/filterFacets';
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     server: {
@@ -87,7 +55,6 @@ const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
 });
 
 const Feed = () => {
-  const [showNotifications, setShowNotifications] = useState(false);
   const [selectedFacet, setSelectedFacet] = useState(null);
 
   const modal = useRef(null);
@@ -101,7 +68,7 @@ const Feed = () => {
               <IonIcon slot='icon-only' icon={closeOutline} />
             </IonButton>
           </IonButtons>
-  
+
           <IonTitle>Filter</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -134,7 +101,7 @@ const Feed = () => {
               <IonIcon slot='icon-only' icon={chevronBackOutline} />
             </IonButton>
           </IonButtons>
-  
+
           <IonTitle>{selectedFacet.title}</IonTitle>
         </IonToolbar>
       </IonHeader>
@@ -143,7 +110,17 @@ const Feed = () => {
         <CustomRefinementList attribute={selectedFacet.value} limit={30} />
       </IonContent>
     </>
-  )
+  );
+
+  const ModalFooter = () => (
+    <IonFooter className='ion-no-border'>
+      <IonToolbar>
+        <IonButton expand='full' color='dark' className='square-border' onClick={() => modal.current?.dismiss()}>
+          View Items
+        </IonButton>
+      </IonToolbar>
+    </IonFooter>
+  );
 
   return (
     <InstantSearch searchClient={searchClient} indexName='products'>
@@ -153,22 +130,7 @@ const Feed = () => {
             <IonTitle>New Arrivals</IonTitle>
           </IonToolbar>
 
-          <section className='flex bg-white py-2 divide-x divide-solid border-t border-b'>
-            {['Sort', 'Filter'].map(v => (
-              <IonButton
-                key={v}
-                id={v === 'Filter' && 'open-modal'}
-                fill='clear'
-                className='w-full font-semibold text-black m-0 h-7 rounded-none'
-              >
-                <IonIcon slot='start' icon={v === 'Sort' ? swapVerticalOutline : optionsOutline} size='small' />
-    
-                <IonText>
-                  {v}
-                </IonText>
-              </IonButton>
-            ))}
-          </section>
+          <SortFilterButtons />
 
           <SearchBoxWithHistory
             openOnFocus={true}
@@ -177,20 +139,12 @@ const Feed = () => {
         </IonHeader>
 
         <IonContent className='ion-padding' fullscreen>
-          <Notifications open={showNotifications} onDidDismiss={() => setShowNotifications(false)} />
-
           <CustomInfiniteHits />
 
           <IonModal ref={modal} trigger='open-modal'>
             {selectedFacet ? FilterFacet() : FilterRoot()}
 
-            <IonFooter className='ion-no-border'>
-              <IonToolbar>
-                <IonButton expand='full' color='dark' className='square-border' onClick={() => modal.current?.dismiss()}>
-                  View Items
-                </IonButton>
-              </IonToolbar>
-            </IonFooter>
+            {ModalFooter()}
           </IonModal>
         </IonContent>
       </IonPage>
