@@ -15,17 +15,17 @@ import {
   IonLabel,
   IonNote
 } from '@ionic/react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { chevronBackOutline, closeOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
-import { InstantSearch } from 'react-instantsearch-hooks-web';
+import { Hits, InstantSearch, SearchBox, useSearchBox } from 'react-instantsearch-hooks-web';
 import '@algolia/autocomplete-theme-classic';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import TypesenseInstantSearchAdapter from "typesense-instantsearch-adapter";
-
+import qs from 'qs';
 import Notifications from './Notifications';
 import CustomInfiniteHits from '../CustomInfiniteHits';
 import CustomRefinementList from '../CustomRefinementList';
-import SearchBoxWithHistory from '../SearchBoxWithHistory';
+import SearchBoxWithHistory, { Autocomplete } from '../Autocomplete';
 
 const FILTER_FACETS = [
     {
@@ -86,11 +86,48 @@ const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
     limit: 5,
 });
 
+function createURL(searchState) {
+    return qs.stringify(searchState, { addQueryPrefix: true });
+  }
+  
+  function searchStateToUrl({ location }, searchState) {
+    if (Object.keys(searchState).length === 0) {
+      return '';
+    }
+  
+    // Remove configure search state from query parameters
+    const { configure, ...rest } = searchState;
+    return `${location.pathname}${createURL(rest)}`;
+  }
+  
+  function urlToSearchState({ search }) {
+    return qs.parse(search.slice(1));
+  }
+
+
 const Feed = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [selectedFacet, setSelectedFacet] = useState(null);
 
   const modal = useRef(null);
+
+  const [searchState, setSearchState] = useState(() =>
+  urlToSearchState(window.location)
+);
+const timerRef = useRef(null);
+
+useEffect(() => {
+  clearTimeout(timerRef.current);
+
+  timerRef.current = setTimeout(() => {
+    window.history.pushState(
+      searchState,
+      null,
+      searchStateToUrl({ location: window.location }, searchState)
+    );
+  }, 400);
+}, [searchState]);
+  
 
   const FilterRoot = () => (
     <>
@@ -144,57 +181,48 @@ const Feed = () => {
       </IonContent>
     </>
   )
+  const onSubmit = useCallback(({ state }) => {
+    setSearchState((searchState) => ({
+      ...searchState,
+      query: state.query,
+    }));
+  }, []);
+
+  const onReset = useCallback(() => {
+    setSearchState((searchState) => ({
+      ...searchState,
+      query: '',
+    }));
+  }, []);
+
+  const plugins = useMemo(() => {
+    return []; // add more plugins here
+  }, []); 
 
   return (
-    <InstantSearch searchClient={searchClient} indexName='products'>
-      <IonPage>
-        <IonHeader collapse='condense'>
-          <IonToolbar>
-            <IonTitle>New Arrivals</IonTitle>
-          </IonToolbar>
-
-          <section className='flex bg-white py-2 divide-x divide-solid border-t border-b'>
-            {['Sort', 'Filter'].map(v => (
-              <IonButton
-                key={v}
-                id={v === 'Filter' && 'open-modal'}
-                fill='clear'
-                className='w-full font-semibold text-black m-0 h-7 rounded-none'
-              >
-                <IonIcon slot='start' icon={v === 'Sort' ? swapVerticalOutline : optionsOutline} size='small' />
-    
-                <IonText>
-                  {v}
-                </IonText>
-              </IonButton>
-            ))}
-          </section>
-
-          <SearchBoxWithHistory
-            openOnFocus={true}
-            plugins={[recentSearchesPlugin]}
-          />
-        </IonHeader>
-
-        <IonContent className='ion-padding' fullscreen>
-          <Notifications open={showNotifications} onDidDismiss={() => setShowNotifications(false)} />
-
+    <div>
+      <InstantSearch
+        searchClient={searchClient}
+        indexName='products'
+        searchState={searchState}
+        onSearchStateChange={setSearchState}
+        createURL={createURL}
+        render
+      >
+          <Autocomplete
+              placeholder="Search products"
+              detachedMediaQuery="none"
+              initialState={{
+                query: searchState.query,
+              }}
+              openOnFocus
+              onSubmit={onSubmit}
+              onReset={onReset}
+              plugins={plugins}
+            />
           <CustomInfiniteHits />
-
-          <IonModal ref={modal} trigger='open-modal'>
-            {selectedFacet ? FilterFacet() : FilterRoot()}
-
-            <IonFooter className='ion-no-border'>
-              <IonToolbar>
-                <IonButton expand='full' color='dark' className='square-border' onClick={() => modal.current?.dismiss()}>
-                  View Items
-                </IonButton>
-              </IonToolbar>
-            </IonFooter>
-          </IonModal>
-        </IonContent>
-      </IonPage>
     </InstantSearch>
+    </div>
   );
 };
 
