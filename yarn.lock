@@ -192,6 +192,11 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@braze/web-sdk@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@braze/web-sdk/-/web-sdk-4.0.5.tgz#7c4ca362bc191a58bdb331604b900f4f9ae22c11"
+  integrity sha512-WxiFLoSg8M4Cd3gopOP1yJvHVTxWoDdm8cR8Uw3Y9LxcAiBbZm9zMego7rMHczi4HkBITHaDzlpgVHUm7wYXBw==
+
 "@capacitor/android@^3.0.1":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@capacitor/android/-/android-3.6.0.tgz#60438a0614415c7c242dda48a031cd45335e067a"

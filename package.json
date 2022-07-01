@@ -20,6 +20,7 @@
     "@algolia/autocomplete-plugin-recent-searches": "^1.7.1",
     "@algolia/autocomplete-theme-classic": "^1.7.1",
     "@babel/runtime": "^7.18.6",
+    "@braze/web-sdk": "^4.0.5",
     "@capacitor/android": "^3.0.1",
     "@capacitor/cli": "^3.0.1",
     "@capacitor/core": "^3.0.1",
