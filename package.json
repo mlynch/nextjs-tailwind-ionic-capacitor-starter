@@ -23,6 +23,7 @@
     "@capacitor/android": "^3.0.1",
     "@capacitor/cli": "^3.0.1",
     "@capacitor/core": "^3.0.1",
+    "@capacitor/dialog": "^1.0.7",
     "@capacitor/ios": "^3.0.1",
     "@capacitor/push-notifications": "^1.0.9",
     "@capacitor/status-bar": "^1.0.1",
