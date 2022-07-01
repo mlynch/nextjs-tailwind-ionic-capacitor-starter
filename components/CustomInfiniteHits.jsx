@@ -35,7 +35,7 @@ const CustomInfiniteHits = (props) => {
 				))}
 			</ul>
 			
-			<IonButton expand='full' color='dark' className='mt-4 show-more' onClick={() => showMore()}>Show More</IonButton>
+			<IonButton expand='full' color='dark' className='mt-4 square-border' onClick={() => showMore()}>Show More</IonButton>
 		</>
 	);
 };

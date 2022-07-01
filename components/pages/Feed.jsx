@@ -24,11 +24,12 @@ import {
 } from '@ionic/react';
 import Notifications from './Notifications';
 import { useState, useRef } from 'react';
-import { closeOutline, handRight, heartOutline, notificationsOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
+import { chevronBackOutline, closeOutline, handRight, heartOutline, notificationsOutline, optionsOutline, swapVerticalOutline  } from 'ionicons/icons';
 import { InstantSearch } from 'react-instantsearch-hooks-web';
 import imgixUtil from '../../util/imgixUtil';
 import CustomSearchBox from '../CustomSearchBox';
 import CustomInfiniteHits from '../CustomInfiniteHits';
+import CustomRefinementList from '../CustomRefinementList';
 
 const FILTER_FACETS = [
   {
@@ -93,10 +94,10 @@ const Feed = () => {
 
   const FilterRoot = () => (
     <>
-      <IonHeader>
+      <IonHeader translucent={true}>
         <IonToolbar>
           <IonButtons slot='start'>
-            <IonButton onClick={() => modal.current?.dismiss()}>
+            <IonButton color='dark' onClick={() => modal.current?.dismiss()}>
               <IonIcon slot='icon-only' icon={closeOutline} />
             </IonButton>
           </IonButtons>
@@ -112,7 +113,7 @@ const Feed = () => {
               key={filter.value}
               detail={false}
               button
-              onClick={() => setSelectedFacet(filter.value)}
+              onClick={() => setSelectedFacet(filter)}
             >
               <IonLabel>{filter.title}</IonLabel>
 
@@ -123,6 +124,26 @@ const Feed = () => {
       </IonContent>
     </>
   );
+
+  const FilterFacet = () => (
+    <>
+      <IonHeader translucent={true}>
+        <IonToolbar>
+          <IonButtons slot='start'>
+            <IonButton color='dark' onClick={() => setSelectedFacet(null)}>
+              <IonIcon slot='icon-only' icon={chevronBackOutline} />
+            </IonButton>
+          </IonButtons>
+  
+          <IonTitle>{selectedFacet.title}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+
+      <IonContent className='ion-padding'>
+        <CustomRefinementList attribute={selectedFacet.value} />
+      </IonContent>
+    </>
+  )
 
   return (
     <InstantSearch searchClient={searchClient} indexName='products'>
@@ -158,11 +179,11 @@ const Feed = () => {
           <CustomInfiniteHits />
 
           <IonModal ref={modal} trigger='open-modal'>
-            {!selectedFacet ? FilterRoot() : <RefinementList attribute={selectedFacet} />}
+            {selectedFacet ? FilterFacet() : FilterRoot()}
 
             <IonFooter className='ion-no-border'>
               <IonToolbar>
-                <IonButton onClick={() => modal.current?.dismiss()}>
+                <IonButton expand='full' color='dark' className='square-border' onClick={() => modal.current?.dismiss()}>
                   View Items
                 </IonButton>
               </IonToolbar>

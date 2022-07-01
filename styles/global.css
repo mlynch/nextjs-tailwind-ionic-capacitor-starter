@@ -203,6 +203,6 @@ ion-item::part(native) {
   padding-left: 0;
 }
 
-.show-more::part(native) {
+.square-border::part(native) {
   --border-radius: 0;
 }
