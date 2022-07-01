@@ -128,7 +128,6 @@ const Feed = () => {
         openOnFocus: true,
     });
 
-
     return (
         <IonPage>
             <IonHeader collapse='condense'>

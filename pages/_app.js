@@ -14,6 +14,7 @@ import { PushNotifications } from '@capacitor/push-notifications';
 import '../styles/global.css';
 import '../styles/variables.css';
 import { Capacitor } from '@capacitor/core';
+import notificationHandler from '../util/notificationsHandlerUtil';
 
 function MyApp({ Component, pageProps }) {
 
@@ -30,8 +31,8 @@ function MyApp({ Component, pageProps }) {
 			console.log('Push notification received: ', notification);
 		});
 
-		await PushNotifications.addListener('pushNotificationActionPerformed', notification => {
-			console.log('Push notification action performed', notification.actionId, notification.inputValue);
+		await PushNotifications.addListener('pushNotificationActionPerformed', async (notification) => {
+			await notificationHandler(notification);
 		});
 	}
 

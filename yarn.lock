@@ -226,6 +226,11 @@
   dependencies:
     tslib "^2.1.0"
 
+"@capacitor/dialog@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@capacitor/dialog/-/dialog-1.0.7.tgz#d4e1a93dbb8fa0aa392f401f64748807ba21b84c"
+  integrity sha512-+B6lKlqlpZk9uDrHEYk2rj+b3DF1kxCqV+vGtKwNMr2tFvNppZVkYdZU+L503yAoFFejqgQ27n0A4vXg+BTcBQ==
+
 "@capacitor/ios@^3.0.1":
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-3.6.0.tgz#0b4a89cf22212519425048b40a4cb6c68aa2c060"
