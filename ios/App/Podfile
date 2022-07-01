@@ -18,6 +18,7 @@ target 'App' do
   capacitor_pods
   # Add your Pods here
   # Add the Firebase pod for Google Analytics
+  pod 'Appboy-iOS-SDK'
   pod 'FirebaseAnalytics'
 
   # For Analytics without IDFA collection capability, use this pod instead

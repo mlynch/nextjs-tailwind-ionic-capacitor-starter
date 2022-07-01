@@ -1,5 +1,7 @@
 import UIKit
 import Capacitor
+import Appboy_iOS_SDK
+import UserNotifications
 import FirebaseCore
 import FirebaseInstanceID
 import FirebaseMessaging
@@ -11,6 +13,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+		if #available(iOS 10, *) {
+			let center = UNUserNotificationCenter.current()
+			center.delegate = self as? UNUserNotificationCenterDelegate
+			var options: UNAuthorizationOptions = [.alert, .sound, .badge]
+			if #available(iOS 12.0, *) {
+				options = UNAuthorizationOptions(rawValue: options.rawValue | UNAuthorizationOptions.provisional.rawValue)
+			}
+			center.requestAuthorization(options: options) { (granted, error) in
+				Appboy.sharedInstance()?.pushAuthorization(fromUserNotificationCenter: granted)
+			}
+			UIApplication.shared.registerForRemoteNotifications()
+		} else {
+			let types : UIUserNotificationType = [.alert, .badge, .sound]
+			let setting : UIUserNotificationSettings = UIUserNotificationSettings(types:types, categories:nil)
+			UIApplication.shared.registerUserNotificationSettings(setting)
+			UIApplication.shared.registerForRemoteNotifications()
+		}
         FirebaseApp.configure()
         return true
       }
@@ -19,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().apnsToken = deviceToken
 
         NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
+
+		Appboy.sharedInstance()?.registerDeviceToken(deviceToken)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -59,6 +80,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // tracking app url opens, make sure to keep this call
         return ApplicationDelegateProxy.shared.application(application, continue: userActivity, restorationHandler: restorationHandler)
     }
+
+	func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+    	fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+			Appboy.sharedInstance()?.register(application,
+                                            didReceiveRemoteNotification: userInfo,
+                                            fetchCompletionHandler: completionHandler)
+		}
+
+	func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,
+    	withCompletionHandler completionHandler: @escaping () -> Void) {
+			Appboy.sharedInstance()?.userNotificationCenter(center,
+                                               didReceive: response,
+                                               withCompletionHandler: completionHandler)
+		}
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)

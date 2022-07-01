@@ -21,7 +21,7 @@ braze.initialize('cc3c7bb8-9155-42fc-91ae-e9a2cdba623a', {
 
 braze.openSession();
 
-braze.changeUser('zzzz@zzz.com');
+braze.changeUser('sarah@zzzz.com');
 
 window.matchMedia("(prefers-color-scheme: dark)").addListener(async (status) => {
     try {
