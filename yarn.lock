@@ -9,7 +9,7 @@
   dependencies:
     "@algolia/autocomplete-shared" "1.7.1"
 
-"@algolia/autocomplete-js@^1.7.1":
+"@algolia/autocomplete-js@1.7.1", "@algolia/autocomplete-js@^1.7.1":
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/@algolia/autocomplete-js/-/autocomplete-js-1.7.1.tgz#4cb41eb916cc83d67a96294916ceb86c8200946e"
   integrity sha512-m8xQiH1qdthovVOD9O8/ur9P5us+sljskIpB1HFQIFmsfchorJNFlpMT+zE8V55tbJOwusUrp85c9t+6lkOllg==
@@ -19,6 +19,16 @@
     "@algolia/autocomplete-shared" "1.7.1"
     htm "^3.0.0"
     preact "^10.0.0"
+
+"@algolia/autocomplete-plugin-recent-searches@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@algolia/autocomplete-plugin-recent-searches/-/autocomplete-plugin-recent-searches-1.7.1.tgz#75c61bfb88894db4630c2d76ab031fb0a185ae53"
+  integrity sha512-TjrpdiFTD2ACMYoBgOC7mza1l6IJ6JyjvCGDdV4qJ+eO/1teguWliuGX63c4WRwxr4/827ZIczNZxfdM/gUTSg==
+  dependencies:
+    "@algolia/autocomplete-core" "1.7.1"
+    "@algolia/autocomplete-js" "1.7.1"
+    "@algolia/autocomplete-preset-algolia" "1.7.1"
+    "@algolia/autocomplete-shared" "1.7.1"
 
 "@algolia/autocomplete-preset-algolia@1.7.1":
   version "1.7.1"

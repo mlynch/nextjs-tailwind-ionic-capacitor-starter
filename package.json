@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@algolia/autocomplete-js": "^1.7.1",
+    "@algolia/autocomplete-plugin-recent-searches": "^1.7.1",
     "@algolia/autocomplete-theme-classic": "^1.7.1",
     "@babel/runtime": "^7.18.6",
     "@capacitor/android": "^3.0.1",
