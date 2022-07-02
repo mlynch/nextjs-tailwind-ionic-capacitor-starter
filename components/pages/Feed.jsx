@@ -20,7 +20,6 @@ import { InstantSearch } from 'react-instantsearch-hooks-web';
 import { history } from 'instantsearch.js/es/lib/routers';
 import { simple } from 'instantsearch.js/es/lib/stateMappings';
 import '@algolia/autocomplete-theme-classic';
-import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import TypesenseInstantSearchAdapter from 'typesense-instantsearch-adapter';
 
 import CustomInfiniteHits from '../CustomInfiniteHits';
@@ -53,10 +52,6 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 
 const searchClient = typesenseInstantsearchAdapter.searchClient;
 
-const recentSearchesPlugin = createLocalStorageRecentSearchesPlugin({
-    key: 'RECENT_SEARCH',
-    limit: 5,
-});
 
 function createURL(searchState) {
     return qs.stringify(searchState, { addQueryPrefix: true });
@@ -195,11 +190,6 @@ const Feed = () => {
         }));
     }, []);
 
-    const plugins = useMemo(() => {
-        return []; // add more plugins here
-    }, []);
-
-
     return (
         <InstantSearch
             searchClient={searchClient}
@@ -226,7 +216,6 @@ const Feed = () => {
                         openOnFocus
                         onSubmit={onSubmit}
                         onReset={onReset}
-                        plugins={plugins}
                     />
                 </IonHeader>
 
@@ -235,7 +224,11 @@ const Feed = () => {
 
                     {FILTER_FACETS.map(filter => <VirtualRefinementList key={filter.value} attribute={filter.value} />)}
 
-                    <IonModal ref={modal} trigger="open-modal">
+                    <IonModal
+                        ref={modal}
+                        trigger="open-modal"
+                        onWillDismiss={() => setSearchState(urlToSearchState(window.location))}
+                    >
                         {selectedFacet ? FilterFacet() : FilterRoot()}
 
                         {ModalFooter()}

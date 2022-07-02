@@ -16,6 +16,7 @@ import {
 import { autocomplete } from '@algolia/autocomplete-js';
 import { createLocalStorageRecentSearchesPlugin } from '@algolia/autocomplete-plugin-recent-searches';
 import { debounce } from '@algolia/autocomplete-shared';
+import { createRoot } from 'react-dom/client';
 
 import '@algolia/autocomplete-theme-classic';
 
@@ -28,6 +29,9 @@ export default function Autocomplete({
 
   const { query, refine: setQuery } = useSearchBox();
   const { refine: setPage } = usePagination();
+
+  const panelRootRef = useRef(null);
+  const rootRef = useRef(null);
 
   const [
     instantSearchUiState,
@@ -79,14 +83,17 @@ export default function Autocomplete({
       onSubmit({ state }) {
         setInstantSearchUiState({ query: state.query });
       },
-    //   onStateChange({ prevState, state }) {
-    //     if (prevState.query !== state.query) {
-    //       debouncedSetInstantSearchUiState({
-    //         query: state.query,
-    //       });
-    //     }
-    //   },
-      renderer: { createElement, Fragment, render },
+      renderer: { createElement, Fragment, render: () => {} },
+      render({ children }, root) {
+        if (!panelRootRef.current || rootRef.current !== root) {
+          rootRef.current = root;
+
+          panelRootRef.current?.unmount();
+          panelRootRef.current = createRoot(root);
+        }
+
+        panelRootRef.current.render(children);
+      },
     });
 
     return () => autocompleteInstance.destroy();
