@@ -82,6 +82,8 @@ const Feed = () => {
   const [searchState, setSearchState] = useState(() => urlToSearchState(window.location));
   const timerRef = useRef(null);
 
+  console.log(searchState);
+
   useEffect(() => {
     clearTimeout(timerRef.current);
 
@@ -123,9 +125,13 @@ const Feed = () => {
               button
               onClick={() => setSelectedFacet(filter)}
             >
-              <IonLabel>{filter.title}</IonLabel>
+              <IonLabel >{filter.title}</IonLabel>
 
-              <IonNote>All</IonNote>
+              <IonNote className='ion-text-capitalize truncate'>
+                {searchState?.products?.refinementList?.[filter.value]
+                  ? searchState.products?.refinementList?.[filter.value]?.join(', ')
+                  : 'All'}
+              </IonNote>
             </IonItem>
           ))}
         </IonList>

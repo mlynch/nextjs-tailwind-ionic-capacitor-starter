@@ -203,6 +203,11 @@ ion-item::part(native) {
   padding-left: 0;
 }
 
+ion-item ion-label {
+  text-overflow: unset !important;
+  overflow: visible !important;
+}
+
 .square-border::part(native) {
   --border-radius: 0;
 }
