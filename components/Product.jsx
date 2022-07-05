@@ -10,8 +10,6 @@ const Product = (props) => {
 
 	const sendFavorites = async (product) => {
 		setfavorite(!favorite);
-		console.log(favorite);
-		console.log(product)
 		const userLoggedin = true;
 	
 		if (userLoggedin){
@@ -19,7 +17,7 @@ const Product = (props) => {
 			const data = JSON.stringify({
 				"attributes": [
 				  {
-					"external_id": "zzzz@zzz.com",
+					"external_id": "sarah@zzzz.com",
 					"favorites": [
 					  {
 						"id": hit.id,
