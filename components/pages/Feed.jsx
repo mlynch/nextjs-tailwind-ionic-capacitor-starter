@@ -125,12 +125,10 @@ const Feed = () => {
               button
               onClick={() => setSelectedFacet(filter)}
             >
-              <IonLabel >{filter.title}</IonLabel>
+              <IonLabel>{filter.title}</IonLabel>
 
-              <IonNote className='ion-text-capitalize truncate'>
-                {searchState?.products?.refinementList?.[filter.value]
-                  ? searchState.products?.refinementList?.[filter.value]?.join(', ')
-                  : 'All'}
+              <IonNote className="ion-text-capitalize truncate">
+                {searchState?.products?.refinementList?.[filter.value]?.join(', ') ?? 'All'}
               </IonNote>
             </IonItem>
           ))}
@@ -154,7 +152,7 @@ const Feed = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
-        <CustomRefinementList attribute={selectedFacet.value} limit={30} sortBy={['name']} />
+        <CustomRefinementList attribute={selectedFacet.value} limit={1000} sortBy={['name']} />
       </IonContent>
     </>
   );
