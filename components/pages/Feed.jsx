@@ -30,6 +30,7 @@ import { VirtualRefinementList } from '../VirtualRefinementList';
 import Autocomplete from '../Autocomplete';
 
 import qs from 'qs';
+import CustomStats from '../CustomStats';
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   server: {
@@ -81,8 +82,6 @@ const Feed = () => {
 
   const [searchState, setSearchState] = useState(() => urlToSearchState(window.location));
   const timerRef = useRef(null);
-
-  console.log(searchState);
 
   useEffect(() => {
     clearTimeout(timerRef.current);
@@ -199,12 +198,10 @@ const Feed = () => {
       routing={routing}
     >
       <IonPage>
-        <IonHeader collapse="condense">
+        <IonHeader collapse='condense'>
           <IonToolbar>
             <IonTitle>New Arrivals</IonTitle>
           </IonToolbar>
-
-          <SortFilterButtons />
 
           <Autocomplete
             placeholder="Search products"
@@ -215,10 +212,17 @@ const Feed = () => {
             openOnFocus
             onSubmit={onSubmit}
             onReset={onReset}
+            className='ion-padding-start ion-padding-end bg-white'
           />
+
+          <div className='w-100% bg-white'>
+            <CustomStats />
+          </div>
         </IonHeader>
 
         <IonContent className="ion-padding" fullscreen>
+          <SortFilterButtons />
+
           <CustomInfiniteHits />
 
           {FILTER_FACETS.map((filter) => (
