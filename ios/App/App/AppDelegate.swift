@@ -38,8 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Messaging.messaging().apnsToken = deviceToken
 
         NotificationCenter.default.post(name: .capacitorDidRegisterForRemoteNotifications, object: deviceToken)
-
-		// Appboy.sharedInstance()?.registerDeviceToken(deviceToken)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -87,6 +85,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     //                                         didReceiveRemoteNotification: userInfo,
     //                                         fetchCompletionHandler: completionHandler)
 	// 	}
+
+	// func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+	// 	Appboy.sharedInstance()?.registerDeviceToken(deviceToken)
+	// }
 
 	// func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,
     // 	withCompletionHandler completionHandler: @escaping () -> Void) {
