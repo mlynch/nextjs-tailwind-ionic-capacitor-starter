@@ -12,13 +12,12 @@
     "export": "next export"
   },
   "dependencies": {
-    "@capacitor/android": "^3.0.1",
-    "@capacitor/cli": "^3.0.1",
-    "@capacitor/core": "^3.0.1",
-    "@capacitor/ios": "^3.0.1",
-    "@capacitor/status-bar": "^1.0.1",
-    "@ionic/react": "^6.1.12",
-    "@ionic/react-router": "^6.1.12",
+    "@capacitor/android": "^4.0.0",
+    "@capacitor/core": "^4.0.0",
+    "@capacitor/ios": "^4.0.0",
+    "@capacitor/status-bar": "^4.0.0",
+    "@ionic/react": "^6.2.9",
+    "@ionic/react-router": "^6.2.9",
     "autoprefixer": "^10.2.6",
     "classnames": "^2.2.6",
     "next": "^12.2.0",
@@ -30,9 +29,11 @@
     "tailwindcss": "^2.2.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^4.0.0",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
-    "ionicons": "^5.2.3",
+    "ionicons": "^6.0.3",
+    "next-transpile-modules": "^9.0.0",
     "prettier": "^2.2.1",
     "pullstate": "1.24",
     "react-use-gesture": "^9.1.3",
