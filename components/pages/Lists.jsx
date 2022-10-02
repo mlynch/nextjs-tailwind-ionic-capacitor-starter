@@ -9,6 +9,7 @@ import {
   IonContent,
   IonItem,
   IonLabel,
+  IonList,
 } from '@ionic/react';
 
 const ListEntry = ({ list, ...props }) => (
@@ -43,7 +44,9 @@ const Lists = () => {
             <IonTitle size="large">Lists</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <AllLists />
+        <IonList>
+          <AllLists />
+        </IonList>
       </IonContent>
     </IonPage>
   );

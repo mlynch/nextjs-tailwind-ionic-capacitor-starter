@@ -1,11 +1,14 @@
-import { IonApp, IonRouterOutlet, IonSplitPane, setupIonicReact  } from '@ionic/react';
+import { IonApp, IonLabel, IonRouterOutlet, setupIonicReact, IonTabs, IonTabBar, IonTabButton, IonIcon  } from '@ionic/react';
+import { cog, flash, list } from 'ionicons/icons';
 import { StatusBar, Style } from '@capacitor/status-bar';
 
 import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
-import Menu from './Menu';
 
-import Tabs from './pages/Tabs';
+import Feed from './pages/Feed';
+import Lists from './pages/Lists';
+import ListDetail from './pages/ListDetail';
+import Settings from './pages/Settings';
 
 setupIonicReact({});
 
@@ -21,13 +24,37 @@ const AppShell = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonSplitPane contentId="main">
-          <Menu />
-          <IonRouterOutlet id="main">
-            <Route path="/tabs" render={() => <Tabs />} />
-            <Route exact path="/" render={() => <Redirect to="/tabs" />} />
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/tabs/feed" exact={true}>
+              <Feed />
+            </Route>
+            <Route path="/tabs/lists" exact={true}>
+              <Lists />
+            </Route>
+            <Route path="/tabs/lists/:listId" exact={true}>
+              <ListDetail />
+            </Route>
+            <Route path="/tabs/settings" exact={true}>
+              <Settings />
+            </Route>
+            <Route path="/" render={() => <Redirect to="/tabs/feed" />} exact={true} />
           </IonRouterOutlet>
-        </IonSplitPane>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" href="/tabs/feed">
+              <IonIcon icon={flash} />
+              <IonLabel>Feed</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/tabs/lists">
+              <IonIcon icon={list} />
+              <IonLabel>Lists</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/tabs/settings">
+              <IonIcon icon={cog} />
+              <IonLabel>Settings</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
       </IonReactRouter>
     </IonApp>
   );
