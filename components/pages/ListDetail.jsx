@@ -42,7 +42,7 @@ const ListDetail = ({ match }) => {
 
   return (
     <IonPage>
-      <IonHeader translucent>
+      <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tabs/lists" />
@@ -50,12 +50,7 @@ const ListDetail = ({ match }) => {
           <IonTitle>{loadedList.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">{loadedList.name}</IonTitle>
-          </IonToolbar>
-        </IonHeader>
+      <IonContent>
         <ListItems list={loadedList} />
       </IonContent>
     </IonPage>

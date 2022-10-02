@@ -9,6 +9,7 @@ import Feed from './pages/Feed';
 import Lists from './pages/Lists';
 import ListDetail from './pages/ListDetail';
 import Settings from './pages/Settings';
+import Tabs from './pages/Tabs';
 
 setupIonicReact({});
 
@@ -24,37 +25,10 @@ const AppShell = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonTabs>
-          <IonRouterOutlet>
-            <Route path="/tabs/feed" exact={true}>
-              <Feed />
-            </Route>
-            <Route path="/tabs/lists" exact={true}>
-              <Lists />
-            </Route>
-            <Route path="/tabs/lists/:listId" exact={true}>
-              <ListDetail />
-            </Route>
-            <Route path="/tabs/settings" exact={true}>
-              <Settings />
-            </Route>
-            <Route path="/" render={() => <Redirect to="/tabs/feed" />} exact={true} />
-          </IonRouterOutlet>
-          <IonTabBar slot="bottom">
-            <IonTabButton tab="tab1" href="/tabs/feed">
-              <IonIcon icon={flash} />
-              <IonLabel>Feed</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab2" href="/tabs/lists">
-              <IonIcon icon={list} />
-              <IonLabel>Lists</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab3" href="/tabs/settings">
-              <IonIcon icon={cog} />
-              <IonLabel>Settings</IonLabel>
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        <IonRouterOutlet id="main">
+          <Route path="/tabs" render={() => <Tabs />} />
+          <Route path="/" render={() => <Redirect to="/tabs/feed" />} exact={true} />
+        </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>
   );
