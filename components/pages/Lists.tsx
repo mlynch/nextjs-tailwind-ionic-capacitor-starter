@@ -1,3 +1,4 @@
+import React from 'react'
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
 
@@ -45,7 +46,7 @@ const Lists = () => {
           </IonToolbar>
         </IonHeader>
         <IonList>
-          <AllLists />
+          <AllLists onSelect={null} />
         </IonList>
       </IonContent>
     </IonPage>

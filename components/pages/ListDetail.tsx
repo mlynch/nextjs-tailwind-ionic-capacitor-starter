@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   IonBackButton,
   IonButtons,
@@ -34,7 +35,11 @@ const ListItemEntry = ({ list, item }) => (
   </IonItem>
 );
 
-const ListDetail = ({ match }) => {
+interface iListDetailProps {
+  match?: any;
+}
+
+const ListDetail = ({ match }: iListDetailProps) => {
   const lists = Store.useState(selectors.getLists);
   const params = useParams();
   const { listId } = params;

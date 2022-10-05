@@ -1,3 +1,4 @@
+import React from 'react'
 import { IonApp, IonLabel, IonRouterOutlet, setupIonicReact, IonTabs, IonTabBar, IonTabButton, IonIcon  } from '@ionic/react';
 import { cog, flash, list } from 'ionicons/icons';
 import { StatusBar, Style } from '@capacitor/status-bar';
@@ -27,7 +28,7 @@ const AppShell = () => {
       <IonReactRouter>
         <IonRouterOutlet id="main">
           <Route path="/tabs" render={() => <Tabs />} />
-          <Route path="/" render={() => <Redirect to="/tabs/feed" />} exact={true} />
+          <Route path="/tabs/feed" render={() => <Redirect to="/tabs/feed" />} exact={true} />
         </IonRouterOutlet>
       </IonReactRouter>
     </IonApp>

@@ -21,6 +21,7 @@ export const setSettings = settings => {
 // App-specific actions
 
 export const setDone = (list, item, done) => {
+  // TODO: Apply types to state mutations
   Store.update((s, o) => {
     const listIndex = o.lists.findIndex(l => l === list);
     const itemIndex = o.lists[listIndex].items.findIndex(i => i === item);
