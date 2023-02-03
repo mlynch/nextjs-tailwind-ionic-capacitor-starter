@@ -1,7 +1,7 @@
 export const images = [
-  'https://images.unsplash.com/photo-1610235554447-41505d7962f8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=882&q=80',
-  'https://images.unsplash.com/photo-1610212594948-370947a3ba0b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80',
-  'https://images.unsplash.com/photo-1610155180433-9994da6a323b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80',
+  '/img/c1.avif',
+  '/img/c2.avif',
+  '/img/c3.avif',
 ];
 
 export const homeItems = [
