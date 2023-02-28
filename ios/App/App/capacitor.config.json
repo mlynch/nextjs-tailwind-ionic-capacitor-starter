@@ -1,9 +1,12 @@
 {
-	"appId": "com.example.app",
-	"appName": "nextjs-tailwind-capacitor",
-	"bundledWebRuntime": false,
-	"npmClient": "npm",
+	"appId": "com.travel.tales.app",
+	"appName": "Travel-Tales",
 	"webDir": "out",
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://192.168.1.122:3000",
+		"cleartext": true
+	},
 	"plugins": {
 		"SplashScreen": {
 			"launchShowDuration": 0

@@ -34,7 +34,7 @@ const ListItemEntry = ({ list, item }) => (
   </IonItem>
 );
 
-const ListDetail = ({ match }) => {
+const ListDetail = () => {
   const lists = Store.useState(selectors.getLists);
   const params = useParams();
   const { listId } = params;

@@ -21,6 +21,8 @@ import '@ionic/react/css/display.css';
 
 import '../styles/global.css';
 import '../styles/variables.css';
+import NonSSRWrapper from '../components/NonSSRWrapper';
+import { RecoilRoot } from 'recoil';
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -31,7 +33,9 @@ function MyApp({ Component, pageProps }) {
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         ></meta>
       </Head>
-      <Component {...pageProps} />
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
       <Script
         type="module"
         src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"
