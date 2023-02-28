@@ -19,7 +19,6 @@ target 'App' do
   # Add your Pods here
 end
 
-
 post_install do |installer|
   assertDeploymentTarget(installer)
 end
