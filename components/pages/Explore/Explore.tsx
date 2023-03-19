@@ -16,10 +16,10 @@ import { useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
 import TripCard from '../../TripCard';
 import { useRecoilValue } from 'recoil';
-import { trips } from '../../../states/explore';
+import { tales } from '../../../states/explore';
 
 const Explore = () => {
-  const tripList = useRecoilValue(trips);
+  const tripList = useRecoilValue(tales);
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (

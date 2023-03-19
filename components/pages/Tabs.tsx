@@ -9,12 +9,21 @@ import ListDetail from './ListDetail';
 import Settings from './Settings';
 import Link from 'next/link';
 import Explore from './Explore/Explore';
+import { Suspense } from 'react';
 
 const Tabs = () => {
   return (
     <IonTabs>
       <IonRouterOutlet>
-        <Route path="/tabs/explore" render={() => <Explore />} exact={true} />
+        <Route
+          path="/tabs/explore"
+          render={() => (
+            <Suspense>
+              <Explore />
+            </Suspense>
+          )}
+          exact={true}
+        />
         <Route path="/tabs/lists" render={() => <Lists />} exact={true} />
         <Route path="/tabs/lists/:listId" render={() => <ListDetail />} exact={true} />
         <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
