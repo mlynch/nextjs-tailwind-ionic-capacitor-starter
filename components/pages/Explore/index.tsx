@@ -12,15 +12,22 @@ import {
   IonInput,
 } from '@ionic/react';
 import Notifications from '../Notifications';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
 import TripCard from '../../TripCard';
-import { useRecoilValue } from 'recoil';
-import { tales } from '../../../states/explore';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { currentTale, tales } from '../../../states/explore';
+import { Tale } from '../../../managers/tales-manager';
+import { useIonRouter } from '@ionic/react';
 
 const Explore = () => {
   const tripList = useRecoilValue(tales);
   const [showNotifications, setShowNotifications] = useState(false);
+  const router = useIonRouter();
+
+  const selectTale = useCallback((id: number) => {
+    router.push(`/tabs/tale/${id}`);
+  }, []);
 
   return (
     <IonPage>
@@ -48,8 +55,8 @@ const Explore = () => {
           <IonInput placeholder="Where you wanna go?"></IonInput>
         </IonItem>
         <div className="grid grid-flow-row gap-8 text-neutral-600 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {tripList.map((i, index) => (
-            <TripCard {...i} key={index} />
+          {tripList.map((tale, index) => (
+            <TripCard {...tale} key={index} onClick={() => selectTale(tale.trip_id)} />
           ))}
         </div>
       </IonContent>

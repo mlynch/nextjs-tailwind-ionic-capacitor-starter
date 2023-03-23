@@ -3,13 +3,13 @@ import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } 
 import { IonReactRouter } from '@ionic/react-router';
 import { cog, flash, list, search } from 'ionicons/icons';
 
-import Home from './Feed';
 import Lists from './Lists';
 import ListDetail from './ListDetail';
 import Settings from './Settings';
 import Link from 'next/link';
-import Explore from './Explore/Explore';
+import Explore from './Explore';
 import { Suspense } from 'react';
+import TaleOverview from './TaleOverview';
 
 const Tabs = () => {
   return (
@@ -20,6 +20,15 @@ const Tabs = () => {
           render={() => (
             <Suspense>
               <Explore />
+            </Suspense>
+          )}
+          exact={true}
+        />
+        <Route
+          path="/tabs/tale/:taleId"
+          render={() => (
+            <Suspense>
+              <TaleOverview />
             </Suspense>
           )}
           exact={true}

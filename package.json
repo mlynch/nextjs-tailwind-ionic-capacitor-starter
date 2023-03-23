@@ -6,9 +6,9 @@
     "node": ">=12"
   },
   "scripts": {
-    "dev": "next dev | pino-pretty",
+    "dev": "NODE_ENV=development next dev | pino-pretty",
     "build": "next build",
-    "start": "next start",
+    "start": "next start | pino-pretty",
     "export": "next export",
     "test:local:env:up": "env/test-env-up.sh",
     "test:local:env:down": "env/test-env-down.sh",

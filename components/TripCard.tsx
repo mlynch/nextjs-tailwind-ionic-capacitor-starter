@@ -8,8 +8,9 @@ const TripCard = ({
   author,
   avatar_photo,
   cover_photo_url,
+  onClick,
 }) => (
-  <Card className="my-4 mx-auto">
+  <Card className="my-4 mx-auto" onClick={() => onClick()}>
     <div className="h-48 w-full relative">
       <Image
         className="rounded-t-xl object-cover min-w-full min-h-full max-w-full max-h-full"
