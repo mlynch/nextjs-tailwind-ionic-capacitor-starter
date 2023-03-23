@@ -1,4 +1,4 @@
-import { createApiHandler } from '../../../utils/api-handler';
+import { createApiHandler } from '../../../server/middlewares/api-handler';
 import { getAllTales } from '../../../server/services/tales';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';

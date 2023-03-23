@@ -21,7 +21,8 @@ async function request(url: string, options: { [key: string]: any } = {}) {
     queryString = queryString && `?${queryString}`;
   }
 
-  return fetch(`${url}${queryString}`, reqOptions).then(handleResponse);
+  const res = await fetch(`${url}${queryString}`, reqOptions);
+  return res;
 }
 
 export async function get(url, query?: { [key: string]: any }) {

@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from 'http-status-codes';
 import { NextApiRequest, NextApiResponse } from 'next';
 import nextConnect from 'next-connect';
-import { logger } from './server-logger';
+import { logger } from '../../utils/server-logger';
 
 export function createApiHandler<Req = NextApiRequest, Res = NextApiResponse>() {
   const handler = nextConnect<Req, Res>({
@@ -15,6 +15,7 @@ export function createApiHandler<Req = NextApiRequest, Res = NextApiResponse>() 
   });
 
   //handler.use(jwtExpressMiddleware);
+  handler.use(logEveryRequest);
 
   return handler;
 }
@@ -26,4 +27,9 @@ export const errorHandler = (err, res) => {
   }
 
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end(ReasonPhrases.INTERNAL_SERVER_ERROR);
+};
+
+export const logEveryRequest = (req, res, next) => {
+  logger.info(req, 'incoming request');
+  return next();
 };

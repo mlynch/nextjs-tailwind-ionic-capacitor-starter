@@ -18,6 +18,6 @@ export async function fetchTales(): Promise<Tale[]> {
         throw new Error('could not fetch tales');
     }
   }
-  const tales = res.json();
+  const { tales } = await res.json();
   return tales.map(tale => ({ ...tale, author: `${tale.first_name} ${tale.last_name}` }));
 }
