@@ -38,7 +38,7 @@ const TaleOverview = () => {
           <IonButtons slot="start">
             <IonBackButton></IonBackButton>
           </IonButtons>
-          <IonTitle>{title}</IonTitle>
+          <IonTitle className={'lg:text-center'}>{title}</IonTitle>
         </IonToolbar>
         <img className="lg:h-96 lg:w-3/4 object-cover sm:h-full sm:w-48" src={cover_photo_url} />
         <div className={'w-full'}>
