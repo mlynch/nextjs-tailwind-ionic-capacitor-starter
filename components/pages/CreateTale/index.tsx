@@ -16,63 +16,70 @@ import {
 import Card from '../../ui/Card';
 
 const CreateTale = () => {
+  const [tripName, setTripName] = useState('');
+  const [catchphrase, setCatchphrase] = useState('');
+  const [coverPhoto, setCoverPhoto] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  const onButtonClick = (e) => {
+    e.preventDefault();
+    console.log(`tripName: ${tripName}, catchphrase: ${catchphrase}`);
+  }
 
   return (
-    <>
-      <Card className="my-4 mx-auto">
+    <Card className="my-4 mx-auto">
+      <form style={{ padding: '2vh 2vw', display: 'grid' }}>
         <div className="tripData">
-          <div className="description">
-            <label>Trip Name</label>
-            <input type="text" />
-            <label>Catchphrase</label>
-            <input type="text" />
-            <label>Cover Photo</label>
-            <input type="text" />
+          <div className="description" style={{ display: 'flex', flexDirection: 'column' }}>
+            <label htmlFor="tripName">Trip Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="tripName"
+              style={{ marginBottom: '1vh', border: '1px solid #b8c1cc', borderRadius: '5px' }}
+              onChange={e => setTripName(e.target.value)}
+            />
+            <label htmlFor="catchphrase">Catchphrase</label>
+            <input
+              type="text"
+              className="form-control"
+              id="catchphrase"
+              style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
+              onChange={e => setCatchphrase(e.target.value)}
+            />
+            <label htmlFor="coverPhoto">Cover Photo</label>
+            <input
+              type="text"
+              className="form-control"
+              id="coverPhoto"
+              style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
+              onChange={e => setCoverPhoto(e.target.value)}
+            />
           </div>
-          <div className="dates">
-            <label>Start Date</label>
-            <input type="date" />
-            <label>End Date</label>
-            <input type="date" />
+          <div className="dates" style={{ display: 'flex', flexDirection: 'column' }}>
+            <label htmlFor="startDate">Start Date</label>
+            <input
+              type="date"
+              className="form-control"
+              id="startDate"
+              style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
+              onChange={e => setStartDate(e.target.value)}
+            />
+            <label htmlFor="endDate">End Date</label>
+            <input
+              type="date"
+              className="form-control"
+              id="endDate"
+              style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
+              onChange={e => setEndDate(e.target.value)}
+            />
           </div>
         </div>
-        <button>Create Tale</button>
-      </Card>
-    </>
+        <button style={{ margin: "1vh 1vw", border: "1px solid #b8c1cc", borderRadius: "5px" }} onClick={onButtonClick} >Create Tale</button>
+      </form>
+    </Card>
   );
 };
 
 export default CreateTale;
-
-/*
-
-    <Card className="my-4 mx-auto" onClick={() => onClick()}>
-
-
-<Card className="my-4 mx-auto" onClick={() => onClick()}>
-    <div className="h-48 w-full relative">
-      <Image
-        className="rounded-t-xl object-cover min-w-full min-h-full max-w-full max-h-full"
-        src={cover_photo_url}
-        fill
-        alt=""
-      />
-    </div>
-    <div className="px-4 py-4 bg-white rounded-b-xl dark:bg-gray-900">
-      <h4 className="font-bold py-0 text-s text-gray-400 dark:text-gray-500 uppercase">{type}</h4>
-      <h2 className="font-bold text-2xl text-gray-800 dark:text-gray-100">{title}</h2>
-      <p className="sm:text-sm text-s text-gray-500 mr-1 my-3 dark:text-gray-400">{catch_phrase}</p>
-      <div className="flex items-center space-x-4">
-        <div className="w-10 h-10 relative">
-          <Image
-            src={avatar_photo}
-            className="rounded-full object-cover min-w-full min-h-full max-w-full max-h-full"
-            fill
-            alt=""
-          />
-        </div>
-        <h3 className="text-gray-500 dark:text-gray-200 m-l-8 text-sm font-medium">{author}</h3>
-      </div>
-    </div>
-  </Card>
-  */
