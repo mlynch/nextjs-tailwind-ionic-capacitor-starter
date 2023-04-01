@@ -18,6 +18,7 @@ import Lists from './pages/Lists';
 import ListDetail from './pages/ListDetail';
 import Settings from './pages/Settings';
 import Tabs from './pages/Tabs';
+import CreateTale from './pages/CreateTale';
 
 setupIonicReact({});
 
@@ -34,6 +35,7 @@ const AppShell = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet id="main">
+          <Route path="/create" render={() => <CreateTale />} />
           <Route path="/tabs" render={() => <Tabs />} />
           <Route path="/" render={() => <Redirect to="/tabs/explore" />} exact={true} />
         </IonRouterOutlet>
