@@ -25,6 +25,7 @@ const CreateTale = () => {
   const onButtonClick = (e) => {
     e.preventDefault();
     console.log(`tripName: ${tripName}, catchphrase: ${catchphrase}`);
+    //need to send an axios call to server and create a new trip
   }
 
   return (
@@ -48,14 +49,14 @@ const CreateTale = () => {
               style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
               onChange={e => setCatchphrase(e.target.value)}
             />
-            <label htmlFor="coverPhoto">Cover Photo</label>
+            {/*<label htmlFor="coverPhoto">Cover Photo</label>
             <input
               type="text"
               className="form-control"
               id="coverPhoto"
               style={{ marginBottom: "1vh", border: "1px solid #b8c1cc", borderRadius: "5px" }}
               onChange={e => setCoverPhoto(e.target.value)}
-            />
+            /> should check if we want to add this field at this part of the form*/}
           </div>
           <div className="dates" style={{ display: 'flex', flexDirection: 'column' }}>
             <label htmlFor="startDate">Start Date</label>
