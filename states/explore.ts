@@ -1,5 +1,6 @@
 import { atom, selector } from 'recoil';
-import { fetchTales, Tale } from '../managers/tales-manager';
+import { fetchTales, fetchTaleStory } from '../managers/tales-manager';
+import { StoryResponse, Tale } from '../types/types';
 
 export const tales = selector<Tale[]>({
   key: 'tales',
@@ -20,5 +21,13 @@ export const currentTale = selector<Tale>({
     const taleId = get(currentTaleIdState);
     const allTales = get(tales);
     return allTales.find(tale => tale.trip_id === taleId);
+  },
+});
+
+export const currentTaleStory = selector<StoryResponse>({
+  key: 'currentTaleStory',
+  get: async ({ get }) => {
+    const taleId = get(currentTaleIdState);
+    if (taleId) return await fetchTaleStory(taleId);
   },
 });

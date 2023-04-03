@@ -13,13 +13,21 @@ import {
 } from '@ionic/react';
 import Image from 'next/image';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { currentTale, currentTaleIdState } from '../../../states/explore';
+import { currentTale, currentTaleIdState, currentTaleStory } from '../../../states/explore';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Story from './Story';
+
+enum Segments {
+  thingsToDo = 'Things To Do',
+  story = 'Story',
+}
 
 const TaleOverview = () => {
   const [currentTaleId, setCurrenetTaleId] = useRecoilState(currentTaleIdState);
+  const taleStory = useRecoilValue(currentTaleStory);
   const tale = useRecoilValue(currentTale);
+  const [segment, setSegment] = useState<Segments>(Segments.story);
   let { taleId } = useParams();
 
   useEffect(() => () => setCurrenetTaleId(null), []);
@@ -42,17 +50,22 @@ const TaleOverview = () => {
         </IonToolbar>
         <img className="lg:h-96 lg:w-3/4 object-cover sm:h-full sm:w-48" src={cover_photo_url} />
         <div className={'w-full'}>
-          <IonSegment value="default">
-            <IonSegmentButton value="default">
-              <IonLabel>Story</IonLabel>
+          <IonSegment
+            onIonChange={event => setSegment(event.detail.value as Segments)}
+            value={segment}
+          >
+            <IonSegmentButton value={Segments.story}>
+              <IonLabel>{Segments.story}</IonLabel>
             </IonSegmentButton>
-            <IonSegmentButton value="segment">
-              <IonLabel>Things To Do</IonLabel>
+            <IonSegmentButton value={Segments.thingsToDo}>
+              <IonLabel>{Segments.thingsToDo}</IonLabel>
             </IonSegmentButton>
           </IonSegment>
         </div>
       </IonHeader>
-      <IonContent className="ion-padding" fullscreen></IonContent>
+      <IonContent className="ion-padding" fullscreen>
+        {segment === Segments.story && <Story story={taleStory} />}
+      </IonContent>
     </IonPage>
   );
 };

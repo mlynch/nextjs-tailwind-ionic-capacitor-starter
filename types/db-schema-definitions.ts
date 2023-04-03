@@ -1,16 +1,39 @@
 // The TypeScript definitions below are automatically generated.
 // Do not touch them, or risk, your modifications being lost.
 
+import PostgresInterval from 'postgres-interval';
+
 export enum Table {
+  Activities = 'travel_tales.activities',
+  TripDestinations = 'travel_tales.trip_destinations',
   Trips = 'travel_tales.trips',
   Users = 'travel_tales.users',
   UsersTrips = 'travel_tales.users_trips',
 }
 
 export type Tables = {
+  'travel_tales.activities': Activities;
+  'travel_tales.trip_destinations': TripDestinations;
   'travel_tales.trips': Trips;
   'travel_tales.users': Users;
   'travel_tales.users_trips': UsersTrips;
+};
+
+export type Activities = {
+  id: number;
+  destination_id: number;
+  duration: PostgresInterval.IPostgresInterval | string | null;
+  name: string;
+  description: string | null;
+  day_index: number;
+  sequential_number: number;
+};
+
+export type TripDestinations = {
+  id: number;
+  trip_id: number;
+  days: number | null;
+  name: string;
 };
 
 export type Trips = {
