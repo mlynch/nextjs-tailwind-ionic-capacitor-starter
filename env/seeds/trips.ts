@@ -46,21 +46,21 @@ const trips: Trips[] = [
 const users: Users[] = [
   {
     user_id: 1,
-    email: 'nirkl',
+    email: 'nirkl@mta.ac.il',
     first_name: 'Nir',
     last_name: 'Klinger',
     avatar_photo: '/img/or.jpg',
   },
   {
     user_id: 2,
-    email: 'orSamu',
+    email: 'orSamu@mta.ac.il',
     first_name: 'Or',
     last_name: 'Samu',
     avatar_photo: '/img/or.jpg',
   },
   {
     user_id: 3,
-    email: 'darEini',
+    email: 'darEini@mta.ac.il',
     first_name: 'Dar',
     last_name: 'Eini',
     avatar_photo: '/img/or.jpg',
