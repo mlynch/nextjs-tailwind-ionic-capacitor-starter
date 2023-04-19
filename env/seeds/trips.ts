@@ -18,6 +18,8 @@ const trips: Trips[] = [
     catch_phrase: 'We just got back from a trip to Portugal, and we had a great time...',
     cover_photo_url: '/img/portugal.jpeg',
     created_by: 1,
+    start_date: new Date(2022, 10, 5, 0, 0, 0, 0),
+    end_date: new Date(2022, 10, 22, 0, 0, 0, 0),
   },
   {
     trip_id: 2,
@@ -26,6 +28,8 @@ const trips: Trips[] = [
       'Last month we took a trek to the Arctic Circle. The isolation was just what we needed after...',
     cover_photo_url: '/img/c2.avif',
     created_by: 1,
+    start_date: new Date(2022, 3, 5, 0, 0, 0, 0),
+    end_date: new Date(2022, 3, 22, 0, 0, 0, 0),
   },
   {
     trip_id: 3,
@@ -34,6 +38,8 @@ const trips: Trips[] = [
       'The Faroe Islands are a North Atlantic archipelago located 320 kilometres (200 mi) north-northwest of Scotland...',
     cover_photo_url: '/img/c3.avif',
     created_by: 1,
+    start_date: new Date(2022, 1, 7, 0, 0, 0, 0),
+    end_date: new Date(2022, 1, 12, 0, 0, 0, 0),
   },
 ];
 
@@ -80,12 +86,12 @@ const usersTrips: UsersTrips[] = [
 ];
 
 const destinations: TripDestinations[] = [
-  { id: 1, trip_id: 1, days: 3, name: 'Porto' },
-  { id: 2, trip_id: 1, days: 2, name: 'Douro Vali' },
-  { id: 3, trip_id: 1, days: 4, name: 'Ericeira' },
-  { id: 4, trip_id: 1, days: 2, name: 'Milfontes' },
-  { id: 5, trip_id: 1, days: 2, name: 'Lagos' },
-  { id: 6, trip_id: 1, days: 3, name: 'Lisbon' },
+  { id: 1, trip_id: 1, first_day: 1, last_day: 3, name: 'Porto' },
+  { id: 2, trip_id: 1, first_day: 3, last_day: 5, name: 'Douro Vali' },
+  { id: 3, trip_id: 1, first_day: 6, last_day: 10, name: 'Ericeira' },
+  { id: 4, trip_id: 1, first_day: 11, last_day: 13, name: 'Milfontes' },
+  { id: 5, trip_id: 1, first_day: 13, last_day: 15, name: 'Lagos' },
+  { id: 6, trip_id: 1, first_day: 15, last_day: 17, name: 'Lisbon' },
 ];
 
 const activities: Activities[] = [

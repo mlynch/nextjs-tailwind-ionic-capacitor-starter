@@ -5,7 +5,8 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema.withSchema(SCHEMA_NAME).createTable('trip_destinations', table => {
     table.increments().primary();
     table.integer('trip_id').notNullable();
-    table.double('days');
+    table.integer('first_day');
+    table.integer('last_day');
     table.string('name').notNullable();
     table
       .foreign('trip_id')

@@ -32,7 +32,8 @@ export type Activities = {
 export type TripDestinations = {
   id: number;
   trip_id: number;
-  days: number | null;
+  first_day: number | null;
+  last_day: number | null;
   name: string;
 };
 
@@ -42,6 +43,8 @@ export type Trips = {
   catch_phrase: string;
   cover_photo_url: string;
   created_by: number;
+  start_date: Date;
+  end_date: Date;
 };
 
 export type Users = {
