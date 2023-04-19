@@ -1,6 +1,15 @@
 import { Knex } from 'knex';
 import { SCHEMA_NAME } from '../../constants';
-import { Table, Trips, Users, UsersTrips } from '../../types/db-schema-definitions';
+import parse, { IPostgresInterval } from 'postgres-interval';
+
+import {
+  Activities,
+  Table,
+  TripDestinations,
+  Trips,
+  Users,
+  UsersTrips,
+} from '../../types/db-schema-definitions';
 
 const trips: Trips[] = [
   {
@@ -70,6 +79,28 @@ const usersTrips: UsersTrips[] = [
   },
 ];
 
+const destinations: TripDestinations[] = [
+  { id: 1, trip_id: 1, days: 3, name: 'Porto' },
+  { id: 2, trip_id: 1, days: 2, name: 'Douro Vali' },
+  { id: 3, trip_id: 1, days: 4, name: 'Ericeira' },
+  { id: 4, trip_id: 1, days: 2, name: 'Milfontes' },
+  { id: 5, trip_id: 1, days: 2, name: 'Lagos' },
+  { id: 6, trip_id: 1, days: 3, name: 'Lisbon' },
+];
+
+const activities: Activities[] = [
+  {
+    id: 1,
+    destination_id: 1,
+    duration: parse('03:00:00').toPostgres(),
+    name: 'free walking tour',
+    description:
+      'A tour where we will show you the most important monuments in the city and with the experience of our guides, you will fall in love with the city of Porto and its exciting culture and history. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our guides with vast experience, in love with history, will be conducting the Essential Porto Symphony,and with their knowledge of the art and culture of Porto, will accompany us on an essential tour, in addition to advising you with your doubts. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our local guides with vast experience running tours will be waiting for you.',
+    day_index: 1,
+    sequential_number: 1,
+  },
+];
+
 export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
   await knex(Table.Trips).del();
@@ -79,7 +110,13 @@ export async function seed(knex: Knex): Promise<void> {
   await knex.insert(trips).into(Table.Trips);
   await knex.insert(users).into(Table.Users);
   await knex.insert(usersTrips).into(Table.UsersTrips);
+  await knex.insert(destinations).into(Table.TripDestinations);
+  await knex.insert(activities).into(Table.Activities);
   await knex.raw(`select setval(\'trips_trip_id_seq\', max(trip_id)) from ${Table.Trips}`);
   await knex.raw(`select setval(\'users_user_id_seq\', max(user_id)) from ${Table.Users}`);
   await knex.raw(`select setval(\'users_trips_id_seq\', max(id)) from ${Table.UsersTrips}`);
+  await knex.raw(
+    `select setval(\'trip_destinations_id_seq\', max(id)) from ${Table.TripDestinations}`
+  );
+  await knex.raw(`select setval(\'activities_id_seq\', max(id)) from ${Table.Activities}`);
 }

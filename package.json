@@ -34,6 +34,7 @@
     "pino-http": "^8.3.3",
     "pino-pretty": "^10.0.0",
     "postcss": "^8.3.5",
+    "postgres-interval": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.2.0",
