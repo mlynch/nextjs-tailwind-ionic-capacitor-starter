@@ -1,5 +1,4 @@
 import { getConnection } from '../db/connections';
-import { Trips } from '../../types/db-schema-definitions';
 import {
   Activities,
   Table,
@@ -22,6 +21,8 @@ export async function getTales() {
 export const createTale = async (tale:Trips) => {
   const connection = getConnection();
   //add a new trip to db
+}
+
 export async function getTaleDestinations(taleId: number) {
   const connection = getConnection();
   const destinations = await connection
@@ -43,5 +44,4 @@ export async function getTaleActivities(taleId: number) {
     )
     .where(`${Table.TripDestinations}.trip_id`, taleId);
   return destinations;
-}
 }
