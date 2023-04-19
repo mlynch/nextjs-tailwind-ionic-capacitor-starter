@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createTrip } from '..//..//..//managers/tales-manager';
 import {
   IonCard,
   IonItem,
@@ -22,16 +23,18 @@ import Card from '../../ui/Card';
 
 const CreateTale = () => {
   const [tripName, setTripName] = useState('');
-  const [isNameValid, setIsNameValid] = useState(false);
+  const [isTripNameValid, setIsTripNameValid] = useState(false);
   const [catchphrase, setCatchphrase] = useState('');
-  const [isCatchphraseValid, setIsCatchphraseValid] = useState(false);
+  const [isCatchphraseValid, setIsCatchphraseValid] = useState(false); // is catchphrase mandatory?
   const [startDate, setStartDate] = useState('');
-  const [isStartDateValid, setIsStartDateValid] = useState(false);
   const [endDate, setEndDate] = useState('');
-  const [isEndDateValid, setIsEndDateValid] = useState(false);
+  const [isDatesValid, setIsDatesValid] = useState(false);
 
   const tripNameChangeHandler = e => {
-    setTripName(e.target.value);
+    const newTripName = e.target.value;
+
+    setTripName(newTripName);
+    setIsTripNameValid(newTripName.trim().length > 0);
   };
 
   const catchphraseChangeHandler = e => {
