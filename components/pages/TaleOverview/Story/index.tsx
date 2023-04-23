@@ -45,7 +45,7 @@ function Story({ story }: StoryProps) {
                 <IonIcon color={'primary'} icon={time} />
               </div>
             </div>
-            <div className={'rounded-b-md'}>
+            <div className={'mb-4'}>
               <p>{act.description}</p>
             </div>
             <ImageTape media={act.media} />
