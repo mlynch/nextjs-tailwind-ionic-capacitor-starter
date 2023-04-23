@@ -1,8 +1,8 @@
 import { getConnection } from '../db/connections';
 import {
   Activities,
+  ActivityMedia,
   Table,
-  Tables,
   TripDestinations,
   Trips,
   Users,
@@ -29,7 +29,7 @@ export async function getTaleDestinations(taleId: number) {
 
 export async function getTaleActivities(taleId: number) {
   const connection = getConnection();
-  const destinations = await connection
+  const activities = await connection
     .select<Activities[]>(`${Table.Activities}.*`)
     .from(Table.Activities)
     .join(
@@ -38,5 +38,20 @@ export async function getTaleActivities(taleId: number) {
       `${Table.Activities}.destination_id`
     )
     .where(`${Table.TripDestinations}.trip_id`, taleId);
-  return destinations;
+  return activities;
+}
+
+export async function getTaleActivityMedia(taleId: number) {
+  const connection = getConnection();
+  const media = await connection
+    .select<ActivityMedia[]>(`${Table.ActivityMedia}.*`)
+    .from(Table.Activities)
+    .join(
+      Table.TripDestinations,
+      `${Table.TripDestinations}.id`,
+      `${Table.Activities}.destination_id`
+    )
+    .join(Table.ActivityMedia, `${Table.Activities}.id`, `${Table.ActivityMedia}.activity_id`)
+    .where(`${Table.TripDestinations}.trip_id`, taleId);
+  return media;
 }
