@@ -9,6 +9,10 @@ export type TalesResponse = {
   tales: (Trips & Users)[];
 };
 
+export type CreateTaleResponse = { 
+  trip_id: number;
+};
+
 export interface Tale extends Trips, Users {
   author: string;
 }

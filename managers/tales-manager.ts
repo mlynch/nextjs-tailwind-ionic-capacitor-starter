@@ -32,13 +32,14 @@ export async function fetchTaleStory(taleId: number): Promise<StoryResponse> {
   return (await res.json()) as StoryResponse;
 }
 
-export const createTale = async (tale: Tale): Promise<any> => {
-  const res = { ok: true, status: 200 }; //await fetchWrapper.post('/api/tale', tale);
-  console.log('I am here');
+export const createTale = async (taleToCreate: Omit<Trips, "trip_id">): Promise<any> => {
+  const res = await fetchWrapper.post('/api/tales', taleToCreate);
   if (!res.ok) {
     switch (res.status) {
       default:
         throw new Error('could not create a new tale');
     }
   }
+  const newTaleId = await res.json();
+  return newTaleId.trip_id;
 };

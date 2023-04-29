@@ -8,7 +8,10 @@ import { StoryResponse } from '../../../../types/types';
 async function getStory(req: NextApiRequest, res: NextApiResponse<StoryResponse>) {
   const taleId = Number(req.query.taleId);
   const tales = await getTaleStory(taleId);
+  console.log("************************");
+  console.log(tales);
   res.status(StatusCodes.OK).send(tales);
 }
+
 
 export default createApiHandler().get<NextApiRequest, NextApiResponse<StoryResponse>>(getStory);

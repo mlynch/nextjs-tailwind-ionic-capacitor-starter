@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { createTrip } from '..//..//..//managers/tales-manager';
+import React, { useEffect, useState } from 'react';
+import { createTale } from '..//..//..//managers/tales-manager';
+import { Trips } from '..//..//..//types/db-schema-definitions';
 import {
   IonCard,
   IonItem,
@@ -8,27 +9,30 @@ import {
   IonDatetimeButton,
   IonModal,
   IonDatetime,
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
   IonButton,
-  IonIcon,
-  IonContent,
-  IonMenuButton,
 } from '@ionic/react';
+import { useIonRouter } from '@ionic/react';
 
 import Card from '../../ui/Card';
+
+const coverPhotoUrl = "https://www.shutterstock.com/image-photo/commercial-airplane-flying-over-bright-260nw-1205447614.jpg";
 
 const CreateTale = () => {
   const [tripName, setTripName] = useState('');
   const [isTripNameValid, setIsTripNameValid] = useState(false);
   const [catchphrase, setCatchphrase] = useState('');
-  const [isCatchphraseValid, setIsCatchphraseValid] = useState(false); // is catchphrase mandatory?
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+  const [isCatchphraseValid, setIsCatchphraseValid] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [isDatesValid, setIsDatesValid] = useState(false);
+  const router = useIonRouter();
+
+  const validateDates = useEffect(() => {
+    const isDatesValid = endDate >= startDate;
+
+    setIsDatesValid(isDatesValid);
+
+  }, [startDate, endDate]);
 
   const tripNameChangeHandler = e => {
     const newTripName = e.target.value;
@@ -38,41 +42,41 @@ const CreateTale = () => {
   };
 
   const catchphraseChangeHandler = e => {
-    setCatchphrase(e.target.value);
+    const newCatchphraseName = e.target.value;
+
+    setCatchphrase(newCatchphraseName);
+    setIsCatchphraseValid(newCatchphraseName.trim().length > 0);
   };
 
   const startDateChangeHandler = e => {
-    const formattedDate = formatDate(e.target.value);
+    const newDate = e.target.value;
 
-    setStartDate(formattedDate);
+    setStartDate(newDate);
   };
 
   const endDateChangeHandler = e => {
-    const formattedDate = formatDate(e.target.value);
+    const newDate = e.target.value;
 
-    setEndDate(formattedDate);
+    setEndDate(newDate);
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear().toString();
-
-    return `${day}-${month}-${year}`;
+  const createTaleHandler = async () => {
+    if (isTripNameValid && isCatchphraseValid && isDatesValid) {
+      const newTale: Omit<Trips, "trip_id"> = {   
+        title: tripName,
+        catch_phrase: catchphrase,
+        cover_photo_url: coverPhotoUrl,
+        created_by: 1,
+        start_date: startDate,
+        end_date: endDate
+      }
+      const newTaleId = await createTale(newTale);
+      router.push(`/tabs/tale/${newTaleId}`);
+    }
+    else {
+      console.log("not inserted - validation failed");
+    }
   };
-
-  const createTaleHandler = () => {
-    console.log("Submit process started");
-    validateForm();
-    console.log("Submit process ended");
-  }
-
-  const validateForm = () => {
-    setIsNameValid(tripName ? true : false);
-    setIsNameValid(catchphrase ? true : false);
-    //setIsStartDateValid((startDate &&) ? true : false); //
-  }
 
   return (
     <Card className="my-4 mx-auto">

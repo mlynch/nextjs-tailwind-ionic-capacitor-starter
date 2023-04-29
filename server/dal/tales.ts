@@ -18,9 +18,21 @@ export async function getTales() {
   return tales;
 }
 
-export const createTale = async (tale:Trips) => {
+export const insertNewTale = async (tale: Omit<Trips, "trip_id">) => {
   const connection = getConnection();
-  //add a new trip to db
+  const taleId = await connection
+    .insert(
+      tale,
+      'trip_id'
+    )
+    .into(Table.Trips);
+  const userLinkObj = { user_id: tale.created_by, trip_id: taleId[0].trip_id };
+  const userLink = await connection
+      .insert(
+        userLinkObj
+      )
+      .into(Table.UsersTrips);
+   return taleId[0];
 }
 
 export async function getTaleDestinations(taleId: number) {

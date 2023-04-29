@@ -1,4 +1,5 @@
-import { getTaleActivities, getTaleDestinations, getTales } from '../dal/tales';
+import { getTaleActivities, getTaleDestinations, getTales, insertNewTale } from '../dal/tales';
+import { Trips } from '../../types/db-schema-definitions';
 
 export async function getAllTales() {
   return getTales();
@@ -14,3 +15,12 @@ export async function getTaleStory(taleId: number) {
     activities,
   };
 }
+
+export const createNewTale = async (newTale: Omit<Trips, "trip_id">) => {
+  const newTaleId = await Promise.all([
+    insertNewTale(newTale),
+  ]);
+  return newTaleId[0];
+}
+
+
