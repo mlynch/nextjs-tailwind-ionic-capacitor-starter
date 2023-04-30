@@ -8,20 +8,13 @@ import {
   IonSegmentButton,
   IonTitle,
   IonToolbar,
-  useIonRouter,
   IonBackButton,
-  IonImg,
 } from '@ionic/react';
-import Image from 'next/image';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentTale, currentTaleIdState, currentTaleStory } from '../../../states/explore';
 import { useParams } from 'react-router-dom';
-import { createRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Story from './Story';
-import {
-  useIonHeaderCollapse,
-  UseIonHeaderCollapse,
-} from '@codesyntax/ionic-react-header-collapse';
 
 enum Segments {
   thingsToDo = 'Things To Do',
@@ -49,7 +42,7 @@ const TaleOverview = () => {
       <IonHeader className={``}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
+            <IonBackButton defaultHref="/tabs/explore"></IonBackButton>
           </IonButtons>
           <IonTitle className={'lg:text-center'}>{title}</IonTitle>
         </IonToolbar>
