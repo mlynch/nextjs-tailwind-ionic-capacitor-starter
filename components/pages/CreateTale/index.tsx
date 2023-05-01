@@ -58,13 +58,13 @@ const CreateTale = () => {
   const startDateChangeHandler = e => {
     const newDate = e.target.value;
 
-    setStartDate(newDate);
+    setStartDate(new Date(newDate));
   };
 
   const endDateChangeHandler = e => {
     const newDate = e.target.value;
 
-    setEndDate(newDate);
+    setEndDate(new Date(newDate));
   };
 
   const createTaleHandler = async () => {
