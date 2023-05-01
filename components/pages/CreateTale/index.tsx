@@ -77,7 +77,7 @@ const CreateTale = () => {
         end_date: endDate,
       };
       const newTaleId = await createTale(newTale);
-      router.push(`/tabs/tale/${newTaleId}`);
+      router.push(`/tabs/tale/${newTaleId}`, 'forward', 'replace');
     } else {
       console.log('not inserted - validation failed');
     }
