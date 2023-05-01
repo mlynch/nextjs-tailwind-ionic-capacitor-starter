@@ -3,8 +3,14 @@
 
 import PostgresInterval from 'postgres-interval';
 
+export enum MediaType {
+  Image = 'image',
+  Video = 'video',
+}
+
 export enum Table {
   Activities = 'travel_tales.activities',
+  ActivityMedia = 'travel_tales.activity_media',
   TripDestinations = 'travel_tales.trip_destinations',
   Trips = 'travel_tales.trips',
   Users = 'travel_tales.users',
@@ -13,6 +19,7 @@ export enum Table {
 
 export type Tables = {
   'travel_tales.activities': Activities;
+  'travel_tales.activity_media': ActivityMedia;
   'travel_tales.trip_destinations': TripDestinations;
   'travel_tales.trips': Trips;
   'travel_tales.users': Users;
@@ -27,6 +34,13 @@ export type Activities = {
   description: string | null;
   day_index: number;
   sequential_number: number;
+};
+
+export type ActivityMedia = {
+  id: number;
+  activity_id: number;
+  media_type: MediaType | null;
+  media_url: string;
 };
 
 export type TripDestinations = {
