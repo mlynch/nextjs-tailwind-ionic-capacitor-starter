@@ -1,5 +1,7 @@
 import Store from '../../store';
 import * as selectors from '../../store/selectors';
+import { useRecoilValue } from 'recoil';
+import { tales } from '../../states/explore';
 
 import {
   IonPage,
@@ -10,17 +12,18 @@ import {
   IonItem,
   IonLabel,
   IonList,
+  IonButton,
+  useIonRouter,
 } from '@ionic/react';
 
 const ListEntry = ({ list, ...props }) => (
-  <IonItem routerLink={`/tabs/lists/${list.id}`} className="list-entry">
-    <IonLabel>{list.name}</IonLabel>
+  <IonItem routerLink={`/tabs/tale/${list.trip_id}`} className="list-entry">
+    <IonLabel>{list.title}</IonLabel>
   </IonItem>
 );
 
 const AllLists = ({ onSelect }) => {
-  const lists = Store.useState(selectors.getLists);
-
+  const lists = useRecoilValue(tales);
   return (
     <>
       {lists.map((list, i) => (
@@ -31,6 +34,9 @@ const AllLists = ({ onSelect }) => {
 };
 
 const Lists = () => {
+  const router = useIonRouter();
+  
+
   return (
     <IonPage>
       <IonHeader translucent={true}>
@@ -48,6 +54,7 @@ const Lists = () => {
           <AllLists />
         </IonList>
       </IonContent>
+      <IonButton href={"/tabs/tale/create"}>Create New Tale</IonButton>
     </IonPage>
   );
 };

@@ -10,12 +10,20 @@ import {
   IonModal,
   IonDatetime,
   IonButton,
+  IonBackButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonTitle,
+  IonToolbar,
 } from '@ionic/react';
 import { useIonRouter } from '@ionic/react';
 
 import Card from '../../ui/Card';
 
-const coverPhotoUrl = "https://www.shutterstock.com/image-photo/commercial-airplane-flying-over-bright-260nw-1205447614.jpg";
+const coverPhotoUrl =
+  'https://www.shutterstock.com/image-photo/commercial-airplane-flying-over-bright-260nw-1205447614.jpg';
 
 const CreateTale = () => {
   const [tripName, setTripName] = useState('');
@@ -31,7 +39,6 @@ const CreateTale = () => {
     const isDatesValid = endDate >= startDate;
 
     setIsDatesValid(isDatesValid);
-
   }, [startDate, endDate]);
 
   const tripNameChangeHandler = e => {
@@ -62,70 +69,82 @@ const CreateTale = () => {
 
   const createTaleHandler = async () => {
     if (isTripNameValid && isCatchphraseValid && isDatesValid) {
-      const newTale: Omit<Trips, "trip_id"> = {   
+      const newTale: Omit<Trips, 'trip_id'> = {
         title: tripName,
         catch_phrase: catchphrase,
         cover_photo_url: coverPhotoUrl,
         created_by: 1,
         start_date: startDate,
-        end_date: endDate
-      }
+        end_date: endDate,
+      };
       const newTaleId = await createTale(newTale);
       router.push(`/tabs/tale/${newTaleId}`);
-    }
-    else {
-      console.log("not inserted - validation failed");
+    } else {
+      console.log('not inserted - validation failed');
     }
   };
 
   return (
-    <Card className="my-4 mx-auto">
-      <IonCard className="my-4 mx-auto">
-        <form style={{ padding: '2vh 2vw', display: 'grid' }}>
-          <IonItem fill="outline">
-            <IonLabel position="floating">Trip Name</IonLabel>
-            <IonInput
-              placeholder="Enter Trip Name..."
-              id="tripName"
-              onIonChange={tripNameChangeHandler}
-              value={tripName}
-            />
-          </IonItem>
-          <IonItem fill="outline">
-            <IonLabel position="floating">Catchphrase</IonLabel>
-            <IonInput
-              placeholder="Enter Catchphrase..."
-              id="catchphrase"
-              onIonChange={catchphraseChangeHandler}
-              value={catchphrase}
-            />
-          </IonItem>
-          <IonItem>
-            <IonLabel>Start Date</IonLabel>
-            <IonDatetimeButton datetime="startDatetime"></IonDatetimeButton>
-            <IonModal keepContentsMounted={true}>
-              <IonDatetime
-                id="startDatetime"
-                presentation="date"
-                onIonChange={startDateChangeHandler}
-              ></IonDatetime>
-            </IonModal>
-          </IonItem>
-          <IonItem>
-            <IonLabel>End Date</IonLabel>
-            <IonDatetimeButton datetime="endDatetime"></IonDatetimeButton>
-            <IonModal keepContentsMounted={true}>
-              <IonDatetime
-                id="endDatetime"
-                presentation="date"
-                onIonChange={endDateChangeHandler}
-              ></IonDatetime>
-            </IonModal>
-          </IonItem>
-          <IonButton onClick={createTaleHandler}>Create Your Tale</IonButton>
-        </form>
-      </IonCard>
-    </Card>
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton defaultHref="/tabs/lists" />
+          </IonButtons>
+          <IonTitle>{'Creating a New Tale'}</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <Card className="my-4 mx-auto">
+          <form>
+            <IonCard className="my-4 mx-auto p-4 gap-3 flex flex-col">
+              <IonItem className="lg:shadow-lg md:shadow-lg" fill="outline">
+                <IonLabel position="floating">Trip Name</IonLabel>
+                <IonInput
+                  className="h-10"
+                  placeholder="Enter Trip Name..."
+                  id="tripName"
+                  onIonChange={tripNameChangeHandler}
+                  value={tripName}
+                />
+              </IonItem>
+              <IonItem className="lg:shadow-lg md:shadow-lg" fill="outline">
+                <IonLabel position="floating">Catchphrase</IonLabel>
+                <IonInput
+                  placeholder="Enter Catchphrase..."
+                  id="catchphrase"
+                  onIonChange={catchphraseChangeHandler}
+                  value={catchphrase}
+                />
+              </IonItem>
+              <IonItem>
+                <IonLabel>Start Date</IonLabel>
+                <IonDatetimeButton datetime="startDatetime"></IonDatetimeButton>
+                <IonModal keepContentsMounted={true}>
+                  <IonDatetime
+                    id="startDatetime"
+                    presentation="date"
+                    onIonChange={startDateChangeHandler}
+                  ></IonDatetime>
+                </IonModal>
+              </IonItem>
+              <IonItem>
+                <IonLabel>End Date</IonLabel>
+                <IonDatetimeButton datetime="endDatetime"></IonDatetimeButton>
+                <IonModal keepContentsMounted={true}>
+                  <IonDatetime
+                    id="endDatetime"
+                    presentation="date"
+                    onIonChange={endDateChangeHandler}
+                  ></IonDatetime>
+                </IonModal>
+              </IonItem>
+              <IonButton onClick={createTaleHandler}>Create Your Tale</IonButton>
+            </IonCard>
+          </form>
+        </Card>
+      </IonContent>
+    </IonPage>
   );
 };
 

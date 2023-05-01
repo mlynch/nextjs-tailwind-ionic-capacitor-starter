@@ -10,6 +10,8 @@ import Link from 'next/link';
 import Explore from './Explore';
 import { Suspense } from 'react';
 import TaleOverview from './TaleOverview';
+import CreateTale from './CreateTale';
+
 
 const Tabs = () => {
   return (
@@ -33,7 +35,8 @@ const Tabs = () => {
           )}
           exact={true}
         />
-        <Route path="/tabs/lists" render={() => <Lists />} exact={true} />
+        <Route path="/tabs/tale/create" exact={true} render={() => <CreateTale />} />
+        <Route path="/tabs/lists" render={() => <Suspense><Lists /></Suspense>} exact={true} />
         <Route path="/tabs/lists/:listId" render={() => <ListDetail />} exact={true} />
         <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
         <Route path="/tabs" render={() => <Redirect to="/tabs/explore" />} exact={true} />
