@@ -10,8 +10,8 @@
     "build": "next build",
     "start": "next start | pino-pretty",
     "export": "next export",
-    "test:local:env:up": ".\\env\\test-env-up.bat",
-    "test:local:env:down": ".\\env\\test-env-down.bat",
+    "test:local:env:up": "env/test-env-up.sh",
+    "test:local:env:down": "env/test-env-down.sh",
     "db:update-types": "ts-node ./scripts/update-types"
   },
   "dependencies": {

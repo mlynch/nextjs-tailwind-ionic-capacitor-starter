@@ -1,2 +1,2 @@
-#!/bin/bash
-docker compose -f env\\docker-compose.yml down
+#!/usr/bin/env bash
+docker compose -f env/docker-compose.yml down
