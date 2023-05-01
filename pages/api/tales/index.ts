@@ -2,8 +2,7 @@ import { createApiHandler } from '../../../server/middlewares/api-handler';
 import { getAllTales, createNewTale } from '../../../server/services/tales';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
-import { Trips } from '../../../types/db-schema-definitions';
-import { TalesResponse, CreateTaleResponse } from '../../../types/types';
+import { TalesResponse,CreateTaleResponse } from '../../../types/types';
 
 async function getTales(req: NextApiRequest, res: NextApiResponse<TalesResponse>) {
   const tales = await getAllTales();

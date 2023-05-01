@@ -8,11 +8,9 @@ import {
   IonSegmentButton,
   IonTitle,
   IonToolbar,
-  useIonRouter,
   IonBackButton,
 } from '@ionic/react';
-import Image from 'next/image';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { currentTale, currentTaleIdState, currentTaleStory } from '../../../states/explore';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
@@ -41,14 +39,19 @@ const TaleOverview = () => {
   const { title, catch_phrase, author, avatar_photo, cover_photo_url } = tale;
   return (
     <IonPage>
-      <IonHeader className={'flex flex-col items-center'}>
+      <IonHeader className={``}>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
+            <IonBackButton defaultHref="/tabs/explore"></IonBackButton>
           </IonButtons>
           <IonTitle className={'lg:text-center'}>{title}</IonTitle>
         </IonToolbar>
-        <img className="lg:h-96 lg:w-3/4 object-cover sm:h-full sm:w-48" src={cover_photo_url} />
+      </IonHeader>
+      <IonContent className={''}>
+        <img
+          className="lg:h-96 lg:w-3/6 m-auto object-cover sm:h-full sm:w-48"
+          src={cover_photo_url}
+        />
         <div className={'w-full'}>
           <IonSegment
             onIonChange={event => setSegment(event.detail.value as Segments)}
@@ -62,8 +65,6 @@ const TaleOverview = () => {
             </IonSegmentButton>
           </IonSegment>
         </div>
-      </IonHeader>
-      <IonContent className="ion-padding" fullscreen>
         {segment === Segments.story && <Story story={taleStory} />}
       </IonContent>
     </IonPage>
