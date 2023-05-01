@@ -22,8 +22,7 @@ import { useIonRouter } from '@ionic/react';
 
 import Card from '../../ui/Card';
 
-const coverPhotoUrl =
-  'https://www.shutterstock.com/image-photo/commercial-airplane-flying-over-bright-260nw-1205447614.jpg';
+const coverPhotoUrl = '/img/c2.avif';
 
 const CreateTale = () => {
   const [tripName, setTripName] = useState('');
