@@ -57,13 +57,13 @@ const CreateTale = () => {
   const startDateChangeHandler = e => {
     const newDate = e.target.value;
 
-    setStartDate(newDate);
+    setStartDate(new Date(newDate));
   };
 
   const endDateChangeHandler = e => {
     const newDate = e.target.value;
 
-    setEndDate(newDate);
+    setEndDate(new Date(newDate));
   };
 
   const createTaleHandler = async () => {
@@ -77,7 +77,7 @@ const CreateTale = () => {
         end_date: endDate,
       };
       const newTaleId = await createTale(newTale);
-      router.push(`/tabs/tale/${newTaleId}`);
+      router.push(`/tabs/tale/${newTaleId}`, 'forward', 'replace');
     } else {
       console.log('not inserted - validation failed');
     }

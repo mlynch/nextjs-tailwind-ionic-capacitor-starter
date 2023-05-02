@@ -1,17 +1,14 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
-import { cog, flash, list, search } from 'ionicons/icons';
+import { cog, list, search } from 'ionicons/icons';
 
 import Lists from './Lists';
 import ListDetail from './ListDetail';
 import Settings from './Settings';
-import Link from 'next/link';
 import Explore from './Explore';
 import { Suspense } from 'react';
 import TaleOverview from './TaleOverview';
 import CreateTale from './CreateTale';
-
 
 const Tabs = () => {
   return (
@@ -36,7 +33,15 @@ const Tabs = () => {
           exact={true}
         />
         <Route path="/tabs/tale/create" exact={true} render={() => <CreateTale />} />
-        <Route path="/tabs/lists" render={() => <Suspense><Lists /></Suspense>} exact={true} />
+        <Route
+          path="/tabs/lists"
+          render={() => (
+            <Suspense>
+              <Lists />
+            </Suspense>
+          )}
+          exact={true}
+        />
         <Route path="/tabs/lists/:listId" render={() => <ListDetail />} exact={true} />
         <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
         <Route path="/tabs" render={() => <Redirect to="/tabs/explore" />} exact={true} />

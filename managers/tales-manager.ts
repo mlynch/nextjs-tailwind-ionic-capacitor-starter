@@ -15,7 +15,12 @@ export async function fetchTales(): Promise<Tale[]> {
     }
   }
   const { tales } = (await res.json()) as TalesResponse;
-  return tales.map(tale => ({ ...tale, author: `${tale.first_name} ${tale.last_name}` }));
+  return tales.map(tale => ({
+    ...tale,
+    author: `${tale.first_name} ${tale.last_name}`,
+    start_date: new Date(tale.start_date),
+    end_date: new Date(tale.end_date),
+  }));
 }
 
 export async function fetchTaleStory(taleId: number): Promise<StoryResponse> {
@@ -32,7 +37,7 @@ export async function fetchTaleStory(taleId: number): Promise<StoryResponse> {
   return (await res.json()) as StoryResponse;
 }
 
-export const createTale = async (taleToCreate: Omit<Trips, "trip_id">): Promise<any> => {
+export const createTale = async (taleToCreate: Omit<Trips, 'trip_id'>): Promise<any> => {
   const res = await fetchWrapper.post('/api/tales', taleToCreate);
   if (!res.ok) {
     switch (res.status) {
