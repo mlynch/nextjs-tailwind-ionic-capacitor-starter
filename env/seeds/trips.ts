@@ -1,9 +1,10 @@
 import { Knex } from 'knex';
-import { SCHEMA_NAME } from '../../constants';
-import parse, { IPostgresInterval } from 'postgres-interval';
+import parse from 'postgres-interval';
 
 import {
   Activities,
+  ActivityMedia,
+  MediaType,
   Table,
   TripDestinations,
   Trips,
@@ -105,6 +106,66 @@ const activities: Activities[] = [
     day_index: 1,
     sequential_number: 1,
   },
+  {
+    id: 2,
+    destination_id: 1,
+    duration: parse('02:00:00').toPostgres(),
+    name: 'Sunset at Jardin do Morro',
+    description:
+      'The most beautiful sunsets in Jardim do Morro.\n' +
+      'Jardim do Morro is a “must see” point on any traveler’s list when visiting the area. Located on the hill in Vila Nova de Gaia. This special place offers a beautiful viewpoint of Porto along the river bank and the famous Pont Luis I bridge. It is the Douro River that separates two cities – Vila Nova de Gaia and Porto. What’s more, such a location gives You the best opportunity to admire the panorama of both cities during sunsets. Some people believe that these are the most beautiful sunsets in Portugal and even Europe.\n' +
+      'No wonder that hundreds of tourists from all over the world come to Jardim do Morro every day to enjoy the view and take commemorative photos. During sunny days and sunsets, the place is always bustling with life, and sometimes it’s hard to find a place to sit. This wonderfully romantic view is available completely free of charge. You can also hear artists there who make the atmosphere of the place even more magical. It is a place for everyone, groups of young people, married couples, families with children or retirees. Everyone feels good there and can relax. There is a small playground in the park, where children can find their place while parents rest on the grass. Nevertheless, if you are not a fan of sitting on the grass, there are also benches in the park.\n' +
+      'On weekends and special events, food trucks from different types of cuisine come to Jarrdim do Moro. Sometimes also fairs or other events with live music are organized in the this place. Along the section of Avenida da República, next to the park, there is a subway that can take you to both Porto and Vila Nova de Gaia. It is a very good point for further sightseeing. An interesting alternative to get to the garden is to take the cable car along the river in Vila Nova de Gaia. The most beautiful sunsets in Jardim do Morro. Staying in Jardim do Morro will be an unforgettable experience and the sunset will probably be the most beautiful you will ever see.',
+    day_index: 1,
+    sequential_number: 2,
+  },
+  {
+    id: 3,
+    destination_id: 1,
+    duration: parse('03:00:00').toPostgres(),
+    name: 'free walking tour',
+    description:
+      'A tour where we will show you the most important monuments in the city and with the experience of our guides, you will fall in love with the city of Porto and its exciting culture and history. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our guides with vast experience, in love with history, will be conducting the Essential Porto Symphony,and with their knowledge of the art and culture of Porto, will accompany us on an essential tour, in addition to advising you with your doubts. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our local guides with vast experience running tours will be waiting for you.',
+    day_index: 2,
+    sequential_number: 3,
+  },
+  {
+    id: 4,
+    destination_id: 1,
+    duration: parse('03:00:00').toPostgres(),
+    name: 'payed walking tour',
+    description:
+      'A tour where we will show you the most important monuments in the city and with the experience of our guides, you will fall in love with the city of Porto and its exciting culture and history. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our guides with vast experience, in love with history, will be conducting the Essential Porto Symphony,and with their knowledge of the art and culture of Porto, will accompany us on an essential tour, in addition to advising you with your doubts. We will meet you at Gomes Teixeira Square (next to the fascinating Lello Bookstore), where our local guides with vast experience running tours will be waiting for you.',
+    day_index: 2,
+    sequential_number: 4,
+  },
+];
+
+const activityMedia: ActivityMedia[] = [
+  {
+    id: 1,
+    activity_id: 1,
+    media_type: MediaType.Image,
+    media_url: '/img/freeWalk1.jpg',
+  },
+  {
+    id: 2,
+    activity_id: 1,
+    media_type: MediaType.Image,
+    media_url: '/img/freeWalk2.jpg',
+  },
+  {
+    id: 3,
+    activity_id: 1,
+    media_type: MediaType.Image,
+    media_url: '/img/freeWalk3.jpg',
+  },
+  {
+    id: 4,
+    activity_id: 1,
+    media_type: MediaType.Image,
+    media_url: '/img/freeWalk4.jpg',
+  },
 ];
 
 export async function seed(knex: Knex): Promise<void> {
@@ -118,6 +179,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex.insert(usersTrips).into(Table.UsersTrips);
   await knex.insert(destinations).into(Table.TripDestinations);
   await knex.insert(activities).into(Table.Activities);
+  await knex.insert(activityMedia).into(Table.ActivityMedia);
   await knex.raw(`select setval(\'trips_trip_id_seq\', max(trip_id)) from ${Table.Trips}`);
   await knex.raw(`select setval(\'users_user_id_seq\', max(user_id)) from ${Table.Users}`);
   await knex.raw(`select setval(\'users_trips_id_seq\', max(id)) from ${Table.UsersTrips}`);
@@ -125,4 +187,5 @@ export async function seed(knex: Knex): Promise<void> {
     `select setval(\'trip_destinations_id_seq\', max(id)) from ${Table.TripDestinations}`
   );
   await knex.raw(`select setval(\'activities_id_seq\', max(id)) from ${Table.Activities}`);
+  await knex.raw(`select setval(\'activity_media_id_seq\', max(id)) from ${Table.ActivityMedia}`);
 }

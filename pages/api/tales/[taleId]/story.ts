@@ -2,7 +2,6 @@ import { createApiHandler } from '../../../../server/middlewares/api-handler';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { StatusCodes } from 'http-status-codes';
 import { getTaleStory } from '../../../../server/services/tales';
-import { Activities, TripDestinations } from '../../../../types/db-schema-definitions';
 import { StoryResponse } from '../../../../types/types';
 
 async function getStory(req: NextApiRequest, res: NextApiResponse<StoryResponse>) {
