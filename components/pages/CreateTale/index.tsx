@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createTale } from '..//..//..//managers/tales-manager';
 import { Trips } from '..//..//..//types/db-schema-definitions';
 import {
@@ -17,12 +17,23 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  IonIcon,
+  IonThumbnail,
+  IonImg,
+  IonList,
 } from '@ionic/react';
+import { cameraOutline, closeOutline } from 'ionicons/icons';
 import { useIonRouter } from '@ionic/react';
+import { Camera, CameraResultType, CameraSource, Photo } from '@capacitor/camera';
+import { Filesystem } from '@capacitor/filesystem';
 
 import Card from '../../ui/Card';
+import { Directory } from '@capacitor/filesystem';
+
+import { LocalFile } from '../../../types/types';
 
 const coverPhotoUrl = '/img/c2.avif';
+const IMAGE_DIR = 'stored-images';
 
 const CreateTale = () => {
   const [tripName, setTripName] = useState('');
@@ -32,7 +43,18 @@ const CreateTale = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [isDatesValid, setIsDatesValid] = useState(false);
+
+  const [isFileSelected, setIsFileSelected] = useState(false);
+  const [coverPhoto, setCoverPhoto] = useState<LocalFile>({ name: '', path: '', data: '' });
+
   const router = useIonRouter();
+
+  useEffect(() => {
+    loadPhoto();
+    if (coverPhoto.name !== '') {
+      setIsFileSelected(true);
+    }
+  }, [coverPhoto]);
 
   const validateDates = useEffect(() => {
     const isDatesValid = endDate >= startDate;
@@ -66,6 +88,78 @@ const CreateTale = () => {
     setEndDate(new Date(newDate));
   };
 
+  const selectPhoto = useCallback(async () => {
+    const photo = await Camera.getPhoto({
+      quality: 100,
+      allowEditing: false,
+      resultType: CameraResultType.Base64,
+      source: CameraSource.Photos,
+    });
+    console.log(photo);
+    if (photo) {
+      savePhoto(photo);
+    }
+  }, []);
+
+  const savePhoto = async (photo: Photo) => {
+    const fileName = new Date().getTime() + '.jpeg';
+    const savedFile = await Filesystem.writeFile({
+      directory: Directory.Data,
+      path: `${IMAGE_DIR}/${fileName}`,
+      data: photo.base64String,
+    });
+    console.log('saved file:' + savedFile);
+    loadPhoto();
+  };
+
+  const loadPhoto = useCallback(async () => {
+    Filesystem.readdir({
+      directory: Directory.Data,
+      path: IMAGE_DIR,
+    })
+      .then(
+        result => {
+          console.log(`reading directory, result: ${JSON.stringify(result.files)}`);
+          const fileNames = result.files.map(file => {
+            return file.name;
+          });
+          if (fileNames.length > 0) {
+            loadFileData(fileNames);
+          }
+        },
+        async err => {
+          console.log(`error - ${err}`);
+          await Filesystem.mkdir({
+            directory: Directory.Data,
+            path: IMAGE_DIR,
+          });
+        }
+      )
+      .then(() => {});
+  }, []);
+
+  const loadFileData = useCallback(async (fileNames: string[]) => {
+    const fileName = fileNames[fileNames.length - 1];
+    const filePath = `${IMAGE_DIR}/${fileName}`;
+    const readFile = await Filesystem.readFile({
+      directory: Directory.Data,
+      path: filePath,
+    });
+    setCoverPhoto({
+      name: fileName,
+      path: filePath,
+      data: `data:image/jpeg;base64,${readFile.data}`,
+    });
+  }, []);
+
+  const deletePhoto = useCallback(async () => {
+    await Filesystem.deleteFile({
+      directory: Directory.Data,
+      path: coverPhoto.path,
+    });
+    loadPhoto();
+  }, []);
+
   const createTaleHandler = async () => {
     if (isTripNameValid && isCatchphraseValid && isDatesValid) {
       const newTale: Omit<Trips, 'trip_id'> = {
@@ -96,8 +190,8 @@ const CreateTale = () => {
       <IonContent>
         <Card className="my-4 mx-auto">
           <form>
-            <IonCard className="my-4 mx-auto p-4 gap-3 flex flex-col">
-              <IonItem className="lg:shadow-lg md:shadow-lg" fill="outline">
+            <IonCard className="my-4 mx-auto p-4 gap-6 flex flex-col">
+              <IonItem className="lg:shadow-md md:shadow-md" fill="outline">
                 <IonLabel position="floating">Trip Name</IonLabel>
                 <IonInput
                   className="h-10"
@@ -116,6 +210,32 @@ const CreateTale = () => {
                   value={catchphrase}
                 />
               </IonItem>
+              {isFileSelected ? (
+                <IonList>
+                  <IonItem>
+                    <IonLabel>Selected Cover Photo:</IonLabel>
+                  </IonItem>
+                  <IonItem>
+                    <IonThumbnail slot="start">
+                      <IonImg src={coverPhoto.data}></IonImg>
+                    </IonThumbnail>
+                    <IonLabel>{coverPhoto.name}</IonLabel>
+                    <IonButton slot="end" fill="clear" onClick={deletePhoto}>
+                      <IonIcon icon={closeOutline}></IonIcon>
+                    </IonButton>
+                  </IonItem>
+                </IonList>
+              ) : (
+                <IonItem>
+                  <IonToolbar color="primary">
+                    <IonButton fill="clear" expand="full" color="light" onClick={selectPhoto}>
+                      <IonIcon icon={cameraOutline}></IonIcon>
+                      Select A Cover Photo
+                    </IonButton>
+                  </IonToolbar>
+                </IonItem>
+              )}
+
               <IonItem>
                 <IonLabel>Start Date</IonLabel>
                 <IonDatetimeButton datetime="startDatetime"></IonDatetimeButton>

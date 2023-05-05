@@ -45,5 +45,11 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Travel-Tales would like to access your camera to take photos and videos.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Travel-Tales would like to access your photo library to save photos and videos.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Travel-Tales would like to access your photo library to select photos and videos.</string>
 </dict>
 </plist>

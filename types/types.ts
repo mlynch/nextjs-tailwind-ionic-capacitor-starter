@@ -18,3 +18,14 @@ export type CreateTaleResponse = {
 export interface Tale extends Trips, Users {
   author: string;
 }
+
+export interface Photo {
+  filePath: string;
+  webviewPath?: string;
+}
+
+export interface LocalFile {
+  name: string;
+  path: string;
+  data: string;
+}
