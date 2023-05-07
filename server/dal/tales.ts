@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import { getConnection } from '../db/connections';
 import {
   Activities,
@@ -9,16 +10,13 @@ import {
   Users,
 } from '../../types/db-schema-definitions';
 import { LocalFile, NewTrip } from '../../types/types';
-import AWS from 'aws-sdk'
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 const ImageFilePath = 'public\\img\\';
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+const client = new S3Client({
+  region: 'us-east-1',
 });
-
-const s3 = new AWS.S3();
 
 export async function getTales() {
   const connection = getConnection();
@@ -55,24 +53,24 @@ export const saveTaleCoverPhoto = async (coverPhoto: LocalFile) => {
 const saveCoverPhoto = async (buffer: Buffer, fileName: string) => {
   const isDevEnvironment = process.env.NODE_ENV === 'development';
   if (!isDevEnvironment) {
-    const filePath = ImageFilePath + fileName;
+    const ImageFilePath = path.join('public', 'img');
+    const filePath = path.join(ImageFilePath, fileName);
+    
     await fs.promises.writeFile(filePath, buffer);
   } else {
+    const command = new PutObjectCommand({
+      Bucket: 'travel-tales-s3',
+      Key: fileName,
+      Body: buffer,
+    });
     try {
-      console.log("###############################");
-      console.log("trying to upload to amazon.....");
-      console.log(s3);      
-      const aws_response = await s3.putObject({
-        Bucket: "travel-tales-s3", // The name of the bucket. For example, 'sample-bucket-101'.
-        Key: "hello-world.txt", // The name of the object. For example, 'sample_upload.txt'.
-        Body: buffer, // The content of the object. For example, 'Hello world!".
-      });
-      await aws_response.send();
-      console.log(aws_response);
-      console.log("###############################");
-    }
-    catch (error) {
-      console.log(`failed to upload to amazon: ${error}`);
+      console.log(
+        `############################################# aws response: #############################################`
+      );
+      const response = await client.send(command);
+      console.log(response);
+    } catch (err) {
+      console.error(err);
     }
   }
 };
