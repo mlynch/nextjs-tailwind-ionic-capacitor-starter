@@ -17,6 +17,7 @@
     "db:update-types": "ts-node ./scripts/update-types"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.328.0",
     "@capacitor/android": "^4.0.0",
     "@capacitor/camera": "^4.1.4",
     "@capacitor/core": "^4.0.0",
@@ -28,7 +29,7 @@
     "@ionic/react": "^6.2.9",
     "@ionic/react-router": "^6.2.9",
     "autoprefixer": "^10.2.6",
-    "aws-sdk": "^2.1371.0",
+    "aws-sdk": "^2.1373.0",
     "classnames": "^2.2.6",
     "http-status-codes": "^2.2.0",
     "knex": "^2.4.2",

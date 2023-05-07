@@ -29,3 +29,9 @@ export interface LocalFile {
   path: string;
   data: string;
 }
+
+export interface NewTrip extends Omit<Trips, 'trip_id' | 'cover_photo_url'> {
+  cover_photo: LocalFile;
+}
+
+

@@ -30,7 +30,7 @@ import { Filesystem } from '@capacitor/filesystem';
 import Card from '../../ui/Card';
 import { Directory } from '@capacitor/filesystem';
 
-import { LocalFile } from '../../../types/types';
+import { LocalFile, NewTrip } from '../../../types/types';
 
 const coverPhotoUrl = '/img/c2.avif';
 const IMAGE_DIR = 'stored-images';
@@ -51,10 +51,14 @@ const CreateTale = () => {
 
   useEffect(() => {
     loadPhoto();
+  }, []);
+
+  useEffect(() => {
+    setIsFileSelected(false);
     if (coverPhoto.name !== '') {
       setIsFileSelected(true);
     }
-  }, [coverPhoto]);
+  }, [coverPhoto.name]);
 
   const validateDates = useEffect(() => {
     const isDatesValid = endDate >= startDate;
@@ -95,7 +99,6 @@ const CreateTale = () => {
       resultType: CameraResultType.Base64,
       source: CameraSource.Photos,
     });
-    console.log(photo);
     if (photo) {
       savePhoto(photo);
     }
@@ -108,7 +111,6 @@ const CreateTale = () => {
       path: `${IMAGE_DIR}/${fileName}`,
       data: photo.base64String,
     });
-    console.log('saved file:' + savedFile);
     loadPhoto();
   };
 
@@ -157,15 +159,15 @@ const CreateTale = () => {
       directory: Directory.Data,
       path: coverPhoto.path,
     });
-    loadPhoto();
-  }, []);
-
+    setCoverPhoto({ name: '', path: '', data: '' });
+  }, [coverPhoto]);
+  
   const createTaleHandler = async () => {
     if (isTripNameValid && isCatchphraseValid && isDatesValid) {
-      const newTale: Omit<Trips, 'trip_id'> = {
+      const newTale: NewTrip = {
         title: tripName,
         catch_phrase: catchphrase,
-        cover_photo_url: coverPhotoUrl,
+        cover_photo: coverPhoto,
         created_by: 1,
         start_date: startDate,
         end_date: endDate,

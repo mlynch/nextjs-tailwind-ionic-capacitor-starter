@@ -1,7 +1,7 @@
 import { fetchWrapper } from '../utils/fetchWrapper';
 import { StatusCodes } from 'http-status-codes';
 import { Trips, Users } from '../types/db-schema-definitions';
-import { StoryResponse, Tale, TalesResponse } from '../types/types';
+import { NewTrip, StoryResponse, Tale, TalesResponse } from '../types/types';
 
 export async function fetchTales(): Promise<Tale[]> {
   const res = await fetchWrapper.get('/api/tales');
@@ -37,7 +37,7 @@ export async function fetchTaleStory(taleId: number): Promise<StoryResponse> {
   return (await res.json()) as StoryResponse;
 }
 
-export const createTale = async (taleToCreate: Omit<Trips, 'trip_id'>): Promise<any> => {
+export const createTale = async (taleToCreate: NewTrip): Promise<any> => {
   const res = await fetchWrapper.post('/api/tales', taleToCreate);
   if (!res.ok) {
     switch (res.status) {

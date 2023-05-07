@@ -3,9 +3,10 @@ import {
   getTaleActivityMedia,
   getTaleDestinations,
   getTales,
-  insertNewTale
+  insertNewTale,
+  saveTaleCoverPhoto
 } from '../dal/tales';
-import { ActivitiesWithMedia } from '../../types/types';
+import { ActivitiesWithMedia, NewTrip } from '../../types/types';
 import { act } from 'react-dom/test-utils';
 import { Trips } from '../../types/db-schema-definitions';
 
@@ -30,9 +31,10 @@ export async function getTaleStory(taleId: number) {
   };
 }
 
-export const createNewTale = async (newTale: Omit<Trips, "trip_id">) => {
+export const createNewTale = async (newTale: NewTrip) => {
   const newTaleId = await Promise.all([
     insertNewTale(newTale),
+    saveTaleCoverPhoto(newTale.cover_photo),
   ]);
   return newTaleId[0];
 }
