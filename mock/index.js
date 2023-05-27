@@ -57,6 +57,6 @@ export const lists = [
       { name: 'Router' },
     ],
   },
-  { name: 'Work', id: 'work', items: [{ name: 'TPS Report' }, { name: 'Set up email' }] },
+  { name: 'Working', id: 'work', items: [{ name: 'TPS Report' }, { name: 'Set up email' }] },
   { name: 'Reminders', id: 'reminders' },
 ];
