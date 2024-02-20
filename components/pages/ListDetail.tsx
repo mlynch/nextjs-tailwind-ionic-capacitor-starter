@@ -16,8 +16,13 @@ import { useParams } from 'react-router-dom';
 import Store from '../../store';
 import * as actions from '../../store/actions';
 import * as selectors from '../../store/selectors';
+import { ListItem, TodoListItem } from '../../mock';
 
-const ListItems = ({ list }) => {
+type ListDetailParams = {
+  listId: string;
+};
+
+const ListItems = ({ list }: {list: TodoListItem}) => {
   return (
     <IonList>
       {(list?.items || []).map((item, key) => (
@@ -27,16 +32,16 @@ const ListItems = ({ list }) => {
   );
 };
 
-const ListItemEntry = ({ list, item }) => (
+const ListItemEntry = ({ list, item }: {list: TodoListItem, item: ListItem}) => (
   <IonItem onClick={() => actions.setDone(list, item, !item.done)}>
     <IonLabel>{item.name}</IonLabel>
     <IonCheckbox checked={item.done || false} slot="end" />
   </IonItem>
 );
 
-const ListDetail = ({ match }) => {
-  const lists = Store.useState(selectors.getLists);
-  const params = useParams();
+const ListDetail = () => {
+  const lists = Store.useState(selectors.selectLists);
+  const params = useParams<ListDetailParams>();
   const { listId } = params;
   const loadedList = lists.find(l => l.id === listId);
 
@@ -47,11 +52,11 @@ const ListDetail = ({ match }) => {
           <IonButtons slot="start">
             <IonBackButton defaultHref="/tabs/lists" />
           </IonButtons>
-          <IonTitle>{loadedList.name}</IonTitle>
+          <IonTitle>{loadedList?.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <ListItems list={loadedList} />
+        {loadedList && <ListItems list={loadedList} />}
       </IonContent>
     </IonPage>
   );

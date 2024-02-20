@@ -15,10 +15,19 @@ import {
 import Notifications from './Notifications';
 import { useState } from 'react';
 import { notificationsOutline } from 'ionicons/icons';
-import { getHomeItems } from '../../store/selectors';
+import { selectHomeItems } from '../../store/selectors';
 import Store from '../../store';
 
-const FeedCard = ({ title, type, text, author, authorAvatar, image }) => (
+type FeedCardProps = {
+  title: string;
+  type: string;
+  text: string;
+  author: string;
+  authorAvatar: string;
+  image: string;
+}
+
+const FeedCard = ({ title, type, text, author, authorAvatar, image }: FeedCardProps) => (
   <Card className="my-4 mx-auto">
     <div className="h-32 w-full relative">
       <img className="rounded-t-xl object-cover min-w-full min-h-full max-w-full max-h-full" src={image} alt="" />
@@ -38,7 +47,7 @@ const FeedCard = ({ title, type, text, author, authorAvatar, image }) => (
 );
 
 const Feed = () => {
-  const homeItems = Store.useState(getHomeItems);
+  const homeItems = Store.useState(selectHomeItems);
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (

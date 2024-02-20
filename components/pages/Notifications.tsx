@@ -12,11 +12,12 @@ import {
   IonLabel,
 } from '@ionic/react';
 import Store from '../../store';
-import { getNotifications } from '../../store/selectors';
+import { selectNotifications } from '../../store/selectors';
 
 import { close } from 'ionicons/icons';
+import { NotificationItem } from '../../mock';
 
-const NotificationItem = ({ notification }) => (
+const NotificationItem = ({ notification }: {notification: NotificationItem}) => (
   <IonItem>
     <IonLabel>{notification.title}</IonLabel>
     <IonNote slot="end">{notification.when}</IonNote>
@@ -26,8 +27,8 @@ const NotificationItem = ({ notification }) => (
   </IonItem>
 );
 
-const Notifications = ({ open, onDidDismiss }) => {
-  const notifications = Store.useState(getNotifications);
+const Notifications = ({ open, onDidDismiss }: {open: boolean, onDidDismiss: () => void}) => {
+  const notifications = Store.useState(selectNotifications);
 
   return (
     <IonModal isOpen={open} onDidDismiss={onDidDismiss}>
