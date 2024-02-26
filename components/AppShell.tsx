@@ -1,3 +1,4 @@
+'use client'
 import { IonApp, IonLabel, IonRouterOutlet, setupIonicReact, IonTabs, IonTabBar, IonTabButton, IonIcon  } from '@ionic/react';
 import { cog, flash, list } from 'ionicons/icons';
 import { StatusBar, Style } from '@capacitor/status-bar';

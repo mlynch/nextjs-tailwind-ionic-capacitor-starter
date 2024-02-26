@@ -4,6 +4,6 @@ const App = dynamic(() => import('../components/AppShell'), {
   ssr: false,
 });
 
-export default function Index() {
+export default function Page() {
   return <App />;
 }
