@@ -5,7 +5,7 @@ const App = dynamic(() => import('../../components/AppShell'), {
 });
 
 export function generateStaticParams() {
-  return [{ all: ['tabs', 'feed'] }]
+  return [{ all: ['tabs', 'feed'] }];
 }
 
 export default function Page() {
