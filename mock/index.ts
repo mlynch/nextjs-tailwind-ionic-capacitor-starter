@@ -1,9 +1,3 @@
-export const images = [
-  '/img/c1.avif',
-  '/img/c2.avif',
-  '/img/c3.avif',
-];
-
 export type HomeItem = {
   id: number;
   title: string;
@@ -22,27 +16,25 @@ export const homeItems: HomeItem[] = [
     text: 'We just got back from a trip to Maui, and we had a great time...',
     author: 'Max Lynch',
     authorAvatar: '/img/max.jpg',
-    image: images[0],
+    image: '/img/c1.avif',
   },
   {
     id: 2,
     title: 'Arctic Adventures',
     type: 'Blog',
-    text:
-      'Last month we took a trek to the Arctic Circle. The isolation was just what we needed after...',
-    author: 'Max Lynch',
-    authorAvatar: '/img/max.jpg',
-    image: images[1],
+    text: 'Last month we took a trek to the Arctic Circle. The isolation was just what we needed after...',
+    author: 'Nathan Chapman',
+    authorAvatar: '/img/nathan.jpg',
+    image: '/img/c2.avif',
   },
   {
     id: 3,
     title: 'Frolicking in the Faroe Islands',
     type: 'Blog',
-    text:
-      'The Faroe Islands are a North Atlantic archipelago located 320 kilometres (200 mi) north-northwest of Scotland...',
-    author: 'Max Lynch',
-    authorAvatar: '/img/max.jpg',
-    image: images[2],
+    text: 'The Faroe Islands are a North Atlantic archipelago located 320 kilometres (200 mi) north-northwest of Scotland...',
+    author: 'Leo Giovanetti',
+    authorAvatar: '/img/leo.jpg',
+    image: '/img/c3.avif',
   },
 ];
 
@@ -62,24 +54,29 @@ export const notifications: NotificationItem[] = [
 export type ListItem = {
   name: string;
   done?: boolean;
-}
+};
 
 export type TodoListItem = {
   name: string;
   id: string;
   items?: ListItem[];
-}
+};
 
 // Some fake lists
 export const lists: TodoListItem[] = [
   {
     name: 'Groceries',
-    id: 'groceries',
-    items: [{ name: 'Apples' }, { name: 'Bananas' }, { name: 'Milk' }, { name: 'Ice Cream' }],
+    id: '01HRCYTYED31N83MJ0WK97WC02',
+    items: [
+      { name: 'Apples' },
+      { name: 'Bananas' },
+      { name: 'Milk' },
+      { name: 'Ice Cream' },
+    ],
   },
   {
     name: 'Hardware Store',
-    id: 'hardware',
+    id: '01HRCYV2KPNJQJ43Y7X526BHVX',
     items: [
       { name: 'Circular Saw' },
       { name: 'Tack Cloth' },
@@ -87,14 +84,22 @@ export const lists: TodoListItem[] = [
       { name: 'Router' },
     ],
   },
-  { name: 'Work', id: 'work', items: [{ name: 'TPS Report' }, { name: 'Set up email' }] },
-  { name: 'Reminders', id: 'reminders' },
+  {
+    name: 'Work',
+    id: '01HRCYV6C3YWAJRF2ZE7AZ17K7',
+    items: [{ name: 'TPS Report' }, { name: 'Set up email' }],
+  },
+  {
+    name: 'Reminders',
+    id: '01HRCYVADRPCM5SYV5BH98C7HS',
+    items: [{ name: 'Get car inspection', done: true }],
+  },
 ];
 
 export type Settings = {
   enableNotifications: boolean;
-}
+};
 
 export const settings: Settings = {
   enableNotifications: true,
-}
+};

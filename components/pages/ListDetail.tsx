@@ -22,7 +22,7 @@ type ListDetailParams = {
   listId: string;
 };
 
-const ListItems = ({ list }: {list: TodoListItem}) => {
+const ListItems = ({ list }: { list: TodoListItem }) => {
   return (
     <IonList>
       {(list?.items || []).map((item, key) => (
@@ -32,10 +32,20 @@ const ListItems = ({ list }: {list: TodoListItem}) => {
   );
 };
 
-const ListItemEntry = ({ list, item }: {list: TodoListItem, item: ListItem}) => (
+const ListItemEntry = ({
+  list,
+  item,
+}: {
+  list: TodoListItem;
+  item: ListItem;
+}) => (
   <IonItem onClick={() => actions.setDone(list, item, !item.done)}>
     <IonLabel>{item.name}</IonLabel>
-    <IonCheckbox checked={item.done || false} slot="end" />
+    <IonCheckbox
+      aria-label={item.name}
+      checked={item.done || false}
+      slot="end"
+    />
   </IonItem>
 );
 
@@ -50,14 +60,12 @@ const ListDetail = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton defaultHref="/tabs/lists" />
+            <IonBackButton defaultHref="/lists" />
           </IonButtons>
           <IonTitle>{loadedList?.name}</IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
-        {loadedList && <ListItems list={loadedList} />}
-      </IonContent>
+      <IonContent>{loadedList && <ListItems list={loadedList} />}</IonContent>
     </IonPage>
   );
 };
