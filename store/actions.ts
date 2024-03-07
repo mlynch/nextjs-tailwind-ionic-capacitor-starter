@@ -21,13 +21,17 @@ export const setSettings = (settings: Settings) => {
 
 // App-specific actions
 
-export const setDone = (list: TodoListItem, item: ListItem, done: boolean) => {
+export const setDone = (
+  list: TodoListItem,
+  listItem: ListItem,
+  done: boolean,
+) => {
   Store.update((s, o) => {
     const listIndex = o.lists.findIndex(l => l === list);
     const items = o.lists[listIndex].items;
-    if(!items) return;
-    const itemIndex = items.findIndex(i => i === item);
-    const item = items[itemIndex];
+    const itemIndex = items?.findIndex(i => i === listItem);
+    const item = items?.[itemIndex ?? -1];
+    if (!item) return;
     item.done = done;
     if (list === o.selectedList) {
       s.selectedList = s.lists[listIndex];
