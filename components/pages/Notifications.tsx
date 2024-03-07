@@ -15,7 +15,7 @@ import Store from '../../store';
 import { selectNotifications } from '../../store/selectors';
 
 import { close } from 'ionicons/icons';
-import { NotificationItem } from '../../mock';
+import { type NotificationItem } from '../../mock';
 
 const NotificationItem = ({
   notification,
